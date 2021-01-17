@@ -9,7 +9,7 @@ public class GroundCheck : MonoBehaviour
 
     private void Start()
     {
-        rigid = transform.parent.gameObject.GetComponent<Rigidbody2D>();
+        rigid = GameObject.FindGameObjectWithTag("PlayerController").GetComponent<Rigidbody2D>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

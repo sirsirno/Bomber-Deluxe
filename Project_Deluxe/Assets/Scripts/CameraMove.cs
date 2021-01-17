@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraMove : MonoBehaviour
+public class CameraMove : Singleton<CameraMove>
 {
     private float spawnX = 0f;
     [SerializeField]
@@ -14,10 +14,16 @@ public class CameraMove : MonoBehaviour
         spawnX = startPoint.transform.localPosition.x;
     }
 
+    [HideInInspector]
+    public GameObject deathZone_deathAnimation = null;
+
     private void Update()
     {
         float playerDistance = player.transform.localPosition.x - spawnX;
         float followRange = 0 - spawnX;
+
+        if(PlayerController.Instance.state == PlayerController.PlayerState.Dead)
+            return;
 
         if (playerDistance >= followRange)
             transform.localPosition = new Vector3(player.transform.localPosition.x,transform.localPosition.y, transform.localPosition.z);

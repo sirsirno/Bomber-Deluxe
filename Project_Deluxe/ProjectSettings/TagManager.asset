@@ -8,6 +8,7 @@ TagManager:
   - StartPoint
   - Trap
   - TrapRange
+  - PlayerController
   layers:
   - Default
   - TransparentFX

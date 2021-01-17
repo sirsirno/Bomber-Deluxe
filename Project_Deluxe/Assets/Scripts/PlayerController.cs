@@ -28,10 +28,16 @@ public class PlayerController : Singleton<PlayerController>
     private Animator animator;
     Rigidbody2D rb;
 
+    /// <summary>
+    /// 스프라이트 상의 플레이어 (애니메이션용)
+    /// </summary>
+    private GameObject realPlayer = null;
     void Awake()
     {
-        animator = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        realPlayer = GameObject.FindGameObjectWithTag("Player");
+
+        animator = realPlayer.GetComponent<Animator>();
+        spriteRenderer = realPlayer.GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -88,6 +94,7 @@ public class PlayerController : Singleton<PlayerController>
         // 2 -> Jumping
         // 3 -> After Jump Wait
         // 4 -> Death
+        // 5 -> FallenDeath
 
         if (state == PlayerState.Grounded)
         {
@@ -126,11 +133,6 @@ public class PlayerController : Singleton<PlayerController>
                 animator.SetInteger("PlayerAnimation", 2);
             }
         }
-    }
-
-    private void AfterJumpWait() //지우면안댐 애니메이션 이벤트해놓음
-    {
-        animator.SetInteger("PlayerAnimation", 0);
     }
 
     public enum PlayerState
