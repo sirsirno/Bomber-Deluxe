@@ -1,0 +1,9 @@
+diff a/Project_Deluxe/Assets/Scenes/TestScene.unity b/Project_Deluxe/Assets/Scenes/TestScene.unity	(rejected hunks)
+@@ -860,7 +860,6 @@
+ +  m_SortingLayer: 0
+ +  m_SortingOrder: 0
+ +  m_ChunkSize: {x: 32, y: 32, z: 32}
+-   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
+ +  m_ChunkCullingBounds: {x: 2.625, y: 1.0625, z: 0}
+ +  m_MaxChunkCount: 16
+ +  m_MaxFrameAge: 16
