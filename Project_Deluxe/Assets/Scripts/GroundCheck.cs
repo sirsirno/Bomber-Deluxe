@@ -5,6 +5,12 @@ using UnityEngine;
 public class GroundCheck : MonoBehaviour
 {
     public List<Collider2D> colliders = new List<Collider2D>();
+    private Rigidbody2D rigid = null;
+
+    private void Start()
+    {
+        rigid = transform.parent.gameObject.GetComponent<Rigidbody2D>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -26,7 +32,8 @@ public class GroundCheck : MonoBehaviour
         }
         else
         {
-            PlayerController.Instance.state = PlayerController.PlayerState.Grounded;
+            if(rigid.velocity.y < 0)
+                PlayerController.Instance.state = PlayerController.PlayerState.Grounded;
         }
     }
 
