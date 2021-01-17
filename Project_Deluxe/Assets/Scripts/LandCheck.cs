@@ -21,7 +21,7 @@ public class LandCheck : MonoBehaviour
             {
                 if (player.GetComponent<PlayerController>().state == PlayerController.PlayerState.Grounded)
                 {
-                    if (rigid.velocity.y < -10f)
+                    if (rigid.velocity.y < -8f)
                     {
                         player.GetComponent<Animator>().Play("Player_AfterJumpWait");
                         player.GetComponent<Animator>().SetInteger("PlayerAnimation", 3);
@@ -30,6 +30,7 @@ public class LandCheck : MonoBehaviour
                     else
                     {
                         player.GetComponent<Animator>().SetInteger("PlayerAnimation", 0);
+                        Debug.Log((int)rigid.velocity.y);
                     }
                 }
             }
