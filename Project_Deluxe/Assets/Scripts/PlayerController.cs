@@ -72,13 +72,19 @@ public class PlayerController : Singleton<PlayerController>
         {
             if (Input.GetKey(KeyCode.LeftArrow))    //왼쪽화살표 입력시 실행함
             {
-                transform.Translate(Vector3.left * moveSpeed);
+                if (state == PlayerState.Grounded && animator.GetInteger("PlayerAnimation") == 1)
+                    transform.Translate(Vector3.left * moveSpeed);
+                else if (state == PlayerState.Jumping)
+                    transform.Translate(Vector3.left * moveSpeed / 1.5f);
                 spriteRenderer.flipX = true;
             }
 
             if (Input.GetKey(KeyCode.RightArrow))    //오른쪽화살표 입력시 실행함
             {
-                transform.Translate(Vector3.right * moveSpeed);
+                if (state == PlayerState.Grounded && animator.GetInteger("PlayerAnimation") == 1)
+                    transform.Translate(Vector3.right * moveSpeed);
+                else if (state == PlayerState.Jumping)
+                    transform.Translate(Vector3.right * moveSpeed / 1.5f);
                 spriteRenderer.flipX = false;
             }
 

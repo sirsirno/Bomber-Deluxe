@@ -12,16 +12,30 @@ public class GameManager : MonoBehaviour
 
     GameObject startPoint;
     GameObject trapParent;
+    GameObject invisibleBlockParent;
+    GameObject invisibleBlockDownParent;
 
     private void Awake()
     {
         startPoint = GameObject.FindGameObjectWithTag("StartPoint");
         trapParent = GameObject.FindGameObjectWithTag("Trap");
+        invisibleBlockParent = GameObject.FindGameObjectWithTag("InvisibleBlocks");
+        invisibleBlockDownParent = GameObject.FindGameObjectWithTag("InvisibleBlocksDown");
     }
 
     private void Start()
     {
         player.transform.localPosition = startPoint.transform.localPosition;
+
+        for (int i = 0; i < invisibleBlockParent.transform.childCount; i++) // 투명블럭 투명화
+        {
+            invisibleBlockParent.transform.GetChild(i).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
+        }
+
+        for (int i = 0; i < invisibleBlockDownParent.transform.childCount; i++) // 투명블럭 투명화
+        {
+            invisibleBlockDownParent.transform.GetChild(i).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
+        }
 
         if (!isDebugMode)
             DisabledDebug();

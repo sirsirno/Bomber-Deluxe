@@ -9,6 +9,8 @@ TagManager:
   - Trap
   - TrapRange
   - PlayerController
+  - InvisibleBlocks
+  - InvisibleBlocksDown
   layers:
   - Default
   - TransparentFX

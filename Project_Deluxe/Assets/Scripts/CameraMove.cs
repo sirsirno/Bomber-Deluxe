@@ -13,15 +13,11 @@ public class CameraMove : Singleton<CameraMove>
         GameObject startPoint = GameObject.FindGameObjectWithTag("StartPoint");
         spawnX = startPoint.transform.localPosition.x;
     }
-
-    [HideInInspector]
-    public GameObject deathZone_deathAnimation = null;
-
     private void Update()
     {
         float playerDistance = player.transform.localPosition.x - spawnX;
         float followRange = 0 - spawnX;
-
+        Debug.Log(playerDistance + " , " + followRange);
         if(PlayerController.Instance.state == PlayerController.PlayerState.Dead)
             return;
 
