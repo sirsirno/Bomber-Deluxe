@@ -17,6 +17,9 @@ public class PlayerController : Singleton<PlayerController>
     /// 플레이어 점프속도
     /// </summary>
     public float jumpSpeed = 5f;
+    public float jumpTimeLimit = 0.5f;
+    private float jumpTimer = 0;
+    private bool jump = false;
 
     public PlayerState state = PlayerState.Grounded;
     public bool controlEnabled = true;
@@ -36,12 +39,24 @@ public class PlayerController : Singleton<PlayerController>
     {
         if (controlEnabled)
         {
-            if (state == PlayerState.Grounded && Input.GetKeyDown(KeyCode.Space))
+            if (state == PlayerState.Grounded && Input.GetButtonDown("Jump"))
             {
-                rb.velocity = Vector3.zero;
-                rb.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse); //위방향으로 올라가게함
-                state = PlayerState.Jumping;
+                jump = true;
             }
+
+            if (!Input.GetButton("Jump") || jumpTimer >= jumpTimeLimit)
+            {
+                jump = false;
+                jumpTimer = 0f;
+                return;
+            }
+
+            if(jump)
+            {
+                rb.velocity = Vector2.zero;
+                rb.AddForce(Vector2.up * jumpSpeed * ((jumpTimer * 1.3f) + 1f), ForceMode2D.Impulse); //위방향으로 올라가게함
+                jumpTimer += Time.deltaTime;
+            } 
         }
     }
 
@@ -51,24 +66,18 @@ public class PlayerController : Singleton<PlayerController>
         {
             if (Input.GetKey(KeyCode.LeftArrow))    //왼쪽화살표 입력시 실행함
             {
-                Vector3 scale = transform.localScale;
-                scale.x = -Mathf.Abs(scale.x);
-                transform.localScale = scale;
                 transform.Translate(Vector3.left * moveSpeed);
+                spriteRenderer.flipX = true;
+            }
+
+            if (Input.GetKey(KeyCode.RightArrow))    //오른쪽화살표 입력시 실행함
+            {
+                transform.Translate(Vector3.right * moveSpeed);
                 spriteRenderer.flipX = false;
             }
 
-            if (Input.GetKey(KeyCode.RightArrow) )    //오른쪽화살표 입력시 실행함
-            {
-                Vector3 scale = transform.localScale;
-                scale.x = -Mathf.Abs(scale.x);
-                transform.localScale = scale;
-                transform.Translate(Vector3.right * moveSpeed);
-                spriteRenderer.flipX = true;
-            }
+            AnimationUpdate();
         }
-
-        AnimationUpdate();
     }
 
     private void AnimationUpdate()
@@ -105,8 +114,7 @@ public class PlayerController : Singleton<PlayerController>
 
             if (animator.GetInteger("PlayerAnimation") == 2)
             {
-                animator.Play("Player_AfterJumpWait");
-                animator.SetInteger("PlayerAnimation", 3);
+
             }
         }
 
