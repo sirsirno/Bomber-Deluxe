@@ -30,8 +30,8 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.3
-        value: 1
+        time: 0.5
+        value: 0
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 103
@@ -50,17 +50,17 @@ AnimationClip:
     - time: 0
       value: {fileID: -7689382371589266427, guid: 5c8511c9d93593a4e8aa6966c59a194b,
         type: 3}
-    - time: 0.1
+    - time: 0.16666667
       value: {fileID: -6119387374007233121, guid: 5c8511c9d93593a4e8aa6966c59a194b,
         type: 3}
-    - time: 0.2
+    - time: 0.33333334
       value: {fileID: 5435452280369712508, guid: 5c8511c9d93593a4e8aa6966c59a194b,
         type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
-  m_SampleRate: 10
+  m_SampleRate: 60
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -90,7 +90,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.3
+    m_StopTime: 0.5
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -119,8 +119,8 @@ AnimationClip:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.3
-        value: 1
+        time: 0.5
+        value: 0
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 103
@@ -138,7 +138,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.3
+  - time: 0.5
     functionName: AfterJumpWait
     data: 
     objectReferenceParameter: {fileID: 0}
