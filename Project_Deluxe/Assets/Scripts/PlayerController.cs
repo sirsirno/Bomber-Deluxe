@@ -38,12 +38,11 @@ public class PlayerController : Singleton<PlayerController>
         {
             if (state == PlayerState.Grounded && Input.GetKeyDown(KeyCode.Space))
             {
+                rb.velocity = Vector3.zero;
                 rb.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse); //위방향으로 올라가게함
                 state = PlayerState.Jumping;
             }
         }
-
-        AnimationUpdate();
     }
 
     void FixedUpdate()
@@ -68,6 +67,8 @@ public class PlayerController : Singleton<PlayerController>
                 spriteRenderer.flipX = true;
             }
         }
+
+        AnimationUpdate();
     }
 
     private void AnimationUpdate()
@@ -119,7 +120,7 @@ public class PlayerController : Singleton<PlayerController>
         }
     }
 
-    private void AfterJumpWait()
+    private void AfterJumpWait() //지우면안댐 애니메이션 이벤트해놓음
     {
         animator.SetInteger("PlayerAnimation", 0);
     }
