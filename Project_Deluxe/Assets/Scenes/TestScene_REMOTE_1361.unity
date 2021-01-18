@@ -207,7 +207,7 @@ GameObject:
   - component: {fileID: 3508863}
   - component: {fileID: 3508865}
   - component: {fileID: 3508864}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -467,7 +467,7 @@ GameObject:
   - component: {fileID: 33028318}
   - component: {fileID: 33028320}
   - component: {fileID: 33028319}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spike
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -652,7 +652,7 @@ GameObject:
   - component: {fileID: 54053011}
   - component: {fileID: 54053013}
   - component: {fileID: 54053012}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spike (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -950,7 +950,7 @@ GameObject:
   - component: {fileID: 88983581}
   - component: {fileID: 88983583}
   - component: {fileID: 88983582}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1283,7 +1283,7 @@ GameObject:
   - component: {fileID: 123493564}
   - component: {fileID: 123493566}
   - component: {fileID: 123493565}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1393,7 +1393,7 @@ GameObject:
   - component: {fileID: 130833701}
   - component: {fileID: 130833703}
   - component: {fileID: 130833702}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1789,7 +1789,7 @@ GameObject:
   - component: {fileID: 226005799}
   - component: {fileID: 226005801}
   - component: {fileID: 226005800}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spike (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2009,7 +2009,7 @@ GameObject:
   - component: {fileID: 247928615}
   - component: {fileID: 247928617}
   - component: {fileID: 247928616}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spike (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2117,7 +2117,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 282027331}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: AppearTraps
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2397,7 +2397,7 @@ GameObject:
   - component: {fileID: 301520496}
   - component: {fileID: 301520498}
   - component: {fileID: 301520497}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2855,7 +2855,7 @@ GameObject:
   - component: {fileID: 320105852}
   - component: {fileID: 320105851}
   - component: {fileID: 320105850}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spikes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3126,7 +3126,7 @@ GameObject:
   - component: {fileID: 324353571}
   - component: {fileID: 324353573}
   - component: {fileID: 324353572}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spike (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3421,7 +3421,7 @@ GameObject:
   - component: {fileID: 394248689}
   - component: {fileID: 394248691}
   - component: {fileID: 394248690}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3654,7 +3654,7 @@ GameObject:
   - component: {fileID: 414785785}
   - component: {fileID: 414785787}
   - component: {fileID: 414785786}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: DropTileTrap_Vertical_0_LeftNeddles (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3801,7 +3801,7 @@ GameObject:
   - component: {fileID: 435665379}
   - component: {fileID: 435665381}
   - component: {fileID: 435665380}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spike (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3911,7 +3911,7 @@ GameObject:
   - component: {fileID: 474801879}
   - component: {fileID: 474801881}
   - component: {fileID: 474801880}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4206,7 +4206,7 @@ GameObject:
   - component: {fileID: 512166024}
   - component: {fileID: 512166026}
   - component: {fileID: 512166025}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4316,7 +4316,7 @@ GameObject:
   - component: {fileID: 518699804}
   - component: {fileID: 518699806}
   - component: {fileID: 518699805}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4426,7 +4426,7 @@ GameObject:
   - component: {fileID: 534485769}
   - component: {fileID: 534485771}
   - component: {fileID: 534485770}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spike (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4536,7 +4536,7 @@ GameObject:
   - component: {fileID: 536711432}
   - component: {fileID: 536711434}
   - component: {fileID: 536711433}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9743,7 +9743,7 @@ GameObject:
   - component: {fileID: 609739912}
   - component: {fileID: 609739914}
   - component: {fileID: 609739913}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19034,7 +19034,7 @@ GameObject:
   - component: {fileID: 666153454}
   - component: {fileID: 666153456}
   - component: {fileID: 666153455}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19144,7 +19144,7 @@ GameObject:
   - component: {fileID: 666693577}
   - component: {fileID: 666693579}
   - component: {fileID: 666693578}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19377,7 +19377,7 @@ GameObject:
   - component: {fileID: 701472509}
   - component: {fileID: 701472511}
   - component: {fileID: 701472510}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spike
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19487,7 +19487,7 @@ GameObject:
   - component: {fileID: 707786946}
   - component: {fileID: 707786948}
   - component: {fileID: 707786947}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spike (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20016,7 +20016,7 @@ GameObject:
   - component: {fileID: 780762711}
   - component: {fileID: 780762713}
   - component: {fileID: 780762712}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20126,7 +20126,7 @@ GameObject:
   - component: {fileID: 783113205}
   - component: {fileID: 783113207}
   - component: {fileID: 783113206}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spike (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20412,7 +20412,7 @@ GameObject:
   - component: {fileID: 815204529}
   - component: {fileID: 815204531}
   - component: {fileID: 815204530}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Non-Spikes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21343,7 +21343,7 @@ GameObject:
   - component: {fileID: 847648454}
   - component: {fileID: 847648456}
   - component: {fileID: 847648455}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spike (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21671,7 +21671,7 @@ GameObject:
   - component: {fileID: 941663394}
   - component: {fileID: 941663396}
   - component: {fileID: 941663395}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22041,7 +22041,7 @@ GameObject:
   - component: {fileID: 1012938183}
   - component: {fileID: 1012938185}
   - component: {fileID: 1012938184}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22607,7 +22607,7 @@ GameObject:
   - component: {fileID: 1095457317}
   - component: {fileID: 1095457319}
   - component: {fileID: 1095457318}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spike (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22840,7 +22840,7 @@ GameObject:
   - component: {fileID: 1119373610}
   - component: {fileID: 1119373612}
   - component: {fileID: 1119373611}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spike (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23060,7 +23060,7 @@ GameObject:
   - component: {fileID: 1131489913}
   - component: {fileID: 1131489915}
   - component: {fileID: 1131489914}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23355,7 +23355,7 @@ GameObject:
   - component: {fileID: 1148055092}
   - component: {fileID: 1148055094}
   - component: {fileID: 1148055093}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spike (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23465,7 +23465,7 @@ GameObject:
   - component: {fileID: 1190727553}
   - component: {fileID: 1190727555}
   - component: {fileID: 1190727554}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spike (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24035,7 +24035,7 @@ GameObject:
   - component: {fileID: 1359621409}
   - component: {fileID: 1359621411}
   - component: {fileID: 1359621410}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spike (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24145,7 +24145,7 @@ GameObject:
   - component: {fileID: 1359931240}
   - component: {fileID: 1359931242}
   - component: {fileID: 1359931241}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24440,7 +24440,7 @@ GameObject:
   - component: {fileID: 1404447638}
   - component: {fileID: 1404447640}
   - component: {fileID: 1404447639}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24550,7 +24550,7 @@ GameObject:
   - component: {fileID: 1415703178}
   - component: {fileID: 1415703180}
   - component: {fileID: 1415703179}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Non-Spikes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24895,7 +24895,7 @@ GameObject:
   - component: {fileID: 1430163097}
   - component: {fileID: 1430163099}
   - component: {fileID: 1430163098}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: DropTileTrap_Vertical_0_LeftNeddles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25116,7 +25116,7 @@ GameObject:
   - component: {fileID: 1455166594}
   - component: {fileID: 1455166596}
   - component: {fileID: 1455166595}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spike (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25376,7 +25376,7 @@ GameObject:
   - component: {fileID: 1492265228}
   - component: {fileID: 1492265230}
   - component: {fileID: 1492265229}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25487,7 +25487,7 @@ GameObject:
   - component: {fileID: 1533850504}
   - component: {fileID: 1533850503}
   - component: {fileID: 1533850505}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spikes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26002,7 +26002,7 @@ GameObject:
   - component: {fileID: 1608699279}
   - component: {fileID: 1608699281}
   - component: {fileID: 1608699280}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spike (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26222,7 +26222,7 @@ GameObject:
   - component: {fileID: 1644396369}
   - component: {fileID: 1644396371}
   - component: {fileID: 1644396370}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26332,7 +26332,7 @@ GameObject:
   - component: {fileID: 1649921818}
   - component: {fileID: 1649921820}
   - component: {fileID: 1649921819}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spike (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36414,7 +36414,7 @@ GameObject:
   - component: {fileID: 1792574253}
   - component: {fileID: 1792574255}
   - component: {fileID: 1792574254}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36524,7 +36524,7 @@ GameObject:
   - component: {fileID: 1809685845}
   - component: {fileID: 1809685847}
   - component: {fileID: 1809685846}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spike (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36634,7 +36634,7 @@ GameObject:
   - component: {fileID: 1828054014}
   - component: {fileID: 1828054016}
   - component: {fileID: 1828054015}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spike (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36854,7 +36854,7 @@ GameObject:
   - component: {fileID: 1859121077}
   - component: {fileID: 1859121079}
   - component: {fileID: 1859121078}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spike (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37037,7 +37037,7 @@ GameObject:
   - component: {fileID: 1884878253}
   - component: {fileID: 1884878255}
   - component: {fileID: 1884878254}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37332,7 +37332,7 @@ GameObject:
   - component: {fileID: 1900316688}
   - component: {fileID: 1900316690}
   - component: {fileID: 1900316689}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spike (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37627,7 +37627,7 @@ GameObject:
   - component: {fileID: 1912032329}
   - component: {fileID: 1912032331}
   - component: {fileID: 1912032330}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37907,7 +37907,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 63
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -38019,7 +38019,7 @@ GameObject:
   - component: {fileID: 1951821147}
   - component: {fileID: 1951821149}
   - component: {fileID: 1951821148}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spike (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38289,6 +38289,7 @@ MonoBehaviour:
   jumpTimeLimit: 0.5
   state: 0
   controlEnabled: 1
+  sleeping: 0
 --- !u!58 &1984311051
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -38436,7 +38437,7 @@ GameObject:
   - component: {fileID: 2006935609}
   - component: {fileID: 2006935611}
   - component: {fileID: 2006935610}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spike (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38546,7 +38547,7 @@ GameObject:
   - component: {fileID: 2037682733}
   - component: {fileID: 2037682735}
   - component: {fileID: 2037682734}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38656,7 +38657,7 @@ GameObject:
   - component: {fileID: 2041452509}
   - component: {fileID: 2041452511}
   - component: {fileID: 2041452510}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Wall (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39177,7 +39178,7 @@ GameObject:
   - component: {fileID: 2119671838}
   - component: {fileID: 2119671840}
   - component: {fileID: 2119671839}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Spike (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
