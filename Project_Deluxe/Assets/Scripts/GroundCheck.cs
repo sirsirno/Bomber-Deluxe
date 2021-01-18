@@ -14,12 +14,18 @@ public class GroundCheck : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.GetComponent<SpriteRenderer>() != null && collision.GetComponent<InvisibleBlockTrap>() == null)
+            if (collision.gameObject.GetComponent<SpriteRenderer>().color.a == 0)
+                return;
         if (collision.gameObject.tag == "JumpTrigger")
             colliders.Add(collision);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (collision.gameObject.GetComponent<SpriteRenderer>() != null)
+            if (collision.gameObject.GetComponent<SpriteRenderer>().color.a == 0)
+                return;
         if (collision.gameObject.tag == "JumpTrigger")
             colliders.Remove(collision);
     }
@@ -32,7 +38,7 @@ public class GroundCheck : MonoBehaviour
         }
         else
         {
-            if(rigid.velocity.y < 0)
+            if(rigid.velocity.y <= 0f)
                 PlayerController.Instance.state = PlayerController.PlayerState.Grounded;
         }
     }

@@ -43,6 +43,7 @@ public class PlayerController : Singleton<PlayerController>
 
     private void Update()
     {
+        Debug.Log(rb.velocity.y);
         if (controlEnabled)
         {
             if (state == PlayerState.Grounded && Input.GetButtonDown("Jump"))
