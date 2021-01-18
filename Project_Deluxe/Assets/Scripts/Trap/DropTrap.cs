@@ -18,7 +18,8 @@ public class DropTrap : MonoBehaviour
     {
         if(trapType == TrapType.PARENT)
             Trap = transform.parent.gameObject;
-        GetComponent<BoxCollider2D>().size = GetComponent<SpriteRenderer>().size; 
+        if (GetComponent<SpriteRenderer>() != null)
+            GetComponent<BoxCollider2D>().size = GetComponent<SpriteRenderer>().size; 
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
