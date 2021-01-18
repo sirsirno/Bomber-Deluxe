@@ -17,7 +17,6 @@ public class CameraMove : Singleton<CameraMove>
     {
         float playerDistance = player.transform.localPosition.x - spawnX;
         float followRange = 0 - spawnX;
-        Debug.Log(playerDistance + " , " + followRange);
         if(PlayerController.Instance.state == PlayerController.PlayerState.Dead)
             return;
 

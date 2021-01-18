@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
     [SerializeField]
     private bool isDebugMode = false;
     [SerializeField]
     private GameObject player = null;
 
+    public int coin { get; private set; } = 0;
+
     GameObject startPoint;
-    GameObject trapParent;
     GameObject invisibleBlockParent;
     GameObject invisibleBlockDownParent;
 
     private void Awake()
     {
         startPoint = GameObject.FindGameObjectWithTag("StartPoint");
-        trapParent = GameObject.FindGameObjectWithTag("Trap");
         invisibleBlockParent = GameObject.FindGameObjectWithTag("InvisibleBlocks");
         invisibleBlockDownParent = GameObject.FindGameObjectWithTag("InvisibleBlocksDown");
     }
@@ -43,13 +43,15 @@ public class GameManager : MonoBehaviour
 
     private void DisabledDebug()
     {
+        GameObject[] greenDebugBlocks = GameObject.FindGameObjectsWithTag("JumpTrigger");
+
         startPoint.SetActive(false); // 스타트 포인트 안보이게
 
-        for (int i = 0; i < trapParent.transform.childCount; i++) // 함정 표시 디버그 해제
+        for (int i = 0; i < greenDebugBlocks.Length; i++) // 함정 표시 디버그 해제
         {
-            if (trapParent.transform.GetChild(i).GetComponent<Tilemap>() != null)
+            if (greenDebugBlocks[i].GetComponent<Tilemap>() != null)
             {
-                trapParent.transform.GetChild(i).GetComponent<Tilemap>().color = Color.white;
+                greenDebugBlocks[i].GetComponent<Tilemap>().color = Color.white;
             }
         }
 
@@ -58,5 +60,24 @@ public class GameManager : MonoBehaviour
         {
             trapRanges[i].GetComponent<SpriteRenderer>().enabled = false;
         }
+    }
+
+
+    //==============코인 엑세스 함수================
+    public enum SETTYPE
+    {
+        SET = 1,
+        ADD,
+        REMOVE
+    }
+
+    public void AccessSetCoin(SETTYPE settype, int value)
+    {
+        if (settype == SETTYPE.SET)
+            coin = value;
+        else if (settype == SETTYPE.ADD)
+            coin += value;
+        else if (settype == SETTYPE.REMOVE)
+            coin -= value;
     }
 }

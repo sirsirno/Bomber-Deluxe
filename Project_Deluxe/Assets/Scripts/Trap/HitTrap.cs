@@ -11,4 +11,12 @@ public class HitTrap : MonoBehaviour
             GameObject.FindGameObjectWithTag("PlayerController").GetComponent<HitDeath>().HitDeathPlay();
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "PlayerController")
+        {
+            GameObject.FindGameObjectWithTag("PlayerController").GetComponent<HitDeath>().HitDeathPlay();
+        }
+    }
 }
