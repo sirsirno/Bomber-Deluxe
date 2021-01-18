@@ -7,6 +7,10 @@ using UnityEngine;
 /// </summary>
 public class AppearTrap : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject player = null;
+
+    private bool respawn = false;
     private void Start()
     {
         if (transform.childCount != 0)
@@ -26,11 +30,33 @@ public class AppearTrap : MonoBehaviour
         if (GetComponent<SpriteRenderer>() != null)
             GetComponent<BoxCollider2D>().size = GetComponent<SpriteRenderer>().size;
     }
+    private void Update()
+    {
+        if(player.GetComponent<PlayerController>().awake != false && respawn) // 함정 리셋
+        {
+            if (transform.childCount != 0)
+            {
+                for (int i = 0; i < transform.childCount; i++)
+                {
+                    transform.GetChild(i).gameObject.SetActive(false);
+                }
+            }
+            else
+            {
+                Debug.Log("에러");
+            }
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "PlayerController")
         {
+            if (player.GetComponent<PlayerController>().sleeping != false)
+            {
+                respawn = true;
+                Invoke("Respawn", 0.01f);
+            }
             if (transform.childCount != 0)
             {
                 for (int i = 0; i < transform.childCount; i++)
@@ -43,5 +69,9 @@ public class AppearTrap : MonoBehaviour
                 GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
             }
         }
+    }
+    private void Respawn()
+    {
+        respawn = false;
     }
 }

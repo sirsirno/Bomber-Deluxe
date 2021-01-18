@@ -169,6 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 196ce2c3a033df94dad40b3f5bb92dc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1984311048}
   trapType: 1
 --- !u!61 &2312252
 BoxCollider2D:
@@ -2725,6 +2726,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 196ce2c3a033df94dad40b3f5bb92dc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1984311048}
   trapType: 1
 --- !u!61 &89597613
 BoxCollider2D:
@@ -2899,6 +2901,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6616370406211731325, guid: ab0f9d48039e46e48b07e02a0a249808,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1984311048}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab0f9d48039e46e48b07e02a0a249808, type: 3}
 --- !u!4 &120969385 stripped
@@ -3335,6 +3342,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6616370406211731325, guid: ab0f9d48039e46e48b07e02a0a249808,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1984311048}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab0f9d48039e46e48b07e02a0a249808, type: 3}
 --- !u!4 &201776688 stripped
@@ -5329,6 +5341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57c3e3a5a86cf59478072e4ec661d0a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1984311048}
 --- !u!61 &414785787
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -20928,6 +20941,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 196ce2c3a033df94dad40b3f5bb92dc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1984311048}
   trapType: 0
 --- !u!61 &681194576
 BoxCollider2D:
@@ -21298,6 +21312,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6616370406211731325, guid: ab0f9d48039e46e48b07e02a0a249808,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1984311048}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab0f9d48039e46e48b07e02a0a249808, type: 3}
 --- !u!4 &742426548 stripped
@@ -22909,6 +22928,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 647658287}
     m_Modifications:
+    - target: {fileID: 3565793005613466352, guid: 6b8787b2788b5454893227279302b292,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1984311048}
     - target: {fileID: 3565793005613466364, guid: 6b8787b2788b5454893227279302b292,
         type: 3}
       propertyPath: m_Name
@@ -23835,6 +23859,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 196ce2c3a033df94dad40b3f5bb92dc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1984311048}
   trapType: 0
 --- !u!61 &1014418188
 BoxCollider2D:
@@ -24401,6 +24426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 196ce2c3a033df94dad40b3f5bb92dc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1984311048}
   trapType: 0
 --- !u!61 &1102324746
 BoxCollider2D:
@@ -24926,6 +24952,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 647658287}
     m_Modifications:
+    - target: {fileID: 3565793005613466352, guid: 6b8787b2788b5454893227279302b292,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1984311048}
     - target: {fileID: 3565793005613466364, guid: 6b8787b2788b5454893227279302b292,
         type: 3}
       propertyPath: m_Name
@@ -25336,6 +25367,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 647658287}
     m_Modifications:
+    - target: {fileID: 3565793005613466352, guid: 6b8787b2788b5454893227279302b292,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1984311048}
     - target: {fileID: 3565793005613466364, guid: 6b8787b2788b5454893227279302b292,
         type: 3}
       propertyPath: m_Name
@@ -25681,6 +25717,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6616370406211731325, guid: ab0f9d48039e46e48b07e02a0a249808,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1984311048}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab0f9d48039e46e48b07e02a0a249808, type: 3}
 --- !u!4 &1313570975 stripped
@@ -26091,6 +26132,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6616370406211731325, guid: ab0f9d48039e46e48b07e02a0a249808,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1984311048}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab0f9d48039e46e48b07e02a0a249808, type: 3}
 --- !u!4 &1386330267 stripped
@@ -26600,6 +26646,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57c3e3a5a86cf59478072e4ec661d0a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1984311048}
 --- !u!61 &1430163099
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -26957,6 +27004,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6616370406211731325, guid: ab0f9d48039e46e48b07e02a0a249808,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1984311048}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab0f9d48039e46e48b07e02a0a249808, type: 3}
 --- !u!4 &1464173103 stripped
@@ -27037,6 +27089,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6616370406211731325, guid: ab0f9d48039e46e48b07e02a0a249808,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1984311048}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab0f9d48039e46e48b07e02a0a249808, type: 3}
 --- !u!4 &1489442201 stripped
@@ -27462,6 +27519,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6616370406211731325, guid: ab0f9d48039e46e48b07e02a0a249808,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1984311048}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab0f9d48039e46e48b07e02a0a249808, type: 3}
 --- !u!4 &1537615978 stripped
@@ -38684,6 +38746,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 196ce2c3a033df94dad40b3f5bb92dc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1984311048}
   trapType: 1
 --- !u!61 &1875026106
 BoxCollider2D:
@@ -39993,6 +40056,7 @@ MonoBehaviour:
   state: 0
   controlEnabled: 1
   sleeping: 0
+  awake: 0
 --- !u!58 &1984311051
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -40987,6 +41051,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 647658287}
     m_Modifications:
+    - target: {fileID: 3565793005613466352, guid: 6b8787b2788b5454893227279302b292,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1984311048}
     - target: {fileID: 3565793005613466364, guid: 6b8787b2788b5454893227279302b292,
         type: 3}
       propertyPath: m_Name
@@ -41067,6 +41136,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 647658287}
     m_Modifications:
+    - target: {fileID: 3565793005613466352, guid: 6b8787b2788b5454893227279302b292,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1984311048}
     - target: {fileID: 3565793005613466364, guid: 6b8787b2788b5454893227279302b292,
         type: 3}
       propertyPath: m_Name
@@ -41212,5 +41286,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6616370406211731325, guid: ab0f9d48039e46e48b07e02a0a249808,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1984311048}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab0f9d48039e46e48b07e02a0a249808, type: 3}

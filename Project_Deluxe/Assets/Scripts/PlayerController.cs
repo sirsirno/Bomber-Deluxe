@@ -24,6 +24,7 @@ public class PlayerController : Singleton<PlayerController>
     public PlayerState state = PlayerState.Grounded;
     public bool controlEnabled = true;
     public bool sleeping = false; // 미래예지중
+    public bool awake = false;
 
     private SpriteRenderer spriteRenderer;
     private Animator animator;
@@ -49,7 +50,7 @@ public class PlayerController : Singleton<PlayerController>
         {
             Debug.Log("---------미래-------");
             sleeping = true;
-            Invoke("Wakeup", 15);
+            Invoke("Wakeup", 5);
         }
         if (controlEnabled)
         {
@@ -162,6 +163,11 @@ public class PlayerController : Singleton<PlayerController>
         if (sleeping != true)
             return;
         sleeping = false;
-
+        awake = true;
+        Invoke("ResetTrap", 0.01f);
+    }
+    private void ResetTrap()
+    {
+        awake = false;
     }
 }

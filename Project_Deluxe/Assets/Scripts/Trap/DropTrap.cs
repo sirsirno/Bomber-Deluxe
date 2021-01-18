@@ -5,6 +5,13 @@ using UnityEngine.Tilemaps;
 
 public class DropTrap : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject player = null;
+
+    private bool respawn = false;
+
+    private Vector3[] defaultposition = new Vector3[2];
+
     public enum TrapType
     {
         PARENT,
@@ -20,12 +27,53 @@ public class DropTrap : MonoBehaviour
             Trap = transform.parent.gameObject;
         if (GetComponent<SpriteRenderer>() != null)
             GetComponent<BoxCollider2D>().size = GetComponent<SpriteRenderer>().size; 
+        if(trapType == TrapType.PARENT)
+        {
+            defaultposition[0] = Trap.transform.position;
+        }
+        else
+        {
+            for(int i = 0; i <transform.childCount; i++)
+            {
+                defaultposition[i] = transform.GetChild(i).transform.position;
+            }
+        }
+    }
+
+    private void Update()
+    {
+        if (player.GetComponent<PlayerController>().awake != false && respawn) // 함정 리셋
+        {
+            if (trapType == TrapType.PARENT)
+            {
+                if (Trap.GetComponent<Rigidbody2D>() == null)
+                    Trap.AddComponent<Rigidbody2D>();
+                Trap.GetComponent<Rigidbody2D>().gravityScale = 0f;
+                Trap.GetComponent<Rigidbody2D>().mass = 1;
+            }
+            else
+            {
+                for (int i = 0; i < transform.childCount; i++)
+                {
+                    if (transform.GetChild(i).gameObject.GetComponent<Rigidbody2D>() == null)
+                        transform.GetChild(i).gameObject.AddComponent<Rigidbody2D>();
+                    transform.GetChild(i).gameObject.GetComponent<Rigidbody2D>().gravityScale = 0f;
+                    transform.GetChild(i).gameObject.GetComponent<Rigidbody2D>().mass = 1;
+                }
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "PlayerController")
         {
+            if (player.GetComponent<PlayerController>().sleeping != false)
+            {
+                respawn = true;
+                Invoke("Respawn", 0.01f);
+            }
+
             if (trapType == TrapType.PARENT)
             {
                 if (Trap.GetComponent<Rigidbody2D>() == null)
@@ -46,5 +94,9 @@ public class DropTrap : MonoBehaviour
                 }
             }
         }
+    }
+    private void Respawn()
+    {
+        respawn = false;
     }
 }
