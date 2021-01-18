@@ -12,7 +12,7 @@ public class FuturePlay : MonoBehaviour
     private int playScene = 0;
 
     private float playTime = 0f;
-    private float playDelay = 0.1f;
+    private float playDelay = 0.03f;
     private int playframe = 0;
 
     private GameManager gameManager = null;
@@ -37,7 +37,7 @@ public class FuturePlay : MonoBehaviour
             {
                 isFuturePlay = false;
                 playTime = 0f;
-                playDelay = 0.1f;
+                playDelay = 0.03f;
                 playframe = 0;
             }
         }
@@ -45,16 +45,18 @@ public class FuturePlay : MonoBehaviour
         if (isFuturePlay)
         {
             playTime = Time.time;
-            playTime = (float)Math.Round(playTime * 10) / 10;
+            playTime = (float)Math.Round(playTime * 100) / 100;
             if (playTime >= playDelay)
             {
                 Vector2 futurePlayerXY = new Vector2(rm.RecordNumber_XY[playScene - 1].XY[playframe].x, rm.RecordNumber_XY[playScene - 1].XY[playframe].y);
                 Sprite futurePlayerSprite = rm.RecordNumber_Sprite[playScene - 1].Sprite[playframe];
+                bool futurePlayerSpriteFlipX = rm.RecordNumber_SpriteFlipX[playScene - 1].SpriteFlipX[playframe];
 
                 transform.localPosition = futurePlayerXY;
                 GetComponent<SpriteRenderer>().sprite = futurePlayerSprite;
+                GetComponent<SpriteRenderer>().flipX = futurePlayerSpriteFlipX;
 
-                playDelay = playTime + 0.1f;
+                playDelay = playTime + 0.03f;
                 playTime = 0f;
                 playframe++;
             }

@@ -27,11 +27,11 @@ public class CameraMove : Singleton<CameraMove>
 
         if(player.GetComponent<PlayerController>().sleeping != false)
         {
-            GetComponent<Camera>().cullingMask = 1;
+            GetComponent<Camera>().cullingMask = 55;
         }
         else
         {
-            GetComponent<Camera>().cullingMask = ~(1<< 8);
+            GetComponent<Camera>().cullingMask = 63;
         }
     }
 }

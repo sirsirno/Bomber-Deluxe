@@ -10,7 +10,7 @@ public class RecordManager : MonoBehaviour
     private bool isRecrding = false;
 
     private float recordTime = 0f;
-    private float recordDelay = 0.1f;
+    private float recordDelay = 0.03f;
 
     [Header("")]
     [Header(" 녹화가 끝났다면 컴포넌트 복사후 붙여넣기")]
@@ -20,6 +20,7 @@ public class RecordManager : MonoBehaviour
     public int recordNumber = 0;
     public List<RecordXY> RecordNumber_XY = new List<RecordXY>();
     public List<RecordSprite> RecordNumber_Sprite = new List<RecordSprite>();
+    public List<RecordSpriteFlipX> RecordNumber_SpriteFlipX = new List<RecordSpriteFlipX>();
     private PlayerController player = null;
     private GameObject realplayer = null;
 
@@ -39,6 +40,9 @@ public class RecordManager : MonoBehaviour
                 if (!isRecrding)
                 {
                     isRecrding = true;
+                    RecordNumber_XY[recordNumber - 1].XY.Clear();
+                    RecordNumber_Sprite[recordNumber - 1].Sprite.Clear();
+                    RecordNumber_SpriteFlipX[recordNumber - 1].SpriteFlipX.Clear();
                     Debug.Log("녹화중");
                 }
                 else
@@ -49,14 +53,15 @@ public class RecordManager : MonoBehaviour
         if(isRecrding)
         {
             recordTime = Time.time;
-            recordTime = (float)Math.Round(recordTime * 10) / 10;
+            recordTime = (float)Math.Round(recordTime * 100) / 100;
             Debug.Log("recordTime : " + recordTime + ", recordDelay : " + recordDelay);
             if (recordTime >= recordDelay)
             {
                 RecordNumber_XY[recordNumber - 1].XY.Add(new Vector2(player.transform.localPosition.x, player.transform.localPosition.y));
                 RecordNumber_Sprite[recordNumber - 1].Sprite.Add(realplayer.GetComponent<SpriteRenderer>().sprite);
+                RecordNumber_SpriteFlipX[recordNumber - 1].SpriteFlipX.Add(realplayer.GetComponent<SpriteRenderer>().flipX);
 
-                recordDelay = recordTime + 0.1f;
+                recordDelay = recordTime + 0.03f;
                 recordTime = 0f;
             }
         }
@@ -72,5 +77,11 @@ public class RecordManager : MonoBehaviour
     public class RecordSprite
     {
         public List<Sprite> Sprite;
+    }
+
+    [Serializable]
+    public class RecordSpriteFlipX
+    {
+        public List<bool> SpriteFlipX;
     }
 }

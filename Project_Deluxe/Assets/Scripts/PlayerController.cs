@@ -49,7 +49,7 @@ public class PlayerController : Singleton<PlayerController>
         {
             Debug.Log("---------미래-------");
             sleeping = true;
-            Invoke("Wakeup", 5);
+            Invoke("Wakeup", 15);
         }
         if (controlEnabled)
         {

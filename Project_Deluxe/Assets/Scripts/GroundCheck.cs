@@ -23,7 +23,7 @@ public class GroundCheck : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<SpriteRenderer>() != null)
+        if (collision.gameObject.GetComponent<SpriteRenderer>() != null && collision.GetComponent<InvisibleBlockTrap>() == null)
             if (collision.gameObject.GetComponent<SpriteRenderer>().color.a == 0)
                 return;
         if (collision.gameObject.tag == "JumpTrigger")

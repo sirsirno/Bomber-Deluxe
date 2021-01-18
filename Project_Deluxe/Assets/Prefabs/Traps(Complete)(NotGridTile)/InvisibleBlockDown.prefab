@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 282469646923669183}
   - component: {fileID: 282469646923669182}
   - component: {fileID: 6616370406211731325}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: InvisibleBlockDown
   m_TagString: JumpTrigger
   m_Icon: {fileID: 0}
