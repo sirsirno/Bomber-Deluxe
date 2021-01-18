@@ -23,8 +23,8 @@ public class AppearTrap : MonoBehaviour
         
         if (GetComponent<BoxCollider2D>() == null)
             Debug.Log("박스 컬라이더가 없음요");
-
-        GetComponent<BoxCollider2D>().size = GetComponent<SpriteRenderer>().size;
+        if (GetComponent<SpriteRenderer>() != null)
+            GetComponent<BoxCollider2D>().size = GetComponent<SpriteRenderer>().size;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
