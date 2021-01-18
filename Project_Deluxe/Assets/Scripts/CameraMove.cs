@@ -24,5 +24,14 @@ public class CameraMove : Singleton<CameraMove>
             transform.localPosition = new Vector3(player.transform.localPosition.x,transform.localPosition.y, transform.localPosition.z);
         else
             transform.localPosition = new Vector3(0, transform.localPosition.y, transform.localPosition.z);
+
+        if(player.GetComponent<PlayerController>().sleeping != false)
+        {
+            GetComponent<Camera>().cullingMask = 1;
+        }
+        else
+        {
+            GetComponent<Camera>().cullingMask = ~(1<< 8);
+        }
     }
 }

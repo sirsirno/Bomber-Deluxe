@@ -23,6 +23,7 @@ public class PlayerController : Singleton<PlayerController>
 
     public PlayerState state = PlayerState.Grounded;
     public bool controlEnabled = true;
+    public bool sleeping = false; // 미래예지중
 
     private SpriteRenderer spriteRenderer;
     private Animator animator;
@@ -43,6 +44,13 @@ public class PlayerController : Singleton<PlayerController>
 
     private void Update()
     {
+        // ----------------------확인차 만들어 놓음---------------
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Debug.Log("---------미래-------");
+            sleeping = true;
+            Invoke("Wakeup", 5);
+        }
         if (controlEnabled)
         {
             if (state == PlayerState.Grounded && Input.GetButtonDown("Jump"))
@@ -62,7 +70,7 @@ public class PlayerController : Singleton<PlayerController>
                 rb.velocity = Vector2.zero;
                 rb.AddForce(Vector2.up * jumpSpeed * ((jumpTimer * 1.3f) + 1f), ForceMode2D.Impulse); //위방향으로 올라가게함
                 jumpTimer += Time.deltaTime;
-            } 
+            }
         }
     }
 
@@ -147,5 +155,13 @@ public class PlayerController : Singleton<PlayerController>
         Jumping,
         Dead,
         Stop
+    }
+
+    private void Wakeup()
+    {
+        if (sleeping != true)
+            return;
+        sleeping = false;
+
     }
 }
