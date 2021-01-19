@@ -28,7 +28,6 @@ public class FuturePlay : MonoBehaviour
     {
         if (PlayerController.Instance.awake)
         {
-            Debug.Log("awake");
             if (!isFuturePlay)
             {
                 isFuturePlay = true;
@@ -42,7 +41,6 @@ public class FuturePlay : MonoBehaviour
             playTime = 0f;
             playDelay = 0.03f;
             playframe = 0;
-            Debug.Log("sleep");
         }
 
         if (isFuturePlay)

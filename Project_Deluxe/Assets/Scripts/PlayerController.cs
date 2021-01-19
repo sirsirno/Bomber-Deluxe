@@ -32,10 +32,14 @@ public class PlayerController : Singleton<PlayerController>
     public bool awake = false;
     [SerializeField]
     private GameObject sleepingPlayer = null;
+    [SerializeField]
+    private GameObject sandClockEffect = null;
 
     private SpriteRenderer spriteRenderer;
     private Animator animator;
     Rigidbody2D rb;
+
+    public float clockDuration = 15;
 
     /// <summary>
     /// 스프라이트 상의 플레이어 (애니메이션용)
@@ -48,6 +52,8 @@ public class PlayerController : Singleton<PlayerController>
         animator = realPlayer.GetComponent<Animator>();
         spriteRenderer = realPlayer.GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
+
+        InvokeRepeating("SandClockAnimation", 0, 2);
     }
 
     private void Update()
@@ -64,6 +70,7 @@ public class PlayerController : Singleton<PlayerController>
                 realPlayer.GetComponent<SpriteRenderer>().color = new Color(0, 1, 1, 1);
                 sleepingPlayer.SetActive(true);
                 sleepingPlayer.transform.localPosition = transform.localPosition;
+                sleepingPlayer.transform.GetChild(0).gameObject.GetComponent<Animator>().Play("SleepSpeechBubble_Sleeping");
 
                 sleeping = true;
                 sleepingDuration = sleepingDurationDefault;
@@ -74,6 +81,10 @@ public class PlayerController : Singleton<PlayerController>
         if (sleeping)
         {
             float sleepTime = Time.time;
+
+            // 시계 관련
+            clockDuration = sleepingDuration - sleepTime;
+
             if (sleepTime >= sleepingDuration || PlayerStopEvent.Instance.isFutureDead)
             {
                 if (animator.GetInteger("PlayerAnimation") != 4 && animator.GetInteger("PlayerAnimation") != 5)
@@ -92,6 +103,9 @@ public class PlayerController : Singleton<PlayerController>
                     animator.Play("Player_Idle");
                     PlayerStopEvent.Instance.isFutureDead = false;
 
+                    sleepingPlayer.transform.GetChild(0).gameObject.GetComponent<Animator>().Play("SleepSpeechBubble_Awake");
+                    sleepingPlayer.transform.GetChild(0).transform.SetParent(gameObject.transform);
+
                     sleepingPlayer.SetActive(false);
 
                     Debug.Log("-------현재--------");
@@ -99,26 +113,42 @@ public class PlayerController : Singleton<PlayerController>
             }
         }
 
-        //=========================컨트롤================================
-        if (controlEnabled)
+        //=========================모래시계이펙트========================
         {
-            if (state == PlayerState.Grounded && Input.GetButtonDown("Jump"))
+            if (!sleeping)
             {
-                jump = true;
+                sandClockEffect.SetActive(true);
+                if (state == PlayerState.Grounded)
+                    sandClockEffect.GetComponent<Animator>().Play("SandClock_Able");
+                if (state == PlayerState.Jumping)
+                    sandClockEffect.GetComponent<Animator>().Play("SandClock_Unable");
             }
+            else
+                sandClockEffect.SetActive(false);
+        }
 
-            if (!Input.GetButton("Jump") || jumpTimer >= jumpTimeLimit)
+        //=========================컨트롤================================
+        {
+            if (controlEnabled)
             {
-                jump = false;
-                jumpTimer = 0f;
-                return;
-            }
+                if (state == PlayerState.Grounded && Input.GetButtonDown("Jump"))
+                {
+                    jump = true;
+                }
 
-            if(jump)
-            {
-                rb.velocity = Vector2.zero;
-                rb.AddForce(Vector2.up * jumpSpeed * ((jumpTimer * 1.3f) + 1f), ForceMode2D.Impulse); //위방향으로 올라가게함
-                jumpTimer += Time.deltaTime;
+                if (!Input.GetButton("Jump") || jumpTimer >= jumpTimeLimit)
+                {
+                    jump = false;
+                    jumpTimer = 0f;
+                    return;
+                }
+
+                if (jump)
+                {
+                    rb.velocity = Vector2.zero;
+                    rb.AddForce(Vector2.up * jumpSpeed * ((jumpTimer * 1.3f) + 1f), ForceMode2D.Impulse); //위방향으로 올라가게함
+                    jumpTimer += Time.deltaTime;
+                }
             }
         }
     }
@@ -209,5 +239,10 @@ public class PlayerController : Singleton<PlayerController>
     private void ResetTrap()
     {
         awake = false;
+    }
+
+    private void SandClockAnimation()
+    {
+
     }
 }

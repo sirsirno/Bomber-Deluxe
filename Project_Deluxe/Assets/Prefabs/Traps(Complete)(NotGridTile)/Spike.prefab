@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2080398772602820044}
   - component: {fileID: 2080398772602820046}
-  - component: {fileID: 2080398772602820045}
+  - component: {fileID: 1876602156055950770}
   - component: {fileID: 3159239707751673889}
   m_Layer: 0
   m_Name: Spike
@@ -85,8 +85,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &2080398772602820045
-BoxCollider2D:
+--- !u!60 &1876602156055950770
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -108,9 +108,11 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.5, y: 0}
+      - {x: 0.5, y: -0.5}
+      - {x: 0.5, y: 0.5}
 --- !u!114 &3159239707751673889
 MonoBehaviour:
   m_ObjectHideFlags: 0
