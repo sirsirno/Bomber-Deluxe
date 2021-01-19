@@ -61,6 +61,7 @@ public class DropTrap : MonoBehaviour
                     transform.GetChild(i).gameObject.GetComponent<Rigidbody2D>().mass = 1;
                 }
             }
+            respawn = false;
         }
     }
 
@@ -71,7 +72,6 @@ public class DropTrap : MonoBehaviour
             if (player.GetComponent<PlayerController>().sleeping != false)
             {
                 respawn = true;
-                Invoke("Respawn", 0.01f);
             }
 
             if (trapType == TrapType.PARENT)
@@ -94,9 +94,5 @@ public class DropTrap : MonoBehaviour
                 }
             }
         }
-    }
-    private void Respawn()
-    {
-        respawn = false;
     }
 }

@@ -32,7 +32,7 @@ public class AppearTrap : MonoBehaviour
     }
     private void Update()
     {
-        if(player.GetComponent<PlayerController>().awake != false && respawn) // 함정 리셋
+        if(player.GetComponent<PlayerController>().awake != false && respawn != false) // 함정 리셋
         {
             if (transform.childCount != 0)
             {
@@ -45,6 +45,7 @@ public class AppearTrap : MonoBehaviour
             {
                 Debug.Log("에러");
             }
+            respawn = false;
         }
     }
 
@@ -55,7 +56,7 @@ public class AppearTrap : MonoBehaviour
             if (player.GetComponent<PlayerController>().sleeping != false)
             {
                 respawn = true;
-                Invoke("Respawn", 0.01f);
+                //Invoke("Respawn", 0.01f);
             }
             if (transform.childCount != 0)
             {
@@ -69,9 +70,5 @@ public class AppearTrap : MonoBehaviour
                 GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
             }
         }
-    }
-    private void Respawn()
-    {
-        respawn = false;
     }
 }
