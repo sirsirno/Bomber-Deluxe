@@ -12,6 +12,7 @@ TagManager:
   - InvisibleBlocks
   - InvisibleBlocksDown
   - PlayerHead
+  - BadCoin
   layers:
   - Default
   - TransparentFX
