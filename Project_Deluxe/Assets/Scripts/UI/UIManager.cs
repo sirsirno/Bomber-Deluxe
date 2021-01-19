@@ -9,6 +9,10 @@ public class UIManager : MonoBehaviour
     private GameObject menu;
     [SerializeField]
     private GameObject clear;
+    [SerializeField]
+    private Image img;
+
+    private float fillAmount = 0.1f;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +32,12 @@ public class UIManager : MonoBehaviour
             menu.SetActive(false);
             Time.timeScale = 1;
         }
+        if (Input.GetKeyDown(KeyCode.H)) 
+        {
+            fillAmount += 0.1f;
+            img.fillAmount = fillAmount;
+        }
+        
     }
     private void OnClickContinueBtn() 
     {
@@ -47,5 +57,6 @@ public class UIManager : MonoBehaviour
     private void OnClickNextBtn() 
     {
         clear.SetActive(false);
+        
     }
 }
