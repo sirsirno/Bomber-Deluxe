@@ -58,6 +58,10 @@ public class AppearTrap : MonoBehaviour
                 respawn = true;
                 //Invoke("Respawn", 0.01f);
             }
+            else
+            {
+                gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            }
             if (transform.childCount != 0)
             {
                 for (int i = 0; i < transform.childCount; i++)

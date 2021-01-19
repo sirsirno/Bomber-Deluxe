@@ -36,6 +36,10 @@ public class InvisibleBlockOnlyDownTrap : MonoBehaviour
             {
                 respawn = true;
             }
+            else
+            {
+                gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            }
             GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
             GetComponent<BoxCollider2D>().isTrigger = false;
             GetComponent<BoxCollider2D>().offset = Vector2.zero;

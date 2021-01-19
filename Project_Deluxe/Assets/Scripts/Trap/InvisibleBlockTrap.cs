@@ -26,6 +26,10 @@ public class InvisibleBlockTrap : MonoBehaviour
             {
                 respawn = true;
             }
+            else
+            {
+                gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            }
             GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
         }
     }
