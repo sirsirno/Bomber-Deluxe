@@ -8,11 +8,13 @@ public class InvisibleBlockTrap : MonoBehaviour
     private GameObject player = null;
 
     private bool respawn = false;
-
+    private bool isShow = false;
     private void Update()
     {
         if (player.GetComponent<PlayerController>().awake != false && respawn != false) // 함정 리셋
         {
+            if (isShow != false)
+                return;
             GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
             respawn = false;
         }
@@ -28,7 +30,7 @@ public class InvisibleBlockTrap : MonoBehaviour
             }
             else
             {
-                gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                isShow = true;
             }
             GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
         }

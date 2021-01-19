@@ -8,6 +8,7 @@ public class InvisibleBlockOnlyDownTrap : MonoBehaviour
     private GameObject player = null;
 
     private bool respawn = false;
+    private bool isShow = false;
 
     private Vector2 defaultOffset = Vector2.zero;
     private Vector2 defaultsize = Vector2.zero;
@@ -20,6 +21,8 @@ public class InvisibleBlockOnlyDownTrap : MonoBehaviour
     {
         if (player.GetComponent<PlayerController>().awake != false && respawn) // 함정 리셋
         {
+            if (isShow != false)
+                return;
             GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
             GetComponent<BoxCollider2D>().isTrigger = true;
             GetComponent<BoxCollider2D>().offset = defaultOffset;
@@ -38,7 +41,7 @@ public class InvisibleBlockOnlyDownTrap : MonoBehaviour
             }
             else
             {
-                gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                isShow = true;
             }
             GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
             GetComponent<BoxCollider2D>().isTrigger = false;
