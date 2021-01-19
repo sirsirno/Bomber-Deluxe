@@ -10,9 +10,12 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject clear;
     [SerializeField]
+    private GameObject clockNeedle;
+
+    [SerializeField]
     private Image img;
 
-    private float fillAmount = 0.1f;
+    private float fillAmount = 0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,9 +35,19 @@ public class UIManager : MonoBehaviour
             menu.SetActive(false);
             Time.timeScale = 1;
         }
-        if (Input.GetKeyDown(KeyCode.H)) 
+
+        // 시계 관련
         {
-            fillAmount += 0.1f;
+            fillAmount = 1 - ((int)PlayerController.Instance.clockDuration / 15f);
+            clockNeedle.transform.rotation = Quaternion.Euler(0, 0, -360 * (1 - ((int)PlayerController.Instance.clockDuration / 15f)));
+
+            if(PlayerController.Instance.clockDuration <= 0 || PlayerController.Instance.awake)
+            {
+                fillAmount = 0;
+                clockNeedle.transform.rotation = Quaternion.identity;
+                PlayerController.Instance.clockDuration = 15;
+            }
+
             img.fillAmount = fillAmount;
         }
         
