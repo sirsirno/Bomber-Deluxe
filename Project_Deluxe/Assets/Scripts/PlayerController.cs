@@ -162,9 +162,10 @@ public class PlayerController : Singleton<PlayerController>
     {
         if (sleeping != true)
             return;
-        sleeping = false;
         awake = true;
+        sleeping = false;
         Invoke("ResetTrap", 0.01f);
+        Debug.Log("-------현재--------");
     }
     private void ResetTrap()
     {

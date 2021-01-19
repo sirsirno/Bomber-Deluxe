@@ -42,7 +42,7 @@ public class DropTrap : MonoBehaviour
 
     private void Update()
     {
-        if (player.GetComponent<PlayerController>().awake != false && respawn) // 함정 리셋
+        if (player.GetComponent<PlayerController>().awake != false && respawn != false) // 함정 리셋
         {
             if (trapType == TrapType.PARENT)
             {
@@ -50,6 +50,8 @@ public class DropTrap : MonoBehaviour
                     Trap.AddComponent<Rigidbody2D>();
                 Trap.GetComponent<Rigidbody2D>().gravityScale = 0f;
                 Trap.GetComponent<Rigidbody2D>().mass = 1;
+                Trap.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                Trap.transform.position = defaultposition[0];
             }
             else
             {
@@ -59,6 +61,8 @@ public class DropTrap : MonoBehaviour
                         transform.GetChild(i).gameObject.AddComponent<Rigidbody2D>();
                     transform.GetChild(i).gameObject.GetComponent<Rigidbody2D>().gravityScale = 0f;
                     transform.GetChild(i).gameObject.GetComponent<Rigidbody2D>().mass = 1;
+                    transform.GetChild(i).gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
+                    transform.GetChild(i).gameObject.transform.position = defaultposition[i];
                 }
             }
             respawn = false;
