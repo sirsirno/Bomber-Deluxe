@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,8 +24,14 @@ public class PlayerController : Singleton<PlayerController>
 
     public PlayerState state = PlayerState.Grounded;
     public bool controlEnabled = true;
-    public bool sleeping = false; // 미래예지중
+
+    public bool sleeping { get; private set; }  = false; // 미래예지중
+    [SerializeField]
+    private float sleepingDurationDefault = 0; // 미래예지중
+    private float sleepingDuration = 0; // 미래예지중
     public bool awake = false;
+    [SerializeField]
+    private GameObject sleepingPlayer = null;
 
     private SpriteRenderer spriteRenderer;
     private Animator animator;
@@ -46,12 +53,53 @@ public class PlayerController : Singleton<PlayerController>
     private void Update()
     {
         // ----------------------확인차 만들어 놓음---------------
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) && state == PlayerState.Grounded)
         {
-            Debug.Log("---------미래-------");
-            sleeping = true;
-            Invoke("Wakeup", 5);
+            if (!sleeping)
+            {
+                Debug.Log("---------미래-------");
+
+                GlitchEffect.Instance.colorIntensity = 0.306f;
+                GlitchEffect.Instance.intensity = 0.194f;
+                realPlayer.GetComponent<SpriteRenderer>().color = new Color(0, 1, 1, 1);
+                sleepingPlayer.SetActive(true);
+                sleepingPlayer.transform.localPosition = transform.localPosition;
+
+                sleeping = true;
+                sleepingDuration = sleepingDurationDefault;
+                sleepingDuration += Time.time;
+            }
         }
+
+        if (sleeping)
+        {
+            float sleepTime = Time.time;
+            if (sleepTime >= sleepingDuration || PlayerStopEvent.Instance.isFutureDead)
+            {
+                if (animator.GetInteger("PlayerAnimation") != 4 && animator.GetInteger("PlayerAnimation") != 5)
+                {
+                    sleeping = false;
+                    awake = true;
+                    Invoke("ResetTrap", 0.1f);
+
+                    GlitchEffect.Instance.colorIntensity = 0f;
+                    GlitchEffect.Instance.intensity = 0f;
+                    realPlayer.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+                    transform.localPosition = sleepingPlayer.transform.localPosition;
+                    animator.SetInteger("PlayerAnimation", 0);
+                    state = PlayerState.Grounded;
+                    controlEnabled = true;
+                    animator.Play("Player_Idle");
+                    PlayerStopEvent.Instance.isFutureDead = false;
+
+                    sleepingPlayer.SetActive(false);
+
+                    Debug.Log("-------현재--------");
+                }
+            }
+        }
+
+        //=========================컨트롤================================
         if (controlEnabled)
         {
             if (state == PlayerState.Grounded && Input.GetButtonDown("Jump"))
@@ -82,18 +130,18 @@ public class PlayerController : Singleton<PlayerController>
             if (Input.GetKey(KeyCode.LeftArrow))    //왼쪽화살표 입력시 실행함
             {
                 if (state == PlayerState.Grounded && animator.GetInteger("PlayerAnimation") == 1)
-                    transform.Translate(Vector3.left * moveSpeed);
+                    transform.Translate(Vector3.left * moveSpeed * Time.fixedDeltaTime);
                 else if (state == PlayerState.Jumping)
-                    transform.Translate(Vector3.left * moveSpeed / 1.5f);
+                    transform.Translate(Vector3.left * moveSpeed / 1.5f * Time.fixedDeltaTime);
                 spriteRenderer.flipX = true;
             }
 
             if (Input.GetKey(KeyCode.RightArrow))    //오른쪽화살표 입력시 실행함
             {
                 if (state == PlayerState.Grounded && animator.GetInteger("PlayerAnimation") == 1)
-                    transform.Translate(Vector3.right * moveSpeed);
+                    transform.Translate(Vector3.right * moveSpeed * Time.fixedDeltaTime);
                 else if (state == PlayerState.Jumping)
-                    transform.Translate(Vector3.right * moveSpeed / 1.5f);
+                    transform.Translate(Vector3.right * moveSpeed / 1.5f * Time.fixedDeltaTime);
                 spriteRenderer.flipX = false;
             }
 
@@ -158,15 +206,6 @@ public class PlayerController : Singleton<PlayerController>
         Stop
     }
 
-    private void Wakeup()
-    {
-        if (sleeping != true)
-            return;
-        awake = true;
-        sleeping = false;
-        Invoke("ResetTrap", 0.01f);
-        Debug.Log("-------현재--------");
-    }
     private void ResetTrap()
     {
         awake = false;

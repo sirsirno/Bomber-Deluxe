@@ -26,20 +26,23 @@ public class FuturePlay : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (PlayerController.Instance.awake)
         {
+            Debug.Log("awake");
             if (!isFuturePlay)
             {
                 isFuturePlay = true;
-                Debug.Log("미래예지중");
+                Debug.Log("녹화 플레이");
             }
-            else
-            {
-                isFuturePlay = false;
-                playTime = 0f;
-                playDelay = 0.03f;
-                playframe = 0;
-            }
+        }
+        else if (PlayerController.Instance.sleeping)
+        {
+            isFuturePlay = false;
+            transform.localPosition = new Vector3(-11.62f, 0, 0);
+            playTime = 0f;
+            playDelay = 0.03f;
+            playframe = 0;
+            Debug.Log("sleep");
         }
 
         if (isFuturePlay)
@@ -58,7 +61,11 @@ public class FuturePlay : MonoBehaviour
 
                 playDelay = playTime + 0.03f;
                 playTime = 0f;
-                playframe++;
+                //Debug.Log(rm.RecordNumber_XY[playScene - 1].XY.Count + " , " + playframe);
+                if (rm.RecordNumber_XY[playScene - 1].XY.Count - 1 > playframe )
+                    playframe++;
+                else
+                    playframe = 0;
             }
         }
     }

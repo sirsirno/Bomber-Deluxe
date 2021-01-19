@@ -2,24 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStopEvent : MonoBehaviour
+public class PlayerStopEvent : Singleton<PlayerStopEvent>
 {
-    private GameObject player = null;
+    private GameObject playerController = null;
     private Animator animator = null;
+    private GroundCheck groundCheck = null;
+    public bool isFutureDead = false;
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        animator = player.GetComponent<Animator>();
+        playerController = GameObject.FindGameObjectWithTag("PlayerController");
+        animator = GetComponent<Animator>();
+        groundCheck = FindObjectOfType<GroundCheck>();
     }
     private void PlayerStop()
     {
-        transform.parent.gameObject.GetComponent<PlayerController>().controlEnabled = false;
+        playerController.GetComponent<PlayerController>().controlEnabled = false;
     }
 
     private void PlayerResume()
     {
-        transform.parent.gameObject.GetComponent<PlayerController>().controlEnabled = true;
+        playerController.GetComponent<PlayerController>().controlEnabled = true;
         animator.SetInteger("PlayerAnimation", 0);
+    }
+
+    private void BackToNow()
+    {
+        if (PlayerController.Instance.sleeping)
+        {
+            GetComponent<Animator>().SetInteger("PlayerAnimation", 0);
+            GetComponent<Animator>().Play("Player_Idle");
+            groundCheck.GetComponent<GroundCheck>().enabled = true;
+            playerController.GetComponent<Rigidbody2D>().simulated = true;
+            isFutureDead = true;
+        }
     }
 }

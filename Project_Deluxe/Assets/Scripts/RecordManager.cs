@@ -34,8 +34,7 @@ public class RecordManager : MonoBehaviour
     {
         if(isRecordGame)
         {
-
-            if (Input.GetKeyDown(KeyCode.R))
+            if (PlayerController.Instance.sleeping)
             {
                 if (!isRecrding)
                 {
@@ -45,8 +44,10 @@ public class RecordManager : MonoBehaviour
                     RecordNumber_SpriteFlipX[recordNumber - 1].SpriteFlipX.Clear();
                     Debug.Log("³ìÈ­Áß");
                 }
-                else
-                    isRecrding = false;
+            }
+            else
+            {
+                isRecrding = false;
             }
         }
 
@@ -54,7 +55,7 @@ public class RecordManager : MonoBehaviour
         {
             recordTime = Time.time;
             recordTime = (float)Math.Round(recordTime * 100) / 100;
-            Debug.Log("recordTime : " + recordTime + ", recordDelay : " + recordDelay);
+            //Debug.Log("recordTime : " + recordTime + ", recordDelay : " + recordDelay);
             if (recordTime >= recordDelay)
             {
                 RecordNumber_XY[recordNumber - 1].XY.Add(new Vector2(player.transform.localPosition.x, player.transform.localPosition.y));

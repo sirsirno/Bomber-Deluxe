@@ -26,14 +26,18 @@ public class DeathZone : MonoBehaviour
     {
         if(collision.gameObject.tag == "PlayerController")
         {
-            canvas.SetActive(true);
-            Invoke("CheckEffect",0.65f);
-            Invoke("DeathPanelFalse",DeathPanelDelayTime);
             player.GetComponent<Animator>().SetInteger("PlayerAnimation", 5);
             player.GetComponent<Animator>().Play("Player_FallenDeath");
             playerController.GetComponent<Rigidbody2D>().simulated = false;
             groundCheck.GetComponent<GroundCheck>().enabled = false;
-            playerController.GetComponent<PlayerController>().state = PlayerController.PlayerState.Dead;
+
+            if (!PlayerController.Instance.sleeping)
+            {
+                playerController.GetComponent<PlayerController>().state = PlayerController.PlayerState.Dead;
+                canvas.SetActive(true);
+                Invoke("CheckEffect", 0.65f);
+                Invoke("DeathPanelFalse", DeathPanelDelayTime);
+            }
         }
     }
 

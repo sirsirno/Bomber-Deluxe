@@ -14,7 +14,7 @@ using UnityEngine;
 [ExecuteInEditMode]
 [AddComponentMenu("Image Effects/GlitchEffect")]
 [RequireComponent(typeof(Camera))]
-public class GlitchEffect : MonoBehaviour
+public class GlitchEffect : Singleton<GlitchEffect>
 {
 	public Texture2D displacementMap;
 	public Shader Shader;

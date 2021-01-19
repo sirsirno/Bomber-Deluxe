@@ -23,13 +23,17 @@ public class HitDeath : MonoBehaviour
 
     public void HitDeathPlay()
     {
-        canvas.SetActive(true);
-        Invoke("CheckEffect", 0.65f);
-        Invoke("DeathPanelFalse", DeathPanelDelayTime);
         player.GetComponent<Animator>().SetInteger("PlayerAnimation", 4);
         player.GetComponent<Animator>().Play("Player_Death");
         groundCheck.GetComponent<GroundCheck>().enabled = false;
-        playerController.GetComponent<PlayerController>().state = PlayerController.PlayerState.Dead;
+
+        if (!PlayerController.Instance.sleeping)
+        {
+            playerController.GetComponent<PlayerController>().state = PlayerController.PlayerState.Dead;
+            canvas.SetActive(true);
+            Invoke("CheckEffect", 0.65f);
+            Invoke("DeathPanelFalse", DeathPanelDelayTime);
+        }
     }
 
     private void CheckEffect()
