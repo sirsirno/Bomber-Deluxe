@@ -77,6 +77,10 @@ public class DropTrap : MonoBehaviour
             {
                 respawn = true;
             }
+            else
+            {
+                gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            }
 
             if (trapType == TrapType.PARENT)
             {
