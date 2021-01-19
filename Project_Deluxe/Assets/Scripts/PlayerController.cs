@@ -52,8 +52,6 @@ public class PlayerController : Singleton<PlayerController>
         animator = realPlayer.GetComponent<Animator>();
         spriteRenderer = realPlayer.GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
-
-        InvokeRepeating("SandClockAnimation", 0, 2);
     }
 
     private void Update()
@@ -70,7 +68,10 @@ public class PlayerController : Singleton<PlayerController>
                 realPlayer.GetComponent<SpriteRenderer>().color = new Color(0, 1, 1, 1);
                 sleepingPlayer.SetActive(true);
                 sleepingPlayer.transform.localPosition = transform.localPosition;
+                sleepingPlayer.GetComponent<SpriteRenderer>().flipX = spriteRenderer.flipX;
                 sleepingPlayer.transform.GetChild(0).gameObject.GetComponent<Animator>().Play("SleepSpeechBubble_Sleeping");
+                AudioManager.Instance.BGM_FutureRandomPlay();
+                AudioManager.Instance.BGM_Prototype.volume = 0f;
 
                 sleeping = true;
                 sleepingDuration = sleepingDurationDefault;
@@ -82,8 +83,8 @@ public class PlayerController : Singleton<PlayerController>
         {
             float sleepTime = Time.time;
 
-            // 시계 관련
-            clockDuration = sleepingDuration - sleepTime;
+            if (animator.GetInteger("PlayerAnimation") != 4 && animator.GetInteger("PlayerAnimation") != 5)
+                clockDuration = sleepingDuration - sleepTime;
 
             if (sleepTime >= sleepingDuration || PlayerStopEvent.Instance.isFutureDead)
             {
@@ -97,6 +98,7 @@ public class PlayerController : Singleton<PlayerController>
                     GlitchEffect.Instance.intensity = 0f;
                     realPlayer.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
                     transform.localPosition = sleepingPlayer.transform.localPosition;
+                    spriteRenderer.flipX = sleepingPlayer.GetComponent<SpriteRenderer>().flipX;
                     animator.SetInteger("PlayerAnimation", 0);
                     state = PlayerState.Grounded;
                     controlEnabled = true;
@@ -105,6 +107,9 @@ public class PlayerController : Singleton<PlayerController>
 
                     sleepingPlayer.transform.GetChild(0).gameObject.GetComponent<Animator>().Play("SleepSpeechBubble_Awake");
                     sleepingPlayer.transform.GetChild(0).transform.SetParent(gameObject.transform);
+
+                    AudioManager.Instance.BGM_FutureBGMStop();
+                    AudioManager.Instance.BGM_Prototype.volume = 1f;
 
                     sleepingPlayer.SetActive(false);
 
@@ -239,10 +244,5 @@ public class PlayerController : Singleton<PlayerController>
     private void ResetTrap()
     {
         awake = false;
-    }
-
-    private void SandClockAnimation()
-    {
-
     }
 }
