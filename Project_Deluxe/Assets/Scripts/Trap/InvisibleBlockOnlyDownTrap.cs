@@ -24,6 +24,7 @@ public class InvisibleBlockOnlyDownTrap : MonoBehaviour
             GetComponent<BoxCollider2D>().isTrigger = true;
             GetComponent<BoxCollider2D>().offset = defaultOffset;
             GetComponent<BoxCollider2D>().size = defaultsize;
+            respawn = false;
         }
     }
 
@@ -34,16 +35,11 @@ public class InvisibleBlockOnlyDownTrap : MonoBehaviour
             if (player.GetComponent<PlayerController>().sleeping != false)
             {
                 respawn = true;
-                Invoke("Respawn", 0.01f);
             }
             GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
             GetComponent<BoxCollider2D>().isTrigger = false;
             GetComponent<BoxCollider2D>().offset = Vector2.zero;
             GetComponent<BoxCollider2D>().size = Vector2.one;
         }
-    }
-    private void Respawn()
-    {
-        respawn = false;
     }
 }

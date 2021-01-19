@@ -11,9 +11,10 @@ public class InvisibleBlockTrap : MonoBehaviour
 
     private void Update()
     {
-        if (player.GetComponent<PlayerController>().awake != false && respawn) // 함정 리셋
+        if (player.GetComponent<PlayerController>().awake != false && respawn != false) // 함정 리셋
         {
             GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
+            respawn = false;
         }
     }
 
@@ -24,13 +25,8 @@ public class InvisibleBlockTrap : MonoBehaviour
             if (player.GetComponent<PlayerController>().sleeping != false)
             {
                 respawn = true;
-                Invoke("Respawn", 0.01f);
             }
             GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
         }
-    }
-    private void Respawn()
-    {
-        respawn = false;
     }
 }
