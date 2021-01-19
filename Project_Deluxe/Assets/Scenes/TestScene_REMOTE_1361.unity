@@ -399,6 +399,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1446830523}
     m_Modifications:
+    - target: {fileID: 2036590600, guid: 1e79d2a9c22389442a21a2c4504bbac0, type: 3}
+      propertyPath: badEatEffect
+      value: 
+      objectReference: {fileID: 193767629}
+    - target: {fileID: 2036590600, guid: 1e79d2a9c22389442a21a2c4504bbac0, type: 3}
+      propertyPath: parEatEffect
+      value: 
+      objectReference: {fileID: 1198009103}
     - target: {fileID: 5516746180155631906, guid: 1e79d2a9c22389442a21a2c4504bbac0,
         type: 3}
       propertyPath: m_RootOrder
@@ -458,11 +466,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Bad_Coin
-      objectReference: {fileID: 0}
-    - target: {fileID: 6609184756734119529, guid: 1e79d2a9c22389442a21a2c4504bbac0,
-        type: 3}
-      propertyPath: m_TagString
-      value: BadCoin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e79d2a9c22389442a21a2c4504bbac0, type: 3}
@@ -50784,7 +50787,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1970423442}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.5, y: -1.5, z: 0}
+  m_LocalPosition: {x: 139.5, y: -1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 831164562}
@@ -51149,43 +51152,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &2036590598 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6609184756734119529, guid: 1e79d2a9c22389442a21a2c4504bbac0,
-    type: 3}
-  m_PrefabInstance: {fileID: 31830350}
-  m_PrefabAsset: {fileID: 0}
---- !u!58 &2036590599
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2036590598}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
---- !u!114 &2036590600
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2036590598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a93393dd518416d46b077c960f75fa96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parEatEffect: {fileID: 1198009103}
-  badEatEffect: {fileID: 193767629}
-  offEffectTime: 2.5
 --- !u!1 &2037682732
 GameObject:
   m_ObjectHideFlags: 0

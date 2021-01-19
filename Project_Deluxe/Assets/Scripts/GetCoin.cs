@@ -11,16 +11,20 @@ public class GetCoin : MonoBehaviour
     {
         if (collision.gameObject.tag == "PlayerController")
         {
-            if(gameObject.tag == "BadCoin"){
-            badEatEffect.gameObject.SetActive(true);
-            Invoke("OffBadEffect",offEffectTime);
-            gameObject.SetActive(false);
-            return;
+            if (!PlayerController.Instance.sleeping)
+            {
+                if (gameObject.tag == "BadCoin")
+                {
+                    badEatEffect.gameObject.SetActive(true);
+                    Invoke("OffBadEffect", offEffectTime);
+                    gameObject.SetActive(false);
+                    return;
+                }
+                parEatEffect.gameObject.SetActive(true);
+                Invoke("OffEffect", offEffectTime);
+                gameObject.SetActive(false);
+                Invoke("DeleteObject", offEffectTime);
             }
-            parEatEffect.gameObject.SetActive(true);
-            Invoke("OffEffect",offEffectTime);
-            gameObject.SetActive(false);
-            Invoke("DeleteObject",offEffectTime);
         }
     }
     private void OffBadEffect(){

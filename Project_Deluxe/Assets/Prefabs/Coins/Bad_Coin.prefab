@@ -10,9 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 5516746180155631906}
   - component: {fileID: 2294635727688386973}
+  - component: {fileID: 2036590599}
+  - component: {fileID: 2036590600}
   m_Layer: 0
   m_Name: Bad_Coin
-  m_TagString: Untagged
+  m_TagString: BadCoin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83,3 +85,34 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!58 &2036590599
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6609184756734119529}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!114 &2036590600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6609184756734119529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a93393dd518416d46b077c960f75fa96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parEatEffect: {fileID: 0}
+  badEatEffect: {fileID: 0}
+  offEffectTime: 2.5

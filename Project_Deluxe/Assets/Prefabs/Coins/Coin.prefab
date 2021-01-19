@@ -113,3 +113,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a93393dd518416d46b077c960f75fa96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parEatEffect: {fileID: 0}
+  badEatEffect: {fileID: 0}
+  offEffectTime: 2.5
