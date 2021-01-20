@@ -53,6 +53,8 @@ public class ExitPoint : Singleton<ExitPoint>
             clearNeedTimer = Time.time;
             if (clearNeedTimer >= clearNeedDuration)
             {
+                GameObject.Find("UIManager").GetComponent<UIManager>().StageClear();
+
                 Debug.Log("클리어");
                 // 클리어
             }

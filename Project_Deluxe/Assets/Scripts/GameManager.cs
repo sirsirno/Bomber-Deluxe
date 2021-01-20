@@ -12,6 +12,7 @@ public class GameManager : Singleton<GameManager>
     private GameObject player = null;
 
     public int coin { get; private set; } = 0;
+    
     public int life { get; private set; } = 5;
     public int star { get; private set; } = 0;
 
@@ -94,7 +95,8 @@ public class GameManager : Singleton<GameManager>
         life--;
         if (life == -1)
         {
-            GameOverState();
+            GameObject.Find("UIManager").GetComponent<UIManager>().StageFail();
+            //GameOverState();
             return;
         }
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -102,6 +104,6 @@ public class GameManager : Singleton<GameManager>
 
     private void GameOverState()
     {
-
+        
     }
 }
