@@ -27,6 +27,8 @@ public class DeathZone : MonoBehaviour
         if(collision.gameObject.tag == "PlayerController")
         {
             player.GetComponent<Animator>().SetInteger("PlayerAnimation", 5);
+            PlayerController.Instance.jumpWingAudio.Stop();
+            PlayerController.Instance.ouchAudio.Play();
             player.GetComponent<Animator>().Play("Player_FallenDeath");
             playerController.GetComponent<Rigidbody2D>().simulated = false;
             groundCheck.GetComponent<GroundCheck>().enabled = false;

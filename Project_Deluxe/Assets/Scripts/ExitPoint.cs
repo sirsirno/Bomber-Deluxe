@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExitPoint : MonoBehaviour
+public class ExitPoint : Singleton<ExitPoint>
 {
     public bool isPlayerOn { get; private set; } = false;
     private float clearNeedTimer = 0f;
@@ -12,6 +12,7 @@ public class ExitPoint : MonoBehaviour
 
     private GameObject realPlayer = null;
     private SpriteRenderer spriteRenderer = null;
+    public AudioSource exitSFX = null;
 
     private void Start()
     {
@@ -25,11 +26,12 @@ public class ExitPoint : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "PlayerController")
+        if (collision.gameObject.tag == "PlayerController" && !PlayerController.Instance.sleeping)
         {
             isPlayerOn = true;
             clearNeedDuration = clearNeedDurationDefault;
             clearNeedDuration += Time.time;
+            exitSFX.Play();
         }
     }
 
@@ -40,6 +42,7 @@ public class ExitPoint : MonoBehaviour
             isPlayerOn = false;
             clearNeedTimer = 0f;
             clearNeedDuration = clearNeedDurationDefault;
+            exitSFX.Stop();
         }
     }
 
@@ -50,11 +53,13 @@ public class ExitPoint : MonoBehaviour
             clearNeedTimer = Time.time;
             if (clearNeedTimer >= clearNeedDuration)
             {
-                //Clear!
+                Debug.Log("클리어");
+                // 클리어
             }
         }
 
         float clearTimeRemain = clearNeedDuration - clearNeedTimer;
         spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, clearTimeRemain / clearNeedDurationDefault);
+        exitSFX.pitch = clearTimeRemain / clearNeedDurationDefault;
     }
 }

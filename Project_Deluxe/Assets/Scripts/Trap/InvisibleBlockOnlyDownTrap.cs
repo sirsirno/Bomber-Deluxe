@@ -47,6 +47,7 @@ public class InvisibleBlockOnlyDownTrap : MonoBehaviour
             GetComponent<BoxCollider2D>().isTrigger = false;
             GetComponent<BoxCollider2D>().offset = Vector2.zero;
             GetComponent<BoxCollider2D>().size = Vector2.one;
+            PlayerController.Instance.headBlockAudio.Play();
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -11,16 +12,22 @@ public class GameManager : Singleton<GameManager>
     private GameObject player = null;
 
     public int coin { get; private set; } = 0;
+    public int life { get; private set; } = 5;
+    public int star { get; private set; } = 0;
 
     GameObject startPoint;
     GameObject invisibleBlockParent;
     GameObject invisibleBlockDownParent;
+    GroundCheck groundCheck;
+    GameObject realPlayer;
 
     private void Awake()
     {
         startPoint = GameObject.FindGameObjectWithTag("StartPoint");
         invisibleBlockParent = GameObject.FindGameObjectWithTag("InvisibleBlocks");
         invisibleBlockDownParent = GameObject.FindGameObjectWithTag("InvisibleBlocksDown");
+        groundCheck = FindObjectOfType<GroundCheck>();
+        realPlayer = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void Start()
@@ -79,5 +86,22 @@ public class GameManager : Singleton<GameManager>
             coin += value;
         else if (settype == SETTYPE.REMOVE)
             coin -= value;
+    }
+
+
+    public void PlayerDeadState()
+    {
+        life--;
+        if (life == -1)
+        {
+            GameOverState();
+            return;
+        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    private void GameOverState()
+    {
+
     }
 }

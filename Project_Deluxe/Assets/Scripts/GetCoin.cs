@@ -6,6 +6,7 @@ public class GetCoin : MonoBehaviour
 {
     public ParticleSystem parEatEffect;
     public ParticleSystem badEatEffect;
+
     public float offEffectTime=2.5f;
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -15,11 +16,15 @@ public class GetCoin : MonoBehaviour
             {
                 if (gameObject.tag == "BadCoin")
                 {
+                    PlayerController.Instance.badCoinGetAudio.Play();
+
                     badEatEffect.gameObject.SetActive(true);
                     Invoke("OffBadEffect", offEffectTime);
                     gameObject.SetActive(false);
                     return;
                 }
+                PlayerController.Instance.coinGetAudio.Play();
+
                 parEatEffect.gameObject.SetActive(true);
                 Invoke("OffEffect", offEffectTime);
                 gameObject.SetActive(false);
