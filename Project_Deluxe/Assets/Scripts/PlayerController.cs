@@ -251,4 +251,10 @@ public class PlayerController : Singleton<PlayerController>
     {
         awake = false;
     }
+
+    public void GameReset()
+    {
+        awake = true;
+        Invoke("ResetTrap", 0.1f);
+    }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -96,17 +97,7 @@ public class GameManager : Singleton<GameManager>
             GameOverState();
             return;
         }
-        // 여기에 라이프 UI 텍스트 갱신
-
-
-        player.transform.localPosition = startPoint.transform.localPosition;
-        realPlayer.GetComponent<Animator>().SetInteger("PlayerAnimation", 0);
-        realPlayer.GetComponent<Animator>().Play("Player_Idle");
-        realPlayer.GetComponent<SpriteRenderer>().flipX = false;
-        groundCheck.GetComponent<GroundCheck>().enabled = true;
-        player.GetComponent<Rigidbody2D>().simulated = true;
-        PlayerController.Instance.controlEnabled = true;
-        PlayerController.Instance.jumpAudio.Play();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void GameOverState()
