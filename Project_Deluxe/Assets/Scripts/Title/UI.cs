@@ -11,6 +11,11 @@ public class UI : MonoBehaviour
     [SerializeField]
     private Text startTxt = null;
 
+    private void Awake()
+    {
+        JsonSave.Instance.LoadGameData();
+    }
+
     void Start()
     {
         startTxt.DOColor(new Color(1f, 1f, 1f, 10f), 0.8f).SetLoops(-1, LoopType.Yoyo);
@@ -20,6 +25,7 @@ public class UI : MonoBehaviour
     {
         if (Input.anyKeyDown) 
         {
+            Time.timeScale = 1;
             SceneManager.LoadScene(1);
         }
     }

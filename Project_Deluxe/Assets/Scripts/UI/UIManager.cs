@@ -18,7 +18,8 @@ public class UIManager : MonoBehaviour
     private Text feedTxt;
     [SerializeField]
     private GameObject fail;
-
+    [SerializeField]
+    private GameObject[] stars = null;
 
     [SerializeField]
     private Image img;
@@ -96,8 +97,33 @@ public class UIManager : MonoBehaviour
 
     public void StageClear() 
     {
-        lifeTxt.text ="X" +gameManager.life;
-        feedTxt.text = "X" + gameManager.coin;
+        // 별 계산
+        {
+            stars[0].SetActive(true);
+            stars[1].SetActive(true);
+            stars[2].SetActive(true);
+            if (gameManager.coin < 4 && gameManager.life < 2)
+            {
+                stars[1].SetActive(false);
+                stars[2].SetActive(false);
+                // TO DO : 별 저장
+                JsonSave.Instance.gameData.StageSetValueSave(GameData.StageValueType.STAR, GameManager.Instance.GetCurrentStage(), 1);
+            }
+            else if (gameManager.coin == 8 && gameManager.life >= 4)
+            {
+                JsonSave.Instance.gameData.StageSetValueSave(GameData.StageValueType.STAR, GameManager.Instance.GetCurrentStage(), 3);
+            }
+            else
+            {
+                stars[2].SetActive(false);
+                JsonSave.Instance.gameData.StageSetValueSave(GameData.StageValueType.STAR, GameManager.Instance.GetCurrentStage(), 2);
+            }
+        }
+
+
+        lifeTxt.text ="x " +gameManager.life;
+        feedTxt.text = "x " + gameManager.coin;
+        Time.timeScale = 0;
         clear.SetActive(true);
     }
 
@@ -110,6 +136,7 @@ public class UIManager : MonoBehaviour
     public void OncClickRetryBtn() 
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1;
         clear.SetActive(false);
     }
     public void OnClickExitBtn() 
