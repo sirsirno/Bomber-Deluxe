@@ -32,8 +32,6 @@ public class PlayerStopEvent : Singleton<PlayerStopEvent>
         {
             GetComponent<Animator>().SetInteger("PlayerAnimation", 0);
             GetComponent<Animator>().Play("Player_Idle");
-            groundCheck.GetComponent<GroundCheck>().enabled = true;
-            playerController.GetComponent<Rigidbody2D>().simulated = true;
             isFutureDead = true;
         }
         else

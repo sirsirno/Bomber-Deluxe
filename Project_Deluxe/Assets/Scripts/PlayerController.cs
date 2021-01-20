@@ -37,6 +37,7 @@ public class PlayerController : Singleton<PlayerController>
     private GameObject sleepingPlayer = null;
     [SerializeField]
     private GameObject sandClockEffect = null;
+    private GroundCheck groundCheck = null;
 
     private SpriteRenderer spriteRenderer;
     private Animator animator;
@@ -53,7 +54,7 @@ public class PlayerController : Singleton<PlayerController>
     void Awake()
     {
         realPlayer = GameObject.FindGameObjectWithTag("Player");
-
+        groundCheck = FindObjectOfType<GroundCheck>();
         animator = realPlayer.GetComponent<Animator>();
         spriteRenderer = realPlayer.GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
@@ -111,6 +112,8 @@ public class PlayerController : Singleton<PlayerController>
                     state = PlayerState.Grounded;
                     controlEnabled = true;
                     animator.Play("Player_Idle");
+                    groundCheck.GetComponent<GroundCheck>().enabled = true;
+                    GetComponent<Rigidbody2D>().simulated = true;
                     PlayerStopEvent.Instance.isFutureDead = false;
 
                     sleepingPlayer.transform.GetChild(0).gameObject.GetComponent<Animator>().Play("SleepSpeechBubble_Awake");
