@@ -5,9 +5,12 @@ using UnityEngine;
 
 public class PlayerController : Singleton<PlayerController>
 {
-    public AudioClip jumpAudio;
-    public AudioClip respawnAudio;
-    public AudioClip ouchAudio;
+    public AudioSource jumpAudio;
+    public AudioSource jumpWingAudio;
+    public AudioSource coinGetAudio;
+    public AudioSource badCoinGetAudio;
+    public AudioSource ouchAudio;
+    public AudioSource headBlockAudio;
 
     /// <summary>
     /// 플레이어 이동속도
@@ -45,6 +48,8 @@ public class PlayerController : Singleton<PlayerController>
     /// 스프라이트 상의 플레이어 (애니메이션용)
     /// </summary>
     private GameObject realPlayer = null;
+    [SerializeField]
+    private GameObject futureEffect = null;
     void Awake()
     {
         realPlayer = GameObject.FindGameObjectWithTag("Player");
@@ -57,12 +62,13 @@ public class PlayerController : Singleton<PlayerController>
     private void Update()
     {
         // ----------------------확인차 만들어 놓음---------------
-        if (Input.GetKeyDown(KeyCode.Q) && state == PlayerState.Grounded)
+        if (Input.GetKeyDown(KeyCode.Q) && state == PlayerState.Grounded && !ExitPoint.Instance.isPlayerOn)
         {
             if (!sleeping)
             {
                 Debug.Log("---------미래-------");
 
+                futureEffect.GetComponent<Animator>().Play("FutureEffect_Blue");
                 GlitchEffect.Instance.colorIntensity = 0.306f;
                 GlitchEffect.Instance.intensity = 0.194f;
                 realPlayer.GetComponent<SpriteRenderer>().color = new Color(0, 1, 1, 1);
@@ -71,6 +77,7 @@ public class PlayerController : Singleton<PlayerController>
                 sleepingPlayer.GetComponent<SpriteRenderer>().flipX = spriteRenderer.flipX;
                 sleepingPlayer.transform.GetChild(0).gameObject.GetComponent<Animator>().Play("SleepSpeechBubble_Sleeping");
                 AudioManager.Instance.BGM_FutureRandomPlay();
+                AudioManager.Instance.SFX_FutureEnter.Play();
                 AudioManager.Instance.BGM_Prototype.volume = 0f;
 
                 sleeping = true;
@@ -94,6 +101,7 @@ public class PlayerController : Singleton<PlayerController>
                     awake = true;
                     Invoke("ResetTrap", 0.1f);
 
+                    futureEffect.GetComponent<Animator>().Play("FutureEffect_Yellow");
                     GlitchEffect.Instance.colorIntensity = 0f;
                     GlitchEffect.Instance.intensity = 0f;
                     realPlayer.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
@@ -123,9 +131,9 @@ public class PlayerController : Singleton<PlayerController>
             if (!sleeping)
             {
                 sandClockEffect.SetActive(true);
-                if (state == PlayerState.Grounded)
+                if (state == PlayerState.Grounded && !ExitPoint.Instance.isPlayerOn)
                     sandClockEffect.GetComponent<Animator>().Play("SandClock_Able");
-                if (state == PlayerState.Jumping)
+                else
                     sandClockEffect.GetComponent<Animator>().Play("SandClock_Unable");
             }
             else
@@ -139,6 +147,7 @@ public class PlayerController : Singleton<PlayerController>
                 if (state == PlayerState.Grounded && Input.GetButtonDown("Jump"))
                 {
                     jump = true;
+                    jumpAudio.Play();
                 }
 
                 if (!Input.GetButton("Jump") || jumpTimer >= jumpTimeLimit)
@@ -217,10 +226,7 @@ public class PlayerController : Singleton<PlayerController>
                 }
             }
 
-            if (animator.GetInteger("PlayerAnimation") == 2)
-            {
-
-            }
+            jumpWingAudio.Stop();
         }
 
         if (state == PlayerState.Jumping)

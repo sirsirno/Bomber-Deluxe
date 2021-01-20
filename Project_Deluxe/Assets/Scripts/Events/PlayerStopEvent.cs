@@ -37,4 +37,10 @@ public class PlayerStopEvent : Singleton<PlayerStopEvent>
             isFutureDead = true;
         }
     }
+
+    private void WingSoundPlay()
+    {
+        if(!PlayerController.Instance.jumpWingAudio.isPlaying)
+        PlayerController.Instance.jumpWingAudio.Play();
+    }
 }

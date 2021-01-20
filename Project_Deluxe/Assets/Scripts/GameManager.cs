@@ -11,6 +11,7 @@ public class GameManager : Singleton<GameManager>
     private GameObject player = null;
 
     public int coin { get; private set; } = 0;
+    public int life { get; private set; } = 0;
 
     GameObject startPoint;
     GameObject invisibleBlockParent;

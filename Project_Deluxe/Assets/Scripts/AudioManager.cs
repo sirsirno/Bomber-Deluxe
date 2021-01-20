@@ -11,6 +11,7 @@ public class AudioManager : Singleton<AudioManager>
     [Header("SFX")]
     public AudioSource SFX_ClockTic = null;
     public AudioSource SFX_ClockTok = null;
+    public AudioSource SFX_FutureEnter = null;
     public void BGM_FutureRandomPlay()
     {
         int randomRange = Random.Range(0, 4);
