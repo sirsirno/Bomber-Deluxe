@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2080398772602820044}
   - component: {fileID: 2080398772602820046}
-  - component: {fileID: 1876602156055950770}
+  - component: {fileID: 1849623513674860608}
   - component: {fileID: 3159239707751673889}
   m_Layer: 0
-  m_Name: Spike
+  m_Name: Spike(Up)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2545419923108700538, guid: f57da01353e0205459628e9025438478,
+  m_Sprite: {fileID: -4297176587758394252, guid: f57da01353e0205459628e9025438478,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &1876602156055950770
+--- !u!60 &1849623513674860608
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,9 +110,9 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.5, y: 0}
+    - - {x: 0, y: 0.5}
+      - {x: -0.5, y: -0.5}
       - {x: 0.5, y: -0.5}
-      - {x: 0.5, y: 0.5}
 --- !u!114 &3159239707751673889
 MonoBehaviour:
   m_ObjectHideFlags: 0

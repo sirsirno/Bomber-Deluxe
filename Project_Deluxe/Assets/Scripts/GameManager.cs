@@ -11,17 +11,22 @@ public class GameManager : Singleton<GameManager>
     private GameObject player = null;
 
     public int coin { get; private set; } = 0;
-    public int life { get; private set; } = 0;
+    public int life { get; private set; } = 5;
+    public int star { get; private set; } = 0;
 
     GameObject startPoint;
     GameObject invisibleBlockParent;
     GameObject invisibleBlockDownParent;
+    GroundCheck groundCheck;
+    GameObject realPlayer;
 
     private void Awake()
     {
         startPoint = GameObject.FindGameObjectWithTag("StartPoint");
         invisibleBlockParent = GameObject.FindGameObjectWithTag("InvisibleBlocks");
         invisibleBlockDownParent = GameObject.FindGameObjectWithTag("InvisibleBlocksDown");
+        groundCheck = FindObjectOfType<GroundCheck>();
+        realPlayer = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void Start()
@@ -80,5 +85,32 @@ public class GameManager : Singleton<GameManager>
             coin += value;
         else if (settype == SETTYPE.REMOVE)
             coin -= value;
+    }
+
+
+    public void PlayerDeadState()
+    {
+        life--;
+        if (life == -1)
+        {
+            GameOverState();
+            return;
+        }
+        // 여기에 라이프 UI 텍스트 갱신
+
+
+        player.transform.localPosition = startPoint.transform.localPosition;
+        realPlayer.GetComponent<Animator>().SetInteger("PlayerAnimation", 0);
+        realPlayer.GetComponent<Animator>().Play("Player_Idle");
+        realPlayer.GetComponent<SpriteRenderer>().flipX = false;
+        groundCheck.GetComponent<GroundCheck>().enabled = true;
+        player.GetComponent<Rigidbody2D>().simulated = true;
+        PlayerController.Instance.controlEnabled = true;
+        PlayerController.Instance.jumpAudio.Play();
+    }
+
+    private void GameOverState()
+    {
+
     }
 }

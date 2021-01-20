@@ -46,8 +46,6 @@ public class DropTrap : MonoBehaviour
         {
             if (trapType == TrapType.PARENT)
             {
-                if (Trap.GetComponent<Rigidbody2D>() == null)
-                    Trap.AddComponent<Rigidbody2D>();
                 Trap.GetComponent<Rigidbody2D>().gravityScale = 0f;
                 Trap.GetComponent<Rigidbody2D>().mass = 1;
                 Trap.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
@@ -57,8 +55,6 @@ public class DropTrap : MonoBehaviour
             {
                 for (int i = 0; i < transform.childCount; i++)
                 {
-                    if (transform.GetChild(i).gameObject.GetComponent<Rigidbody2D>() == null)
-                        transform.GetChild(i).gameObject.AddComponent<Rigidbody2D>();
                     transform.GetChild(i).gameObject.GetComponent<Rigidbody2D>().gravityScale = 0f;
                     transform.GetChild(i).gameObject.GetComponent<Rigidbody2D>().mass = 1;
                     transform.GetChild(i).gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);

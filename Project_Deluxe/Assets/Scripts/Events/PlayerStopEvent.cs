@@ -36,6 +36,10 @@ public class PlayerStopEvent : Singleton<PlayerStopEvent>
             playerController.GetComponent<Rigidbody2D>().simulated = true;
             isFutureDead = true;
         }
+        else
+        {
+            GameManager.Instance.PlayerDeadState();
+        }
     }
 
     private void WingSoundPlay()
