@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -11,6 +12,14 @@ public class UIManager : MonoBehaviour
     private GameObject clear;
     [SerializeField]
     private GameObject clockNeedle;
+    [SerializeField]
+    private Text lifeTxt;
+    [SerializeField]
+    private Text feedTxt;
+    [SerializeField]
+    private GameObject fail;
+    [SerializeField]
+    private GameObject[] stars = null;
 
     [SerializeField]
     private Image img;
@@ -20,10 +29,12 @@ public class UIManager : MonoBehaviour
 
     private Animator animator;
     private GameObject realPlayer = null;
+    private GameManager gameManager;
     void Awake()
     {
         realPlayer = GameObject.FindGameObjectWithTag("Player");
         animator = realPlayer.GetComponent<Animator>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -72,24 +83,68 @@ public class UIManager : MonoBehaviour
         }
         
     }
-    private void OnClickContinueBtn() 
+    public void OnClickContinueBtn() 
     {
         menu.SetActive(false);
         Time.timeScale = 1;
     }
-    private void OnClickHomeBtn() 
+    public void OnClickHomeBtn() 
     {
+        SceneManager.LoadScene(0);
         menu.SetActive(false);
+        clear.SetActive(false);
     }
 
-    private void StageClear() 
+    public void StageClear() 
     {
+        // 별 계산
+        {
+            stars[0].SetActive(true);
+            stars[1].SetActive(true);
+            stars[2].SetActive(true);
+            if (gameManager.coin < 4 && gameManager.life < 2)
+            {
+                stars[1].SetActive(false);
+                stars[2].SetActive(false);
+                // TO DO : 별 저장
+                JsonSave.Instance.gameData.StageSetValueSave(GameData.StageValueType.STAR, GameManager.Instance.GetCurrentStage(), 1);
+            }
+            else if (gameManager.coin == 8 && gameManager.life >= 4)
+            {
+                JsonSave.Instance.gameData.StageSetValueSave(GameData.StageValueType.STAR, GameManager.Instance.GetCurrentStage(), 3);
+            }
+            else
+            {
+                stars[2].SetActive(false);
+                JsonSave.Instance.gameData.StageSetValueSave(GameData.StageValueType.STAR, GameManager.Instance.GetCurrentStage(), 2);
+            }
+        }
+
+
+        lifeTxt.text ="x " +gameManager.life;
+        feedTxt.text = "x " + gameManager.coin;
+        Time.timeScale = 0;
         clear.SetActive(true);
     }
 
-    private void OnClickNextBtn() 
+    public void OnClickNextBtn() 
     {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
         clear.SetActive(false);
         
+    }
+    public void OncClickRetryBtn() 
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1;
+        clear.SetActive(false);
+    }
+    public void OnClickExitBtn() 
+    {
+        Application.Quit();
+    }
+    public void StageFail() 
+    {
+        fail.SetActive(true);
     }
 }

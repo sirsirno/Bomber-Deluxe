@@ -12,22 +12,37 @@ public class GameManager : Singleton<GameManager>
     private GameObject player = null;
 
     public int coin { get; private set; } = 0;
+    
     public int life { get; private set; } = 5;
     public int star { get; private set; } = 0;
 
     GameObject startPoint;
     GameObject invisibleBlockParent;
     GameObject invisibleBlockDownParent;
-    GroundCheck groundCheck;
-    GameObject realPlayer;
 
+    public enum WorldType
+    {
+        SKY,
+        FOREST,
+        TEMPLE,
+        MECHA_TEMPLE,
+        DUNGEON
+    }
+
+    public WorldType worldType = WorldType.SKY;
+    [Header("")]
+    [Header("0 : 프로토타입, 1~5는 하늘 이런식")]
+    [Header("현재 스테이지 번호 입력")]
+    [Header("")]
+    public int CurrentStage = 0;
+    private int private_currentStage = 0;
+    public int GetCurrentStage() => private_currentStage;
     private void Awake()
     {
+        private_currentStage = CurrentStage;
         startPoint = GameObject.FindGameObjectWithTag("StartPoint");
         invisibleBlockParent = GameObject.FindGameObjectWithTag("InvisibleBlocks");
         invisibleBlockDownParent = GameObject.FindGameObjectWithTag("InvisibleBlocksDown");
-        groundCheck = FindObjectOfType<GroundCheck>();
-        realPlayer = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void Start()
@@ -94,7 +109,8 @@ public class GameManager : Singleton<GameManager>
         life--;
         if (life == -1)
         {
-            GameOverState();
+            GameObject.Find("UIManager").GetComponent<UIManager>().StageFail();
+            //GameOverState();
             return;
         }
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -102,6 +118,6 @@ public class GameManager : Singleton<GameManager>
 
     private void GameOverState()
     {
-
+        
     }
 }

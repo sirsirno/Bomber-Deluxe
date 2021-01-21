@@ -53,8 +53,8 @@ public class ExitPoint : Singleton<ExitPoint>
             clearNeedTimer = Time.time;
             if (clearNeedTimer >= clearNeedDuration)
             {
-                Debug.Log("클리어");
-                // 클리어
+                GameObject.Find("UIManager").GetComponent<UIManager>().StageClear();
+                exitSFX.Stop();
             }
         }
 
