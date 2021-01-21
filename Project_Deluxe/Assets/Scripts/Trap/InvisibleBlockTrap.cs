@@ -32,6 +32,8 @@ public class InvisibleBlockTrap : MonoBehaviour
             {
                 isShow = true;
             }
+            if(GetComponent<SpriteRenderer>().color == new Color(1,1,1,0))
+                PlayerController.Instance.headBlockAudio.Play();
             GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
         }
     }

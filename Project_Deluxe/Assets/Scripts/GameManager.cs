@@ -11,14 +11,10 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private GameObject player = null;
 
-    public int coin { get; private set; } = 0;
-    
-    public int life { get; private set; } = 5;
-    public int star { get; private set; } = 0;
-
     GameObject startPoint;
     GameObject invisibleBlockParent;
     GameObject invisibleBlockDownParent;
+    ScoreManager scoreManager;
 
     public enum WorldType
     {
@@ -43,6 +39,7 @@ public class GameManager : Singleton<GameManager>
         startPoint = GameObject.FindGameObjectWithTag("StartPoint");
         invisibleBlockParent = GameObject.FindGameObjectWithTag("InvisibleBlocks");
         invisibleBlockDownParent = GameObject.FindGameObjectWithTag("InvisibleBlocksDown");
+        scoreManager = FindObjectOfType<ScoreManager>();
     }
 
     private void Start()
@@ -84,35 +81,16 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-
-    //==============코인 엑세스 함수================
-    public enum SETTYPE
-    {
-        SET = 1,
-        ADD,
-        REMOVE
-    }
-
-    public void AccessSetCoin(SETTYPE settype, int value)
-    {
-        if (settype == SETTYPE.SET)
-            coin = value;
-        else if (settype == SETTYPE.ADD)
-            coin += value;
-        else if (settype == SETTYPE.REMOVE)
-            coin -= value;
-    }
-
-
     public void PlayerDeadState()
     {
-        life--;
-        if (life == -1)
+        scoreManager.ScoreValueSet(ScoreManager.ScoreType.LIFE, ScoreManager.SetType.REMOVE, 1);
+        if (scoreManager.ScoreValueGet(ScoreManager.ScoreType.LIFE) == -1)
         {
             GameObject.Find("UIManager").GetComponent<UIManager>().StageFail();
             //GameOverState();
             return;
         }
+        scoreManager.ScoreValueSet(ScoreManager.ScoreType.FEED, ScoreManager.SetType.SET, 0);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

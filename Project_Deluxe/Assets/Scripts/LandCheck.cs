@@ -27,6 +27,7 @@ public class LandCheck : MonoBehaviour
                     {
                         player.GetComponent<Animator>().Play("Player_AfterJumpWait");
                         player.GetComponent<Animator>().SetInteger("PlayerAnimation", 3);
+                        PlayerController.Instance.landAudio.Play();
                     }
                     else
                     {

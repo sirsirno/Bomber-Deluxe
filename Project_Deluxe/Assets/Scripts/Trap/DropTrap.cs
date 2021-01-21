@@ -50,6 +50,7 @@ public class DropTrap : MonoBehaviour
                 Trap.GetComponent<Rigidbody2D>().mass = 1;
                 Trap.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
                 Trap.transform.position = defaultposition[0];
+                Destroy(Trap.GetComponent<Rigidbody2D>());
             }
             else
             {
@@ -59,6 +60,7 @@ public class DropTrap : MonoBehaviour
                     transform.GetChild(i).gameObject.GetComponent<Rigidbody2D>().mass = 1;
                     transform.GetChild(i).gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
                     transform.GetChild(i).gameObject.transform.position = defaultposition[i];
+                    Destroy(transform.GetChild(i).gameObject.GetComponent<Rigidbody2D>());
                 }
             }
             respawn = false;

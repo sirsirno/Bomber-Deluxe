@@ -5,13 +5,14 @@ using UnityEngine;
 public class AudioManager : Singleton<AudioManager>
 {
     [Header("BGM")]
-    public AudioSource BGM_Prototype = null;
+    public AudioSource BGM_World = null;
     public AudioSource BGM_Future = null;
     public AudioSource BGM_Future2 = null;
     [Header("SFX")]
     public AudioSource SFX_ClockTic = null;
     public AudioSource SFX_ClockTok = null;
     public AudioSource SFX_FutureEnter = null;
+    public AudioSource SFX_PresentEnter = null;
     public void BGM_FutureRandomPlay()
     {
         int randomRange = Random.Range(0, 4);

@@ -17,6 +17,8 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Text feedTxt;
     [SerializeField]
+    private Text FailfeedTxt;
+    [SerializeField]
     private GameObject fail;
     [SerializeField]
     private GameObject[] stars = null;
@@ -25,19 +27,37 @@ public class UIManager : MonoBehaviour
     private Image img;
 
     private float fillAmount = 0f;
-
+    [Header("스타트 스크린 아웃페이드 시간")]
+    [SerializeField]
+    private float startScreenOutWaitTime = 1f;
+    [SerializeField]
+    private float startScreenOutFadeTime = 5f;
+    [SerializeField]
+    private GameObject startScreenPanel = null;
+    private bool isPlayingStartScreen = false;
+    [SerializeField]
+    private Text startScreenLifeTxt = null;
+    [SerializeField]
+    private Text startScreenWorldTxt = null;
 
     private Animator animator;
     private GameObject realPlayer = null;
-    private GameManager gameManager;
+    private ScoreManager scoreManager;
+
+    private float clockDefaultVolume;
+
     void Awake()
     {
+        startScreenPanel.SetActive(true);
         realPlayer = GameObject.FindGameObjectWithTag("Player");
         animator = realPlayer.GetComponent<Animator>();
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        scoreManager = FindObjectOfType<ScoreManager>();
+        isPlayingStartScreen = true;
+        startScreenLifeTxt.text = string.Format("x    {0}", scoreManager.ScoreValueGet(ScoreManager.ScoreType.LIFE));
+        StartScreen_WorldTxtPrint();
+        clockDefaultVolume = AudioManager.Instance.SFX_ClockTic.volume;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape) && !menu.activeSelf)
@@ -61,12 +81,28 @@ public class UIManager : MonoBehaviour
                 if (PlayerController.Instance.sleeping && (int)PlayerController.Instance.clockDuration != 15 && animator.GetInteger("PlayerAnimation") != 4 && animator.GetInteger("PlayerAnimation") != 5)
                 {
                     if ((int)PlayerController.Instance.clockDuration % 2 != 1)
+                    {
                         AudioManager.Instance.SFX_ClockTicPlay();
+                        if (!menu.activeSelf)
+                            AudioManager.Instance.SFX_ClockTok.volume = clockDefaultVolume;
+                    }
                     else
+                    {
                         AudioManager.Instance.SFX_ClockTocPlay();
+                        if (!menu.activeSelf)
+                            AudioManager.Instance.SFX_ClockTic.volume = clockDefaultVolume;
+                    }
                 }
                 else
                 {
+                    AudioManager.Instance.SFX_ClockTic.Stop();
+                    AudioManager.Instance.SFX_ClockTok.Stop();
+                }
+
+                if (menu.activeSelf)
+                {
+                    AudioManager.Instance.SFX_ClockTic.volume = 0;
+                    AudioManager.Instance.SFX_ClockTok.volume = 0;
                     AudioManager.Instance.SFX_ClockTic.Stop();
                     AudioManager.Instance.SFX_ClockTok.Stop();
                 }
@@ -82,6 +118,37 @@ public class UIManager : MonoBehaviour
             img.fillAmount = fillAmount;
         }
         
+        // 스타트 스크린 아웃페이드
+        {
+            if (isPlayingStartScreen)
+            {
+                PlayerController.Instance.controlEnabled = false;
+                if (Time.timeSinceLevelLoad >= startScreenOutWaitTime)
+                {
+                    if (1 - ((Time.timeSinceLevelLoad - startScreenOutWaitTime) / startScreenOutFadeTime) <= 0.88f)
+                        startScreenPanel.GetComponent<Image>().color = new Color(0, 0, 0, 1 - ((Time.timeSinceLevelLoad - startScreenOutWaitTime) / startScreenOutFadeTime));
+                    for (int i = 0; i < startScreenPanel.transform.childCount; i++)
+                    {
+                        if (startScreenPanel.transform.GetChild(i).gameObject.GetComponent<Image>() != null)
+                        {
+                            startScreenPanel.transform.GetChild(i).gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 1 - ((Time.timeSinceLevelLoad - startScreenOutWaitTime) / startScreenOutFadeTime));
+                        }
+                        else if (startScreenPanel.transform.GetChild(i).gameObject.GetComponent<Text>() != null)
+                        {
+                            startScreenPanel.transform.GetChild(i).gameObject.GetComponent<Text>().color = new Color(1, 1, 1, 1 - ((Time.timeSinceLevelLoad - startScreenOutWaitTime) / startScreenOutFadeTime));
+                        }
+                    }
+
+                    if ((Time.timeSinceLevelLoad - startScreenOutWaitTime) >= startScreenOutFadeTime)
+                    {
+                        isPlayingStartScreen = false;
+                        PlayerController.Instance.controlEnabled = true;
+                        startScreenPanel.SetActive(false);
+                        AudioManager.Instance.BGM_World.Play();
+                    }
+                }
+            }
+        }
     }
     public void OnClickContinueBtn() 
     {
@@ -91,6 +158,8 @@ public class UIManager : MonoBehaviour
     public void OnClickHomeBtn() 
     {
         SceneManager.LoadScene(0);
+        scoreManager.ScoreValueSet(ScoreManager.ScoreType.FEED, ScoreManager.SetType.SET, 0);
+        scoreManager.ScoreValueSet(ScoreManager.ScoreType.LIFE, ScoreManager.SetType.SET, 5);
         menu.SetActive(false);
         clear.SetActive(false);
     }
@@ -102,14 +171,14 @@ public class UIManager : MonoBehaviour
             stars[0].SetActive(true);
             stars[1].SetActive(true);
             stars[2].SetActive(true);
-            if (gameManager.coin < 4 && gameManager.life < 2)
+            if (scoreManager.ScoreValueGet(ScoreManager.ScoreType.FEED) < 4 && scoreManager.ScoreValueGet(ScoreManager.ScoreType.LIFE) < 2)
             {
                 stars[1].SetActive(false);
                 stars[2].SetActive(false);
                 // TO DO : 별 저장
                 JsonSave.Instance.gameData.StageSetValueSave(GameData.StageValueType.STAR, GameManager.Instance.GetCurrentStage(), 1);
             }
-            else if (gameManager.coin == 8 && gameManager.life >= 4)
+            else if (scoreManager.ScoreValueGet(ScoreManager.ScoreType.FEED) == 8 && scoreManager.ScoreValueGet(ScoreManager.ScoreType.LIFE) >= 4)
             {
                 JsonSave.Instance.gameData.StageSetValueSave(GameData.StageValueType.STAR, GameManager.Instance.GetCurrentStage(), 3);
             }
@@ -121,8 +190,8 @@ public class UIManager : MonoBehaviour
         }
 
 
-        lifeTxt.text ="x " +gameManager.life;
-        feedTxt.text = "x " + gameManager.coin;
+        lifeTxt.text ="x " + scoreManager.ScoreValueGet(ScoreManager.ScoreType.LIFE);
+        feedTxt.text = "x " + scoreManager.ScoreValueGet(ScoreManager.ScoreType.FEED);
         Time.timeScale = 0;
         clear.SetActive(true);
     }
@@ -137,6 +206,8 @@ public class UIManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 1;
+        scoreManager.ScoreValueSet(ScoreManager.ScoreType.FEED, ScoreManager.SetType.SET, 0);
+        scoreManager.ScoreValueSet(ScoreManager.ScoreType.LIFE, ScoreManager.SetType.SET, 5);
         clear.SetActive(false);
     }
     public void OnClickExitBtn() 
@@ -145,6 +216,42 @@ public class UIManager : MonoBehaviour
     }
     public void StageFail() 
     {
+        FailfeedTxt.text = "x " + scoreManager.ScoreValueGet(ScoreManager.ScoreType.FEED);
         fail.SetActive(true);
+    }
+
+    private void StartScreen_WorldTxtPrint()
+    {
+        int currentStage = GameManager.Instance.CurrentStage;
+
+        startScreenWorldTxt.text = "WORLD ";
+        if (currentStage == 0)
+        {
+            startScreenWorldTxt.text += "PROTOTYPE";
+            return;
+        }
+        else if(currentStage <= 5)
+            startScreenWorldTxt.text += "하늘";
+        else if (currentStage <= 10)
+            startScreenWorldTxt.text += "숲";
+        else if (currentStage <= 15)
+            startScreenWorldTxt.text += "사원";
+        else if (currentStage <= 20)
+            startScreenWorldTxt.text += "기계 사원";
+        else if (currentStage <= 25)
+            startScreenWorldTxt.text += "지하감옥";
+
+        startScreenWorldTxt.text += "-";
+
+        if (currentStage % 5 == 1)
+            startScreenWorldTxt.text += "1";
+        else if (currentStage % 5 == 2)
+            startScreenWorldTxt.text += "2";
+        else if (currentStage % 5 == 3)
+            startScreenWorldTxt.text += "3";
+        else if (currentStage % 5 == 4)
+            startScreenWorldTxt.text += "4";
+        else if (currentStage % 5 == 0)
+            startScreenWorldTxt.text += "5";
     }
 }

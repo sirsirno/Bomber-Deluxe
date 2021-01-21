@@ -2,16 +2,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : Singleton<PlayerController>
 {
+    [Header("플레이어 효과음")]
     public AudioSource jumpAudio;
     public AudioSource jumpWingAudio;
     public AudioSource coinGetAudio;
     public AudioSource badCoinGetAudio;
     public AudioSource ouchAudio;
     public AudioSource headBlockAudio;
+    public AudioSource landAudio;
 
+    [Header("컨트롤 관련")]
     /// <summary>
     /// 플레이어 이동속도
     /// </summary>
@@ -29,17 +33,24 @@ public class PlayerController : Singleton<PlayerController>
     public bool controlEnabled = true;
 
     public bool sleeping { get; private set; }  = false; // 미래예지중
+    [Header("능력 관련")]
     [SerializeField]
     private float sleepingDurationDefault = 0; // 미래예지중
     private float sleepingDuration = 0; // 미래예지중
     public bool awake = false;
+    private bool futureAbillityAbled = false;
+    [SerializeField]
+    private float futureAbillityCoolDown = 5f;
+    private float futureAbillityCoolDownRemaining = 5f;
     [SerializeField]
     private GameObject sleepingPlayer = null;
     [SerializeField]
     private GameObject sandClockEffect = null;
+    private bool sandClockAbled = true;
     private GroundCheck groundCheck = null;
 
     private SpriteRenderer spriteRenderer;
+    private ScoreManager scoreManager;
     private Animator animator;
     Rigidbody2D rb;
 
@@ -51,12 +62,21 @@ public class PlayerController : Singleton<PlayerController>
     private GameObject realPlayer = null;
     [SerializeField]
     private GameObject futureEffect = null;
+
+    [Header("먹이 효과")]
+    [SerializeField]
+    private GameObject feedTxtEffect = null;
+    [SerializeField]
+    private Text feedTxtEffectText = null;
+    [SerializeField]
+    private float feedTxtEffectDuration = 1f;
     void Awake()
     {
         realPlayer = GameObject.FindGameObjectWithTag("Player");
         groundCheck = FindObjectOfType<GroundCheck>();
         animator = realPlayer.GetComponent<Animator>();
         spriteRenderer = realPlayer.GetComponent<SpriteRenderer>();
+        scoreManager = FindObjectOfType<ScoreManager>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -65,7 +85,7 @@ public class PlayerController : Singleton<PlayerController>
         // ----------------------확인차 만들어 놓음---------------
         if (Input.GetKeyDown(KeyCode.Q) && state == PlayerState.Grounded && !ExitPoint.Instance.isPlayerOn)
         {
-            if (!sleeping)
+            if (!sleeping && controlEnabled && futureAbillityAbled)
             {
                 Debug.Log("---------미래-------");
 
@@ -79,11 +99,13 @@ public class PlayerController : Singleton<PlayerController>
                 sleepingPlayer.transform.GetChild(0).gameObject.GetComponent<Animator>().Play("SleepSpeechBubble_Sleeping");
                 AudioManager.Instance.BGM_FutureRandomPlay();
                 AudioManager.Instance.SFX_FutureEnter.Play();
-                AudioManager.Instance.BGM_Prototype.volume = 0f;
+                AudioManager.Instance.BGM_World.volume = 0f;
 
                 sleeping = true;
                 sleepingDuration = sleepingDurationDefault;
                 sleepingDuration += Time.time;
+
+                futureAbillityAbled = false;
             }
         }
 
@@ -105,6 +127,7 @@ public class PlayerController : Singleton<PlayerController>
                     futureEffect.GetComponent<Animator>().Play("FutureEffect_Yellow");
                     GlitchEffect.Instance.colorIntensity = 0f;
                     GlitchEffect.Instance.intensity = 0f;
+
                     realPlayer.GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
                     transform.localPosition = sleepingPlayer.transform.localPosition;
                     spriteRenderer.flipX = sleepingPlayer.GetComponent<SpriteRenderer>().flipX;
@@ -112,26 +135,34 @@ public class PlayerController : Singleton<PlayerController>
                     state = PlayerState.Grounded;
                     controlEnabled = true;
                     animator.Play("Player_Idle");
+
                     groundCheck.GetComponent<GroundCheck>().enabled = true;
                     GetComponent<Rigidbody2D>().simulated = true;
                     PlayerStopEvent.Instance.isFutureDead = false;
 
                     sleepingPlayer.transform.GetChild(0).gameObject.GetComponent<Animator>().Play("SleepSpeechBubble_Awake");
                     sleepingPlayer.transform.GetChild(0).transform.SetParent(gameObject.transform);
-
-                    AudioManager.Instance.BGM_FutureBGMStop();
-                    AudioManager.Instance.BGM_Prototype.volume = 1f;
-
                     sleepingPlayer.SetActive(false);
 
+                    AudioManager.Instance.BGM_FutureBGMStop();
+                    AudioManager.Instance.SFX_PresentEnter.Play();
+                    AudioManager.Instance.BGM_World.volume = 1f;
+
+                    futureAbillityCoolDownRemaining = Time.time + futureAbillityCoolDown;
                     Debug.Log("-------현재--------");
                 }
             }
         }
+        else // (!sleeping)
+        {
+            float timer = Time.time;
+            if (timer >= futureAbillityCoolDownRemaining)
+                futureAbillityAbled = true;
+        }
 
         //=========================모래시계이펙트========================
         {
-            if (!sleeping)
+            if (!sleeping && futureAbillityAbled && sandClockAbled)
             {
                 sandClockEffect.SetActive(true);
                 if (state == PlayerState.Grounded && !ExitPoint.Instance.isPlayerOn)
@@ -142,8 +173,7 @@ public class PlayerController : Singleton<PlayerController>
             else
                 sandClockEffect.SetActive(false);
         }
-
-        //=========================컨트롤================================
+        //=========================컨트롤(위에다가 코드 쓰세요 쓸꺼면)================================
         {
             if (controlEnabled)
             {
@@ -240,6 +270,20 @@ public class PlayerController : Singleton<PlayerController>
                 animator.SetInteger("PlayerAnimation", 2);
             }
         }
+    }
+
+    public void ShowFeedRemaining()
+    {
+        feedTxtEffectText.text = string.Format("{0} / 8", scoreManager.ScoreValueGet(ScoreManager.ScoreType.FEED));
+        feedTxtEffect.SetActive(true);
+        sandClockAbled = false;
+        Invoke("HideFeedRemaining", feedTxtEffectDuration);
+    }
+
+    private void HideFeedRemaining()
+    {
+        feedTxtEffect.SetActive(false);
+        sandClockAbled = true;
     }
 
     public enum PlayerState
