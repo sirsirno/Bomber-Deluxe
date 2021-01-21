@@ -11,6 +11,15 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private GameObject player = null;
 
+    [Header("타이머")]
+    [SerializeField]
+    private int gameTimerDefault = 180;
+    [SerializeField]
+    private int realGameTimer = 180;
+
+    private float gameTimerAddTime = 180;
+    private float gameTimerNeedTime = 1f; // 시간이 1 없어질때까지 걸리는 시간
+
     GameObject startPoint;
     GameObject invisibleBlockParent;
     GameObject invisibleBlockDownParent;
@@ -35,11 +44,13 @@ public class GameManager : Singleton<GameManager>
     public int GetCurrentStage() => private_currentStage;
     private void Awake()
     {
+        realGameTimer = gameTimerDefault;
         private_currentStage = CurrentStage;
         startPoint = GameObject.FindGameObjectWithTag("StartPoint");
         invisibleBlockParent = GameObject.FindGameObjectWithTag("InvisibleBlocks");
         invisibleBlockDownParent = GameObject.FindGameObjectWithTag("InvisibleBlocksDown");
         scoreManager = FindObjectOfType<ScoreManager>();
+        UIManager.Instance.TimerTimeOutput();
     }
 
     private void Start()
@@ -58,6 +69,13 @@ public class GameManager : Singleton<GameManager>
 
         if (!isDebugMode)
             DisabledDebug();
+
+        scoreManager.ScoreValueSet(ScoreManager.ScoreType.SCORETEMP, ScoreManager.SetType.SET, 15000);
+        scoreManager.ScoreValueSet(ScoreManager.ScoreType.FEED, ScoreManager.SetType.SET, 0);
+        scoreManager.ScoreValueSet(ScoreManager.ScoreType.ABILITYUSECOUNT, ScoreManager.SetType.SET, 0);
+        scoreManager.ScoreValueSet(ScoreManager.ScoreType.LIFE, ScoreManager.SetType.SET, 5);
+        UIManager.Instance.ScoreOutput();
+        UIManager.Instance.FutureCountOutput();
     }
 
     private void DisabledDebug()
@@ -84,18 +102,49 @@ public class GameManager : Singleton<GameManager>
     public void PlayerDeadState()
     {
         scoreManager.ScoreValueSet(ScoreManager.ScoreType.LIFE, ScoreManager.SetType.REMOVE, 1);
-        if (scoreManager.ScoreValueGet(ScoreManager.ScoreType.LIFE) == -1)
-        {
-            GameObject.Find("UIManager").GetComponent<UIManager>().StageFail();
-            //GameOverState();
-            return;
-        }
         scoreManager.ScoreValueSet(ScoreManager.ScoreType.FEED, ScoreManager.SetType.SET, 0);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    private void GameOverState()
+    private void Update()
     {
-        
+        if(realGameTimer <= -1)
+        {
+            if (PlayerController.Instance.state != PlayerController.PlayerState.Dead)
+            {
+                player.GetComponent<HitDeath>().HitDeathPlay();
+            }
+            return;
+        }
+
+        float timer = Time.timeSinceLevelLoad;
+        if (PlayerController.Instance.sleeping)
+            gameTimerNeedTime = 0.5f;
+        else
+            gameTimerNeedTime = 1f;
+        if(PlayerController.Instance.controlEnabled)
+        {
+            if(timer >= gameTimerAddTime)
+            {
+                realGameTimer--;
+                if (realGameTimer > -1)
+                {
+                    UIManager.Instance.TimerTimeOutput();
+                    if (realGameTimer <= 10)
+                    {
+                        AudioManager.Instance.SFX_ClockTic.Play();
+                        GlitchEffect.Instance.colorIntensity = 0.306f;
+                        GlitchEffect.Instance.intensity = 0.194f;
+                    }
+                }
+                gameTimerAddTime = timer + gameTimerNeedTime;
+            }
+        }
+        else
+        {
+            gameTimerAddTime = timer + gameTimerNeedTime;
+        }
     }
+
+    public int GetRealTimer() => realGameTimer;
 }

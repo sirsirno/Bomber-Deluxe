@@ -55,6 +55,7 @@ public class PlayerController : Singleton<PlayerController>
     Rigidbody2D rb;
 
     public float clockDuration = 15;
+    private float scoreDuration = 15;
 
     /// <summary>
     /// 스프라이트 상의 플레이어 (애니메이션용)
@@ -83,7 +84,7 @@ public class PlayerController : Singleton<PlayerController>
     private void Update()
     {
         // ----------------------확인차 만들어 놓음---------------
-        if (Input.GetKeyDown(KeyCode.Q) && state == PlayerState.Grounded && !ExitPoint.Instance.isPlayerOn)
+        if (Input.GetKeyDown(KeyCode.Q) && state == PlayerState.Grounded && !ExitPoint.Instance.isPlayerOn && GameManager.Instance.GetRealTimer() > 10)
         {
             if (!sleeping && controlEnabled && futureAbillityAbled)
             {
@@ -104,8 +105,11 @@ public class PlayerController : Singleton<PlayerController>
                 sleeping = true;
                 sleepingDuration = sleepingDurationDefault;
                 sleepingDuration += Time.time;
+                scoreDuration = 14;
 
                 futureAbillityAbled = false;
+                scoreManager.ScoreValueSet(ScoreManager.ScoreType.ABILITYUSECOUNT, ScoreManager.SetType.ADD, 1);
+                UIManager.Instance.FutureCountOutput();
             }
         }
 
@@ -116,7 +120,14 @@ public class PlayerController : Singleton<PlayerController>
             if (animator.GetInteger("PlayerAnimation") != 4 && animator.GetInteger("PlayerAnimation") != 5)
                 clockDuration = sleepingDuration - sleepTime;
 
-            if (sleepTime >= sleepingDuration || PlayerStopEvent.Instance.isFutureDead)
+            if (scoreDuration >= clockDuration)
+            {
+                scoreDuration -= 1;
+                scoreManager.ScoreValueSet(ScoreManager.ScoreType.SCORETEMP, ScoreManager.SetType.REMOVE, 100);
+                UIManager.Instance.ScoreOutput();
+            }
+
+            if (sleepTime >= sleepingDuration || PlayerStopEvent.Instance.isFutureDead || GameManager.Instance.GetRealTimer() <= 10)
             {
                 if (animator.GetInteger("PlayerAnimation") != 4 && animator.GetInteger("PlayerAnimation") != 5)
                 {
@@ -157,7 +168,9 @@ public class PlayerController : Singleton<PlayerController>
         {
             float timer = Time.time;
             if (timer >= futureAbillityCoolDownRemaining)
-                futureAbillityAbled = true;
+            {
+                    futureAbillityAbled = true;
+            }
         }
 
         //=========================모래시계이펙트========================
@@ -165,7 +178,7 @@ public class PlayerController : Singleton<PlayerController>
             if (!sleeping && futureAbillityAbled && sandClockAbled)
             {
                 sandClockEffect.SetActive(true);
-                if (state == PlayerState.Grounded && !ExitPoint.Instance.isPlayerOn)
+                if (state == PlayerState.Grounded && !ExitPoint.Instance.isPlayerOn && GameManager.Instance.GetRealTimer() > 10)
                     sandClockEffect.GetComponent<Animator>().Play("SandClock_Able");
                 else
                     sandClockEffect.GetComponent<Animator>().Play("SandClock_Unable");

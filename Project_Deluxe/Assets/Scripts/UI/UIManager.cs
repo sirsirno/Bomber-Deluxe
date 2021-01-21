@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class UIManager : Singleton<UIManager>
 {
+    [Header("UI")]
     [SerializeField]
     private GameObject menu;
     [SerializeField]
@@ -13,21 +14,28 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject clockNeedle;
     [SerializeField]
-    private Text lifeTxt;
+    private Text futureCountText;
     [SerializeField]
-    private Text feedTxt;
+    private Text result_lifeTxt;
     [SerializeField]
-    private Text FailfeedTxt;
+    private Text result_feedTxt;
     [SerializeField]
-    private GameObject fail;
+    private Text result_futureCountTxt;
+    [SerializeField]
+    private Text result_timerTxt;    
+    [SerializeField]
+    private Text result_scoreTxt;
+    [SerializeField]
+    private Text scoreText;
     [SerializeField]
     private GameObject[] stars = null;
 
+    [Header("이거 시계 빨간 면적임.")]
     [SerializeField]
     private Image img;
 
     private float fillAmount = 0f;
-    [Header("스타트 스크린 아웃페이드 시간")]
+    [Header("스타트 스크린 아웃페이드 관련")]
     [SerializeField]
     private float startScreenOutWaitTime = 1f;
     [SerializeField]
@@ -39,6 +47,9 @@ public class UIManager : MonoBehaviour
     private Text startScreenLifeTxt = null;
     [SerializeField]
     private Text startScreenWorldTxt = null;
+    [Header("타이머 텍스트인데 UI라 여기다 놈")]
+    [SerializeField]
+    private Text timerText = null;
 
     private Animator animator;
     private GameObject realPlayer = null;
@@ -48,24 +59,26 @@ public class UIManager : MonoBehaviour
 
     void Awake()
     {
+        scoreManager = FindObjectOfType<ScoreManager>();
         startScreenPanel.SetActive(true);
+        isPlayingStartScreen = true;
+
+        ScoreOutput();
         realPlayer = GameObject.FindGameObjectWithTag("Player");
         animator = realPlayer.GetComponent<Animator>();
-        scoreManager = FindObjectOfType<ScoreManager>();
-        isPlayingStartScreen = true;
-        startScreenLifeTxt.text = string.Format("x    {0}", scoreManager.ScoreValueGet(ScoreManager.ScoreType.LIFE));
+        startScreenLifeTxt.text = string.Format("x   {0}", scoreManager.ScoreValueGet(ScoreManager.ScoreType.LIFE));
         StartScreen_WorldTxtPrint();
         clockDefaultVolume = AudioManager.Instance.SFX_ClockTic.volume;
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !menu.activeSelf)
+        if (Input.GetKeyDown(KeyCode.Escape) && !menu.activeSelf && !isPlayingStartScreen)
         {
             menu.SetActive(true);
             Time.timeScale = 0;
         }
-        else if (Input.GetKeyDown(KeyCode.Escape) && menu.activeSelf) 
+        else if (Input.GetKeyDown(KeyCode.Escape) && menu.activeSelf && !isPlayingStartScreen)
         {
             menu.SetActive(false);
             Time.timeScale = 1;
@@ -92,11 +105,6 @@ public class UIManager : MonoBehaviour
                         if (!menu.activeSelf)
                             AudioManager.Instance.SFX_ClockTic.volume = clockDefaultVolume;
                     }
-                }
-                else
-                {
-                    AudioManager.Instance.SFX_ClockTic.Stop();
-                    AudioManager.Instance.SFX_ClockTok.Stop();
                 }
 
                 if (menu.activeSelf)
@@ -157,28 +165,32 @@ public class UIManager : MonoBehaviour
     }
     public void OnClickHomeBtn() 
     {
-        SceneManager.LoadScene(0);
-        scoreManager.ScoreValueSet(ScoreManager.ScoreType.FEED, ScoreManager.SetType.SET, 0);
-        scoreManager.ScoreValueSet(ScoreManager.ScoreType.LIFE, ScoreManager.SetType.SET, 5);
         menu.SetActive(false);
         clear.SetActive(false);
+        SceneManager.LoadScene(0);
     }
 
     public void StageClear() 
     {
+        Time.timeScale = 0;
+        result_lifeTxt.text = "x " + scoreManager.ScoreValueGet(ScoreManager.ScoreType.LIFE);
+        result_feedTxt.text = "x " + scoreManager.ScoreValueGet(ScoreManager.ScoreType.FEED);
+        result_futureCountTxt.text = "x " + scoreManager.ScoreValueGet(ScoreManager.ScoreType.ABILITYUSECOUNT);
+        result_timerTxt.text = string.Format("{0:D3}s", GameManager.Instance.GetRealTimer());
+
         // 별 계산
         {
             stars[0].SetActive(true);
             stars[1].SetActive(true);
             stars[2].SetActive(true);
-            if (scoreManager.ScoreValueGet(ScoreManager.ScoreType.FEED) < 4 && scoreManager.ScoreValueGet(ScoreManager.ScoreType.LIFE) < 2)
+            if (scoreManager.ScoreValueGet(ScoreManager.ScoreType.FEED) < 4 || scoreManager.ScoreValueGet(ScoreManager.ScoreType.ABILITYUSECOUNT) >= 10)
             {
                 stars[1].SetActive(false);
                 stars[2].SetActive(false);
                 // TO DO : 별 저장
                 JsonSave.Instance.gameData.StageSetValueSave(GameData.StageValueType.STAR, GameManager.Instance.GetCurrentStage(), 1);
             }
-            else if (scoreManager.ScoreValueGet(ScoreManager.ScoreType.FEED) == 8 && scoreManager.ScoreValueGet(ScoreManager.ScoreType.LIFE) >= 4)
+            else if (scoreManager.ScoreValueGet(ScoreManager.ScoreType.FEED) == 8 && scoreManager.ScoreValueGet(ScoreManager.ScoreType.ABILITYUSECOUNT) <= 5)
             {
                 JsonSave.Instance.gameData.StageSetValueSave(GameData.StageValueType.STAR, GameManager.Instance.GetCurrentStage(), 3);
             }
@@ -189,10 +201,12 @@ public class UIManager : MonoBehaviour
             }
         }
 
-
-        lifeTxt.text ="x " + scoreManager.ScoreValueGet(ScoreManager.ScoreType.LIFE);
-        feedTxt.text = "x " + scoreManager.ScoreValueGet(ScoreManager.ScoreType.FEED);
-        Time.timeScale = 0;
+        // 스코어 계산
+        {
+            scoreManager.ScoreValueSet(ScoreManager.ScoreType.SCORETEMP, ScoreManager.SetType.ADD, GameManager.Instance.GetRealTimer());
+            result_scoreTxt.text = string.Format("{0:D5}", scoreManager.ScoreValueGet(ScoreManager.ScoreType.SCORETEMP));
+            JsonSave.Instance.gameData.StageSetValueSave(GameData.StageValueType.SCORE, GameManager.Instance.GetCurrentStage(), scoreManager.ScoreValueGet(ScoreManager.ScoreType.SCORETEMP));
+        }
         clear.SetActive(true);
     }
 
@@ -205,20 +219,12 @@ public class UIManager : MonoBehaviour
     public void OncClickRetryBtn() 
     {
         Time.timeScale = 1;
-        scoreManager.ScoreValueSet(ScoreManager.ScoreType.FEED, ScoreManager.SetType.SET, 0);
-        scoreManager.ScoreValueSet(ScoreManager.ScoreType.LIFE, ScoreManager.SetType.SET, 5);
         clear.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     public void OnClickExitBtn() 
     {
         Application.Quit();
-    }
-    public void StageFail() 
-    {
-        FailfeedTxt.text = "x " + scoreManager.ScoreValueGet(ScoreManager.ScoreType.FEED);
-        Time.timeScale = 0;
-        fail.SetActive(true);
     }
 
     private void StartScreen_WorldTxtPrint()
@@ -254,5 +260,24 @@ public class UIManager : MonoBehaviour
             startScreenWorldTxt.text += "4";
         else if (currentStage % 5 == 0)
             startScreenWorldTxt.text += "5";
+    }
+
+    public void TimerTimeOutput()
+    {
+        if (PlayerController.Instance.sleeping || GameManager.Instance.GetRealTimer() <= 60)
+            timerText.color = Color.red;
+        else
+            timerText.color = Color.black;
+        timerText.text = string.Format("TIME\n{0}", GameManager.Instance.GetRealTimer());
+    }
+
+    public void ScoreOutput()
+    {
+        scoreText.text = string.Format("{0:D5}", scoreManager.ScoreValueGet(ScoreManager.ScoreType.SCORETEMP));
+    }
+
+    public void FutureCountOutput()
+    {
+        futureCountText.text = string.Format("x {0}", scoreManager.ScoreValueGet(ScoreManager.ScoreType.ABILITYUSECOUNT));
     }
 }
