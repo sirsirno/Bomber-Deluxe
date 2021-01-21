@@ -54,6 +54,7 @@ public class ExitPoint : Singleton<ExitPoint>
             if (clearNeedTimer >= clearNeedDuration)
             {
                 GameObject.Find("UIManager").GetComponent<UIManager>().StageClear();
+                isPlayerOn = false;
                 exitSFX.Stop();
             }
         }

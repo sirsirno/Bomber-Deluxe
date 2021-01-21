@@ -204,11 +204,11 @@ public class UIManager : MonoBehaviour
     }
     public void OncClickRetryBtn() 
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Time.timeScale = 1;
         scoreManager.ScoreValueSet(ScoreManager.ScoreType.FEED, ScoreManager.SetType.SET, 0);
         scoreManager.ScoreValueSet(ScoreManager.ScoreType.LIFE, ScoreManager.SetType.SET, 5);
         clear.SetActive(false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     public void OnClickExitBtn() 
     {
@@ -217,6 +217,7 @@ public class UIManager : MonoBehaviour
     public void StageFail() 
     {
         FailfeedTxt.text = "x " + scoreManager.ScoreValueGet(ScoreManager.ScoreType.FEED);
+        Time.timeScale = 0;
         fail.SetActive(true);
     }
 

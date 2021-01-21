@@ -43,11 +43,13 @@ public class InvisibleBlockOnlyDownTrap : MonoBehaviour
             {
                 isShow = true;
             }
+            if (GetComponent<SpriteRenderer>().color == new Color(1, 1, 1, 0))
+                PlayerController.Instance.headBlockAudio.Play();
             GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
             GetComponent<BoxCollider2D>().isTrigger = false;
             GetComponent<BoxCollider2D>().offset = Vector2.zero;
             GetComponent<BoxCollider2D>().size = Vector2.one;
-            PlayerController.Instance.headBlockAudio.Play();
+
         }
     }
 }
