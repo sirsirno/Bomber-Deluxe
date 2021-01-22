@@ -203,7 +203,7 @@ public class UIManager : Singleton<UIManager>
 
         // 스코어 계산
         {
-            scoreManager.ScoreValueSet(ScoreManager.ScoreType.SCORETEMP, ScoreManager.SetType.ADD, GameManager.Instance.GetRealTimer());
+            scoreManager.ScoreValueSet(ScoreManager.ScoreType.SCORETEMP, ScoreManager.SetType.ADD, GameManager.Instance.GetRealTimer() * 2);
             result_scoreTxt.text = string.Format("{0:D5}", scoreManager.ScoreValueGet(ScoreManager.ScoreType.SCORETEMP));
             JsonSave.Instance.gameData.StageSetValueSave(GameData.StageValueType.SCORE, GameManager.Instance.GetCurrentStage(), scoreManager.ScoreValueGet(ScoreManager.ScoreType.SCORETEMP));
         }
@@ -220,6 +220,7 @@ public class UIManager : Singleton<UIManager>
     {
         Time.timeScale = 1;
         clear.SetActive(false);
+        scoreManager.ScoreValueSet(ScoreManager.ScoreType.LIFE, ScoreManager.SetType.SET, 5);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     public void OnClickExitBtn() 

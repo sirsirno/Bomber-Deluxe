@@ -73,7 +73,6 @@ public class GameManager : Singleton<GameManager>
         scoreManager.ScoreValueSet(ScoreManager.ScoreType.SCORETEMP, ScoreManager.SetType.SET, 15000);
         scoreManager.ScoreValueSet(ScoreManager.ScoreType.FEED, ScoreManager.SetType.SET, 0);
         scoreManager.ScoreValueSet(ScoreManager.ScoreType.ABILITYUSECOUNT, ScoreManager.SetType.SET, 0);
-        scoreManager.ScoreValueSet(ScoreManager.ScoreType.LIFE, ScoreManager.SetType.SET, 5);
         UIManager.Instance.ScoreOutput();
         UIManager.Instance.FutureCountOutput();
     }

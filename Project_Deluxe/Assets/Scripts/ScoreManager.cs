@@ -5,6 +5,7 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     private int feed = 0;
+    [SerializeField]
     private int life = 5;
     private int abilityUseCount = 0;
     private int scoreTemp = 15000;
