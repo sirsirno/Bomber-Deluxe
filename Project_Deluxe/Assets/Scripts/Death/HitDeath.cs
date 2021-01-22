@@ -23,11 +23,11 @@ public class HitDeath : MonoBehaviour
 
     public void HitDeathPlay()
     {
+        if (player.GetComponent<Animator>().GetInteger("PlayerAnimation") != 4)
+            PlayerController.Instance.ouchAudio.Play();
         player.GetComponent<Animator>().SetInteger("PlayerAnimation", 4);
         player.GetComponent<Animator>().Play("Player_Death");
         PlayerController.Instance.jumpWingAudio.Stop();
-        if(!PlayerController.Instance.ouchAudio.isPlaying)
-        PlayerController.Instance.ouchAudio.Play();
         groundCheck.GetComponent<GroundCheck>().enabled = false;
 
         if (!PlayerController.Instance.sleeping)

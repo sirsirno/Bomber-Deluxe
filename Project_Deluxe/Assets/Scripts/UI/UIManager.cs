@@ -26,8 +26,6 @@ public class UIManager : Singleton<UIManager>
     [SerializeField]
     private Text result_futureCountTxt;
     [SerializeField]
-    private Text result_timerTxt;
-    [SerializeField]
     private Image[] resultStampUI;
     [SerializeField]
     private Sprite[] resultStampSprite;
@@ -70,7 +68,6 @@ public class UIManager : Singleton<UIManager>
         startScreenPanel.SetActive(true);
         isPlayingStartScreen = true;
 
-        StampOutput();
         realPlayer = GameObject.FindGameObjectWithTag("Player");
         animator = realPlayer.GetComponent<Animator>();
         startScreenLifeTxt.text = string.Format("x   {0}", scoreManager.ScoreValueGet(ScoreManager.ScoreType.LIFE));
@@ -179,6 +176,16 @@ public class UIManager : Singleton<UIManager>
     {
         menu.SetActive(false);
         clear.SetActive(false);
+        if (GameManager.Instance.GetCurrentStage() >= 5)
+            scoreManager.WorldTypeSet(0);
+        else if(GameManager.Instance.GetCurrentStage() >= 10)
+            scoreManager.WorldTypeSet(1);
+        else if(GameManager.Instance.GetCurrentStage() >= 15)
+            scoreManager.WorldTypeSet(2);
+        else if(GameManager.Instance.GetCurrentStage() >= 20)
+            scoreManager.WorldTypeSet(3);
+        else
+            scoreManager.WorldTypeSet(4);
         SceneManager.LoadScene(0);
     }
 
@@ -188,7 +195,6 @@ public class UIManager : Singleton<UIManager>
         result_lifeTxt.text = "x " + scoreManager.ScoreValueGet(ScoreManager.ScoreType.LIFE);
         result_feedTxt.text = "x " + scoreManager.ScoreValueGet(ScoreManager.ScoreType.FEED);
         result_futureCountTxt.text = "x " + scoreManager.ScoreValueGet(ScoreManager.ScoreType.ABILITYUSECOUNT);
-        result_timerTxt.text = string.Format("{0:D3}s", GameManager.Instance.GetRealTimer());
 
         // º° °è»ê
         {
@@ -299,11 +305,6 @@ public class UIManager : Singleton<UIManager>
         else
             timerText.color = Color.black;
         timerText.text = string.Format("TIME\n{0}", GameManager.Instance.GetRealTimer());
-    }
-
-    public void StampOutput()
-    {
-        //StampOutput TO DO
     }
 
     public void FutureCountOutput()

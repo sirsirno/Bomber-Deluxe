@@ -10,6 +10,7 @@ public class GameManager : Singleton<GameManager>
     private bool isDebugMode = false;
     [SerializeField]
     private GameObject player = null;
+    private GameObject realPlayer = null;
 
     [Header("스탬프 스프라이트")]
     [SerializeField]
@@ -49,6 +50,7 @@ public class GameManager : Singleton<GameManager>
     public int GetCurrentStage() => private_currentStage;
     private void Awake()
     {
+        realPlayer = GameObject.FindGameObjectWithTag("Player");
         realGameTimer = gameTimerDefault;
         private_currentStage = CurrentStage;
         startPoint = GameObject.FindGameObjectWithTag("StartPoint");
@@ -78,7 +80,7 @@ public class GameManager : Singleton<GameManager>
         scoreManager.ScoreValueSet(ScoreManager.ScoreType.STAMPTEMP, ScoreManager.SetType.SET, 0);
         scoreManager.ScoreValueSet(ScoreManager.ScoreType.FEED, ScoreManager.SetType.SET, 0);
         scoreManager.ScoreValueSet(ScoreManager.ScoreType.ABILITYUSECOUNT, ScoreManager.SetType.SET, 0);
-        UIManager.Instance.StampOutput();
+
         UIManager.Instance.FutureCountOutput();
     }
 
@@ -126,7 +128,7 @@ public class GameManager : Singleton<GameManager>
             gameTimerNeedTime = 0.5f;
         else
             gameTimerNeedTime = 1f;
-        if(PlayerController.Instance.controlEnabled)
+        if(PlayerController.Instance.controlEnabled || realPlayer.GetComponent<Animator>().GetInteger("PlayerAnimation") == 3)
         {
             if(timer >= gameTimerAddTime)
             {

@@ -9,13 +9,21 @@ public class ScoreManager : MonoBehaviour
     private int life = 5;
     private int abilityUseCount = 0;
     private int stampTemp = 0;
-    private ScoreManager[] scoreManager;
+
+    [HideInInspector]
+    public bool isTitleBegin = true;
+    /// <summary>
+    /// 타이틀로 돌아갈때, 스테이지로 다시 돌아가기 위해 있는 변수
+    /// </summary>
+    private int worldType = -1;
+    private ScoreManager[] scoreManagers;
+
 
     private void Awake()
     {
-        scoreManager = FindObjectsOfType<ScoreManager>();
+        scoreManagers = FindObjectsOfType<ScoreManager>();
 
-        if(scoreManager.Length >=2)
+        if(scoreManagers.Length >=2)
         {
             Destroy(gameObject);
             return;
@@ -97,4 +105,7 @@ public class ScoreManager : MonoBehaviour
             return stampTemp;
         }
     }
+
+    public int WorldTypeGet => worldType;
+    public void WorldTypeSet(int value) => worldType = value;
 }

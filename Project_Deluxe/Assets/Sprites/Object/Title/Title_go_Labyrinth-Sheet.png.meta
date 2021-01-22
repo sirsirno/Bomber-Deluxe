@@ -1,19 +1,25 @@
 fileFormatVersion: 2
-guid: 6c4d15cb2239d1f439d0eb2199358ebb
+guid: 0c78e90b383149b4489f8ea25f5028a9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1763592194370766197
-    second: negami_0
+      213: -2050383813936373432
+    second: Title_go_Labyrinth-Sheet_0
   - first:
-      213: -2783564308806881076
-    second: negami_1
+      213: -6886828439649300505
+    second: Title_go_Labyrinth-Sheet_1
   - first:
-      213: -1100844982751275527
-    second: negami_2
+      213: -2177962481381707476
+    second: Title_go_Labyrinth-Sheet_2
   - first:
-      213: -3067381901122318530
-    second: negami_3
+      213: 8056464709885798224
+    second: Title_go_Labyrinth-Sheet_3
+  - first:
+      213: 1343255869009225681
+    second: Title_go_Labyrinth-Sheet_4
+  - first:
+      213: 7678987074538473127
+    second: Title_go_Labyrinth-Sheet_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -80,7 +86,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -92,7 +98,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -101,18 +107,6 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -127,85 +121,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: negami_0
+      name: Title_go_Labyrinth-Sheet_0
       rect:
         serializedVersion: 2
-        x: 105
-        y: 233
-        width: 49
-        height: 7
+        x: 0
+        y: 0
+        width: 256
+        height: 256
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b8af0ed3e367687e0800000000000000
-      internalID: -1763592194370766197
+      spriteID: 841ac1dd8c29b83e0800000000000000
+      internalID: -2050383813936373432
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: negami_1
+      name: Title_go_Labyrinth-Sheet_1
       rect:
         serializedVersion: 2
-        x: 276
-        y: 156
-        width: 84
-        height: 90
+        x: 296
+        y: 197
+        width: 176
+        height: 55
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cc03c14520bce59d0800000000000000
-      internalID: -2783564308806881076
+      spriteID: 7ef45a9a5021d60a0800000000000000
+      internalID: -6886828439649300505
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: negami_2
+      name: Title_go_Labyrinth-Sheet_2
       rect:
         serializedVersion: 2
-        x: 408
-        y: 156
-        width: 84
-        height: 90
+        x: 513
+        y: 155
+        width: 252
+        height: 43
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9f5d65a125309b0f0800000000000000
-      internalID: -1100844982751275527
+      spriteID: c217d1b99a256c1e0800000000000000
+      internalID: -2177962481381707476
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: negami_3
+      name: Title_go_Labyrinth-Sheet_3
       rect:
         serializedVersion: 2
-        x: 70
-        y: 60
-        width: 118
-        height: 167
+        x: 789
+        y: 112
+        width: 214
+        height: 44
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e3f4421a9687e65d0800000000000000
-      internalID: -3067381901122318530
+      spriteID: 057a63af7ff4ecf60800000000000000
+      internalID: 8056464709885798224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_go_Labyrinth-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 1027
+        y: 52
+        width: 250
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d7e0c2981434a210800000000000000
+      internalID: 1343255869009225681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Title_go_Labyrinth-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 1298
+        y: 4
+        width: 220
+        height: 57
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a68eac2f0e319a60800000000000000
+      internalID: 7678987074538473127
       vertices: []
       indices: 
       edges: []
