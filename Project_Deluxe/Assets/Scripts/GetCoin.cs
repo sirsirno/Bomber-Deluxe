@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class GetCoin : MonoBehaviour
 {
-    public ParticleSystem parEatEffect;
-    public ParticleSystem badEatEffect;
     private ScoreManager scoreManager;
 
     private void Awake()
@@ -24,20 +22,18 @@ public class GetCoin : MonoBehaviour
                 {
                     PlayerController.Instance.badCoinGetAudio.Play();
 
-                    badEatEffect.gameObject.SetActive(true);
+                    UIManager.Instance.badEatEffect.gameObject.SetActive(true);
                     Invoke("OffBadEffect", offEffectTime);
                     gameObject.SetActive(false);
                     return;
                 }
                 PlayerController.Instance.coinGetAudio.Play();
 
-                parEatEffect.gameObject.SetActive(true);
+                UIManager.Instance.parEatEffect.gameObject.SetActive(true);
                 Invoke("OffEffect", offEffectTime);
 
                 scoreManager.ScoreValueSet(ScoreManager.ScoreType.FEED, ScoreManager.SetType.ADD, 1);
                 PlayerController.Instance.ShowFeedRemaining();
-                scoreManager.ScoreValueSet(ScoreManager.ScoreType.SCORETEMP, ScoreManager.SetType.ADD, 500);
-                UIManager.Instance.ScoreOutput();
 
                 gameObject.SetActive(false);
                 Invoke("DeleteObject", offEffectTime);
@@ -45,11 +41,11 @@ public class GetCoin : MonoBehaviour
         }
     }
     private void OffBadEffect(){
-        badEatEffect.gameObject.SetActive(false);
+        UIManager.Instance.badEatEffect.gameObject.SetActive(false);
         return;
     }
     private void OffEffect(){
-        parEatEffect.gameObject.SetActive(false);
+        UIManager.Instance.parEatEffect.gameObject.SetActive(false);
         
         return;
     }

@@ -8,7 +8,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField]
     private int life = 5;
     private int abilityUseCount = 0;
-    private int scoreTemp = 15000;
+    private int stampTemp = 0;
     private ScoreManager[] scoreManager;
 
     private void Awake()
@@ -28,7 +28,7 @@ public class ScoreManager : MonoBehaviour
         FEED,
         LIFE,
         ABILITYUSECOUNT,
-        SCORETEMP
+        STAMPTEMP
     }
 
     public enum SetType
@@ -67,19 +67,14 @@ public class ScoreManager : MonoBehaviour
             else if (setType == SetType.REMOVE)
                 abilityUseCount -= value;
         }
-        else if (type == ScoreType.SCORETEMP)
+        else if (type == ScoreType.STAMPTEMP)
         {
             if (setType == SetType.SET)
-                scoreTemp = value;
+                stampTemp = value;
             else if (setType == SetType.ADD)
-                scoreTemp += value;
+                stampTemp += value;
             else if (setType == SetType.REMOVE)
-            {
-                if (scoreTemp - value < 0)
-                    scoreTemp = 0;
-                else
-                    scoreTemp -= value;
-            }
+                stampTemp -= value;
         }
     }
 
@@ -99,7 +94,7 @@ public class ScoreManager : MonoBehaviour
         }
         else //if (type == ScoreType.SCORETEMP)
         {
-            return scoreTemp;
+            return stampTemp;
         }
     }
 }

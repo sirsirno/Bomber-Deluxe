@@ -101,7 +101,7 @@ public class JsonSave : MonoBehaviour
             debugLogPrint = false;
             for (int i = 0; i < 30; i++)
             {
-                Debug.Log("스테이지 " + i + " : 별 " + gameData.StageGetValueSave(GameData.StageValueType.STAR, i) + "개, 점수 " + gameData.StageGetValueSave(GameData.StageValueType.SCORE, i) + "점\n");
+                Debug.Log("스테이지 " + i + " : 별 " + gameData.StageGetValueSave(GameData.StageValueType.STAR, i) + "개, 점수 " + gameData.StageGetValueSave(GameData.StageValueType.STAMP, i) + "점\n");
             }
         }
     }

@@ -8,13 +8,13 @@ public class GameData
     [SerializeField]
     private int[] stageStar = new int[30];
     [SerializeField]
-    private int[] stageScore = new int[30];
+    private int[] stageStamp = new int[30];
     [SerializeField]
     private int bestStage = 0;
     public enum StageValueType
     {
         STAR,
-        SCORE
+        STAMP
     }
 
     public void StageSetValueSave(StageValueType type, int stage, int value)
@@ -26,10 +26,10 @@ public class GameData
             else
                 return;
         }
-        else if (type == StageValueType.SCORE)
+        else if (type == StageValueType.STAMP)
         {
-            if (stageScore[stage] < value)
-                stageScore[stage] = value;
+            if (stageStamp[stage] < value)
+                stageStamp[stage] = value;
             else
                 return;
         }
@@ -45,7 +45,7 @@ public class GameData
         }
         else //if (type == StageValueType.SCORE)
         {
-            return stageScore[stage];
+            return stageStamp[stage];
         }
     }
 }

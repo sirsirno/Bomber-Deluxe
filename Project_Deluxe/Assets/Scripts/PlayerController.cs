@@ -55,7 +55,6 @@ public class PlayerController : Singleton<PlayerController>
     Rigidbody2D rb;
 
     public float clockDuration = 15;
-    private float scoreDuration = 15;
 
     /// <summary>
     /// 스프라이트 상의 플레이어 (애니메이션용)
@@ -105,7 +104,6 @@ public class PlayerController : Singleton<PlayerController>
                 sleeping = true;
                 sleepingDuration = sleepingDurationDefault;
                 sleepingDuration += Time.time;
-                scoreDuration = 14;
 
                 futureAbillityAbled = false;
                 scoreManager.ScoreValueSet(ScoreManager.ScoreType.ABILITYUSECOUNT, ScoreManager.SetType.ADD, 1);
@@ -119,13 +117,6 @@ public class PlayerController : Singleton<PlayerController>
 
             if (animator.GetInteger("PlayerAnimation") != 4 && animator.GetInteger("PlayerAnimation") != 5)
                 clockDuration = sleepingDuration - sleepTime;
-
-            if (scoreDuration >= clockDuration)
-            {
-                scoreDuration -= 1;
-                scoreManager.ScoreValueSet(ScoreManager.ScoreType.SCORETEMP, ScoreManager.SetType.REMOVE, 100);
-                UIManager.Instance.ScoreOutput();
-            }
 
             if (sleepTime >= sleepingDuration || PlayerStopEvent.Instance.isFutureDead || GameManager.Instance.GetRealTimer() <= 10)
             {

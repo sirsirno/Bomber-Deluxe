@@ -10,6 +10,12 @@ public class UI : MonoBehaviour
 {
     [SerializeField]
     private Text startTxt = null;
+    [SerializeField]
+    private GameObject startPanel = null;
+    [SerializeField]
+    private GameObject mainCamera = null;
+    [SerializeField]
+    private GameObject backgroundCamera = null;
 
     private void Awake()
     {
@@ -26,7 +32,10 @@ public class UI : MonoBehaviour
     {
         if (Input.anyKeyDown) 
         {
-            SceneManager.LoadScene(1);
+            //SceneManager.LoadScene(1);
+            startPanel.SetActive(false);
+            mainCamera.transform.DOMoveY(-160, 5f);
+            backgroundCamera.transform.DOMoveY(-33.9f, 5f);
         }
     }
 }

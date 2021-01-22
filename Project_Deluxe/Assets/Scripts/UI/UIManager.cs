@@ -16,17 +16,21 @@ public class UIManager : Singleton<UIManager>
     [SerializeField]
     private Text futureCountText;
     [SerializeField]
+    private Image[] stampUI;
+    [SerializeField]
+    private Text result_clearTxt;
+    [SerializeField]
     private Text result_lifeTxt;
     [SerializeField]
     private Text result_feedTxt;
     [SerializeField]
     private Text result_futureCountTxt;
     [SerializeField]
-    private Text result_timerTxt;    
+    private Text result_timerTxt;
     [SerializeField]
-    private Text result_scoreTxt;
+    private Image[] resultStampUI;
     [SerializeField]
-    private Text scoreText;
+    private Sprite[] resultStampSprite;
     [SerializeField]
     private GameObject[] stars = null;
 
@@ -50,6 +54,9 @@ public class UIManager : Singleton<UIManager>
     [Header("타이머 텍스트인데 UI라 여기다 놈")]
     [SerializeField]
     private Text timerText = null;
+    [Header("파티클 이펙트")]
+    public ParticleSystem parEatEffect;
+    public ParticleSystem badEatEffect;
 
     private Animator animator;
     private GameObject realPlayer = null;
@@ -63,12 +70,17 @@ public class UIManager : Singleton<UIManager>
         startScreenPanel.SetActive(true);
         isPlayingStartScreen = true;
 
-        ScoreOutput();
+        StampOutput();
         realPlayer = GameObject.FindGameObjectWithTag("Player");
         animator = realPlayer.GetComponent<Animator>();
         startScreenLifeTxt.text = string.Format("x   {0}", scoreManager.ScoreValueGet(ScoreManager.ScoreType.LIFE));
         StartScreen_WorldTxtPrint();
         clockDefaultVolume = AudioManager.Instance.SFX_ClockTic.volume;
+
+        for (int i = 0; i < stampUI.Length; i++)
+        {
+            stampUI[i].sprite = GameManager.Instance.GetStampSprite(true, i);
+        }
     }
 
     void Update()
@@ -187,25 +199,42 @@ public class UIManager : Singleton<UIManager>
             {
                 stars[1].SetActive(false);
                 stars[2].SetActive(false);
-                // TO DO : 별 저장
+                result_clearTxt.text = "도착!";
                 JsonSave.Instance.gameData.StageSetValueSave(GameData.StageValueType.STAR, GameManager.Instance.GetCurrentStage(), 1);
             }
             else if (scoreManager.ScoreValueGet(ScoreManager.ScoreType.FEED) == 8 && scoreManager.ScoreValueGet(ScoreManager.ScoreType.ABILITYUSECOUNT) <= 5)
             {
+                result_clearTxt.text = "대단해요!";
                 JsonSave.Instance.gameData.StageSetValueSave(GameData.StageValueType.STAR, GameManager.Instance.GetCurrentStage(), 3);
             }
             else
             {
                 stars[2].SetActive(false);
+                result_clearTxt.text = "잘했어요!";
                 JsonSave.Instance.gameData.StageSetValueSave(GameData.StageValueType.STAR, GameManager.Instance.GetCurrentStage(), 2);
             }
         }
 
-        // 스코어 계산
+        // 스탬프 계산 TO DO
         {
-            scoreManager.ScoreValueSet(ScoreManager.ScoreType.SCORETEMP, ScoreManager.SetType.ADD, GameManager.Instance.GetRealTimer() * 2);
-            result_scoreTxt.text = string.Format("{0:D5}", scoreManager.ScoreValueGet(ScoreManager.ScoreType.SCORETEMP));
-            JsonSave.Instance.gameData.StageSetValueSave(GameData.StageValueType.SCORE, GameManager.Instance.GetCurrentStage(), scoreManager.ScoreValueGet(ScoreManager.ScoreType.SCORETEMP));
+            int stampByte = scoreManager.ScoreValueGet(ScoreManager.ScoreType.STAMPTEMP);
+
+            if (stampByte == 1 || stampByte == 3 ||stampByte == 5 || stampByte == 7)
+                resultStampUI[0].sprite = resultStampSprite[1];
+            else
+                resultStampUI[0].sprite = resultStampSprite[0];
+
+            if (stampByte == 2 || stampByte == 3 || stampByte == 6 || stampByte == 7)
+                resultStampUI[1].sprite = resultStampSprite[1];
+            else
+                resultStampUI[1].sprite = resultStampSprite[0];
+
+            if (stampByte == 4 || stampByte == 5 || stampByte == 6 || stampByte == 7)
+                resultStampUI[2].sprite = resultStampSprite[1];
+            else
+                resultStampUI[2].sprite = resultStampSprite[0];
+
+            JsonSave.Instance.gameData.StageSetValueSave(GameData.StageValueType.STAMP, GameManager.Instance.GetCurrentStage(), scoreManager.ScoreValueGet(ScoreManager.ScoreType.STAMPTEMP));
         }
         clear.SetActive(true);
     }
@@ -272,13 +301,18 @@ public class UIManager : Singleton<UIManager>
         timerText.text = string.Format("TIME\n{0}", GameManager.Instance.GetRealTimer());
     }
 
-    public void ScoreOutput()
+    public void StampOutput()
     {
-        scoreText.text = string.Format("{0:D5}", scoreManager.ScoreValueGet(ScoreManager.ScoreType.SCORETEMP));
+        //StampOutput TO DO
     }
 
     public void FutureCountOutput()
     {
         futureCountText.text = string.Format("x {0}", scoreManager.ScoreValueGet(ScoreManager.ScoreType.ABILITYUSECOUNT));
+    }
+
+    public void StampSpriteSet(bool isEmpty, int number)
+    {
+        stampUI[number].sprite = GameManager.Instance.GetStampSprite(isEmpty, number);
     }
 }

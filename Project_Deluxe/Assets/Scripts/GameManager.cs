@@ -11,10 +11,15 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private GameObject player = null;
 
+    [Header("스탬프 스프라이트")]
+    [SerializeField]
+    private Sprite[] stampSprites = null;
+    [SerializeField]
+    private Sprite[] emptyStampSprites = null;
+
     [Header("타이머")]
     [SerializeField]
     private int gameTimerDefault = 180;
-    [SerializeField]
     private int realGameTimer = 180;
 
     private float gameTimerAddTime = 180;
@@ -70,10 +75,10 @@ public class GameManager : Singleton<GameManager>
         if (!isDebugMode)
             DisabledDebug();
 
-        scoreManager.ScoreValueSet(ScoreManager.ScoreType.SCORETEMP, ScoreManager.SetType.SET, 15000);
+        scoreManager.ScoreValueSet(ScoreManager.ScoreType.STAMPTEMP, ScoreManager.SetType.SET, 0);
         scoreManager.ScoreValueSet(ScoreManager.ScoreType.FEED, ScoreManager.SetType.SET, 0);
         scoreManager.ScoreValueSet(ScoreManager.ScoreType.ABILITYUSECOUNT, ScoreManager.SetType.SET, 0);
-        UIManager.Instance.ScoreOutput();
+        UIManager.Instance.StampOutput();
         UIManager.Instance.FutureCountOutput();
     }
 
@@ -146,4 +151,26 @@ public class GameManager : Singleton<GameManager>
     }
 
     public int GetRealTimer() => realGameTimer;
+
+    public Sprite GetStampSprite(bool isEmpty, int number)
+    {
+        if (isEmpty)
+        {
+            if (number == 0)
+                return emptyStampSprites[0];
+            else if (number == 1)
+                return emptyStampSprites[1];
+            else
+                return emptyStampSprites[2];
+        }
+        else
+        {
+            if (number == 0)
+                return stampSprites[0];
+            else if (number == 1)
+                return stampSprites[1];
+            else
+                return stampSprites[2];
+        }
+    }
 }
