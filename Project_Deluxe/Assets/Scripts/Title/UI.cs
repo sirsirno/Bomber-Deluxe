@@ -14,6 +14,7 @@ public class UI : MonoBehaviour
     private void Awake()
     {
         JsonSave.Instance.LoadGameData();
+        Time.timeScale = 1;
     }
 
     void Start()
@@ -25,7 +26,6 @@ public class UI : MonoBehaviour
     {
         if (Input.anyKeyDown) 
         {
-            Time.timeScale = 1;
             SceneManager.LoadScene(1);
         }
     }

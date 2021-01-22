@@ -33,8 +33,12 @@ public class GetCoin : MonoBehaviour
 
                 parEatEffect.gameObject.SetActive(true);
                 Invoke("OffEffect", offEffectTime);
+
                 scoreManager.ScoreValueSet(ScoreManager.ScoreType.FEED, ScoreManager.SetType.ADD, 1);
                 PlayerController.Instance.ShowFeedRemaining();
+                scoreManager.ScoreValueSet(ScoreManager.ScoreType.SCORETEMP, ScoreManager.SetType.ADD, 500);
+                UIManager.Instance.ScoreOutput();
+
                 gameObject.SetActive(false);
                 Invoke("DeleteObject", offEffectTime);
             }
