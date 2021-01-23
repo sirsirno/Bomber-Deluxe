@@ -18,15 +18,13 @@ public class UI : MonoBehaviour
     private GameObject TitleObjects = null;
 
     private ScoreManager scoreManager = null;
+    [SerializeField]
+    private float titleClickWaitTime = 1f;
 
     // 함수용 변수
 
     [SerializeField]
     private float cameraMoveSpeed=1f;
-    [SerializeField]
-    private float cameraMoveSlowSpeed = 1f;
-    [SerializeField]
-    private float cameraMoveSlowDistance = 50f;
     [SerializeField]
     private float cameraMoveDistance = 800f;
 
@@ -42,23 +40,38 @@ public class UI : MonoBehaviour
         scoreManager.ScoreValueSet(ScoreManager.ScoreType.LIFE, ScoreManager.SetType.SET, 5);
         startTxt.DOColor(new Color(1f, 1f, 1f, 10f), 0.8f).SetLoops(-1, LoopType.Yoyo);
 
+        if (!scoreManager.isTitleBegin)
+        {
+            TitleObjects.transform.DOLocalMoveY(30f, 0);
+            TitleObjects.transform.DOScale(new Vector3(0.3f, 0.3f, 0.3f), 0);
+            AudioManager.Instance.BGM_Labyrinth.volume = 1;
+            AudioManager.Instance.BGM_Labyrinth.Play();
+        }
+        else
+            AudioManager.Instance.BGM_Title.Play();
     }
+
     private void Update()
     {
         if (Input.anyKeyDown && scoreManager.isTitleBegin) 
         {
-            startPanel.GetComponent<RectTransform>().DOLocalMoveY(1000, 2);
             scoreManager.isTitleBegin = false;
-            backgroundCamera.transform.DOMoveY(-33.9f, 2f);
-            TitleObjects.transform.DOLocalMoveY(30f, 2);
-            TitleObjects.transform.DOScale(new Vector3(0.3f, 0.3f, 0.3f), 1);
-
-            mainCamera.transform.DOMoveY(-cameraMoveDistance, cameraMoveSpeed).SetEase(Ease.InOutCubic);
+            Invoke("TitleToLabyrinth", titleClickWaitTime);
         }
 
-        //if (mainCamera.transform.localPosition.y <= -cameraMoveSlowDistance)
-        //{
-        //    mainCamera.transform.DOMoveY(-cameraMoveDistance, cameraMoveSpeed);
-        //}
+        if (AudioManager.Instance.BGM_Title.volume == 0)
+            AudioManager.Instance.BGM_Title.Stop();
+    }
+
+    private void TitleToLabyrinth()
+    {
+        startPanel.GetComponent<RectTransform>().DOLocalMoveY(1000, 2);
+        backgroundCamera.transform.DOMoveY(-33.9f, 4.5f);
+        TitleObjects.transform.DOLocalMoveY(30f, 2);
+        TitleObjects.transform.DOScale(new Vector3(0.3f, 0.3f, 0.3f), 1);
+        AudioManager.Instance.BGM_Title.DOFade(0, 2);
+        AudioManager.Instance.BGM_Labyrinth.Play();
+        AudioManager.Instance.BGM_Labyrinth.DOFade(1, 6);
+        mainCamera.transform.DOMoveY(-cameraMoveDistance, cameraMoveSpeed).SetEase(Ease.InOutCubic);
     }
 }

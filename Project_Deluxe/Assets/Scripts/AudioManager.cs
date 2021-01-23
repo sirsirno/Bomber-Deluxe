@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class AudioManager : Singleton<AudioManager>
 {
+    [Header("타이틀")]
+    public AudioSource BGM_Title = null;
+    public AudioSource BGM_Labyrinth = null;
+
+    [Header("인게임")]
     [Header("BGM")]
     public AudioSource BGM_World = null;
     public AudioSource BGM_Future = null;

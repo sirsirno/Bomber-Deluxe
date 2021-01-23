@@ -55,11 +55,22 @@ public class SceneMoveManager : MonoBehaviour
 
         scoreManager.WorldTypeSet(-1);
         startPanel.SetActive(false);
-        mainCamera.transform.localPosition = new Vector3(-1.08f, -320, -37);
+        mainCamera.transform.localPosition = new Vector3(-1.08f, -800, -37);
         backgroundCamera.transform.localPosition = new Vector3(30.5f, -33.9f, -37);
         stageCanvas.SetActive(true);
+        worldStages[0].SetActive(false);
+        worldStages[1].SetActive(false);
+        worldStages[2].SetActive(false);
+        worldStages[3].SetActive(false);
+        worldStages[4].SetActive(false);
 
         worldStages[worldType].SetActive(true);
+        worldType_ = worldType;
+        //Debug.Log(Stages[worldType].position.x + " " + Stages[worldType].position.y + " " + worldType) ;
+        Vector3 stagePosition = new Vector3(Stages[worldType].position.x, Stages[worldType].position.y + 18.4213f, -37);
+
+        mainCamera.transform.DOMove(stagePosition, 0);
+        mainCamera.GetComponent<Camera>().DOOrthoSize(1, 0);
     }
 
     public void WorldButtonClick(int worldType)
@@ -102,6 +113,8 @@ public class SceneMoveManager : MonoBehaviour
         block.SetActive(true);
         mainCamera.transform.DOMove(new Vector3(-1f ,-800f, -37), 0.5f).SetEase(Ease.InCubic);
         mainCamera.GetComponent<Camera>().DOOrthoSize(5, 0.5f).SetEase(Ease.InCubic).OnComplete(StopBolck);
+        stageInfo.SetActive(false);
+        currentShowStage = 0;
     }
 
     public void TitleReset()
@@ -180,5 +193,10 @@ public class SceneMoveManager : MonoBehaviour
             return EmptyStamps[spriteNumber];
         else
             return Stamps[spriteNumber];
+    }
+
+    private void Update()
+    {
+        Debug.Log(GameObject.Find("Viewport").transform.position.x + " " + GameObject.Find("Viewport").transform.position.y + " " + 0);
     }
 }
