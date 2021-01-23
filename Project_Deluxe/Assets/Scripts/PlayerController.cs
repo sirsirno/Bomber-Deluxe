@@ -70,6 +70,11 @@ public class PlayerController : Singleton<PlayerController>
     private Text feedTxtEffectText = null;
     [SerializeField]
     private float feedTxtEffectDuration = 1f;
+
+    [Header("컨트롤러 불")]
+    public bool[] isPressedController;
+
+
     void Awake()
     {
         realPlayer = GameObject.FindGameObjectWithTag("Player");
@@ -208,7 +213,7 @@ public class PlayerController : Singleton<PlayerController>
     {
         if (controlEnabled)
         {
-            if (Input.GetKey(KeyCode.LeftArrow))    //왼쪽화살표 입력시 실행함
+            if (Input.GetKey(KeyCode.LeftArrow) || isPressedController[0])    //왼쪽화살표 입력시 실행함
             {
                 if (state == PlayerState.Grounded && animator.GetInteger("PlayerAnimation") == 1)
                     transform.Translate(Vector3.left * moveSpeed * Time.fixedDeltaTime);
@@ -217,7 +222,7 @@ public class PlayerController : Singleton<PlayerController>
                 spriteRenderer.flipX = true;
             }
 
-            if (Input.GetKey(KeyCode.RightArrow))    //오른쪽화살표 입력시 실행함
+            if (Input.GetKey(KeyCode.RightArrow) || isPressedController[1])    //오른쪽화살표 입력시 실행함
             {
                 if (state == PlayerState.Grounded && animator.GetInteger("PlayerAnimation") == 1)
                     transform.Translate(Vector3.right * moveSpeed * Time.fixedDeltaTime);
@@ -242,19 +247,19 @@ public class PlayerController : Singleton<PlayerController>
 
         if (state == PlayerState.Grounded)
         {
-            if (Input.GetKey(KeyCode.LeftArrow) && animator.GetInteger("PlayerAnimation") == 0)
+            if ((Input.GetKey(KeyCode.LeftArrow) || isPressedController[0]) && animator.GetInteger("PlayerAnimation") == 0)
             {
                 animator.Play("Player_Walk");
                 animator.SetInteger("PlayerAnimation", 1);
             }
 
-            if (Input.GetKey(KeyCode.RightArrow) && animator.GetInteger("PlayerAnimation") == 0)
+            if ((Input.GetKey(KeyCode.RightArrow) || isPressedController[1]) && animator.GetInteger("PlayerAnimation") == 0)
             {
                 animator.Play("Player_Walk");
                 animator.SetInteger("PlayerAnimation", 1);
             }
 
-            if (!Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow))
+            if (!(Input.GetKey(KeyCode.LeftArrow) || isPressedController[0]) && !(Input.GetKey(KeyCode.RightArrow) || isPressedController[1]))
             {
                 if (animator.GetInteger("PlayerAnimation") == 0 || animator.GetInteger("PlayerAnimation") == 1)
                 {

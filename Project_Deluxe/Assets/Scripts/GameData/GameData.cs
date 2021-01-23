@@ -48,4 +48,12 @@ public class GameData
             return stageStamp[stage];
         }
     }
+
+    public void BestStageSet(int value)
+    {
+        if (bestStage < value)
+            bestStage = value;
+    }
+
+    public int BestStageGet() => bestStage;
 }

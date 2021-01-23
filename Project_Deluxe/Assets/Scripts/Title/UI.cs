@@ -31,6 +31,7 @@ public class UI : MonoBehaviour
     private void Awake()
     {
         JsonSave.Instance.LoadGameData();
+        Screen.SetResolution(800, 480, true);
         Time.timeScale = 1;
     }
 

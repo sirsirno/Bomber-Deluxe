@@ -221,7 +221,7 @@ public class UIManager : Singleton<UIManager>
             }
         }
 
-        // ½ºÅÆÇÁ °è»ê TO DO
+        // ½ºÅÆÇÁ °è»ê
         {
             int stampByte = scoreManager.ScoreValueGet(ScoreManager.ScoreType.STAMPTEMP);
 
@@ -242,6 +242,9 @@ public class UIManager : Singleton<UIManager>
 
             JsonSave.Instance.gameData.StageSetValueSave(GameData.StageValueType.STAMP, GameManager.Instance.GetCurrentStage(), scoreManager.ScoreValueGet(ScoreManager.ScoreType.STAMPTEMP));
         }
+
+        JsonSave.Instance.gameData.BestStageSet(GameManager.Instance.GetCurrentStage());
+
         clear.SetActive(true);
     }
 

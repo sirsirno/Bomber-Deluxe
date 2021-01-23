@@ -32,6 +32,8 @@ public class SceneMoveManager : MonoBehaviour
     [SerializeField]
     private GameObject stageInfoStamp = null;
     [SerializeField]
+    private Sprite[] stageButton = null;
+    [SerializeField]
     private Sprite[] EmptyStamps = null;
     [SerializeField]
     private Sprite[] Stamps = null;
@@ -40,12 +42,20 @@ public class SceneMoveManager : MonoBehaviour
     [SerializeField]
     private GameObject block = null;
     private int worldType_ = 0;
-
     private int currentShowStage = 0;
+
+    [Header("스크롤 표시기능 화살표")]
+    [SerializeField]
+    private GameObject[] scrollShowArrows = null;
+    [SerializeField]
+    private GameObject scroll = null;
+
     private void Start()
     {
         scoreManager = FindObjectOfType<ScoreManager>();
         TitleMove(scoreManager.WorldTypeGet);
+        scrollShowArrows[0].GetComponent<RectTransform>().DOAnchorPosY(30, 0.5f).SetLoops(-1, LoopType.Yoyo);
+        scrollShowArrows[1].GetComponent<RectTransform>().DOAnchorPosY(-30, 0.5f).SetLoops(-1, LoopType.Yoyo);
     }
 
     public void TitleMove(int worldType)
@@ -195,8 +205,21 @@ public class SceneMoveManager : MonoBehaviour
             return Stamps[spriteNumber];
     }
 
+    public Sprite GetStageButtonSprites(int spriteNumber)
+    {
+        return stageButton[spriteNumber];
+    }
+
     private void Update()
     {
-        Debug.Log(GameObject.Find("Viewport").transform.position.x + " " + GameObject.Find("Viewport").transform.position.y + " " + 0);
+        if (scroll.GetComponent<RectTransform>().anchoredPosition.y >= 40)
+            scrollShowArrows[1].SetActive(true);
+        else
+            scrollShowArrows[1].SetActive(false);
+
+        if (scroll.GetComponent<RectTransform>().anchoredPosition.y <= 260)
+            scrollShowArrows[0].SetActive(true);
+        else
+            scrollShowArrows[0].SetActive(false);
     }
 }
