@@ -82,16 +82,26 @@ public class SceneMoveManager : MonoBehaviour
     }
     private void ShowStage()
     {
+        block.SetActive(false);
         worldStages[worldType_].SetActive(true);
+    }
+    private void StopBolck()
+    {
+        block.SetActive(false);
     }
     public void WorldExit()
     {
-        worldStages[0].SetActive(false);
-        worldStages[1].SetActive(false);
-        worldStages[2].SetActive(false);
-        worldStages[3].SetActive(false);
-        worldStages[4].SetActive(false);
+        worldStages[worldType_].SetActive(false);
+        //worldStages[0].SetActive(false);
+        //worldStages[1].SetActive(false);
+        //worldStages[2].SetActive(false);
+        //worldStages[3].SetActive(false);
+        //worldStages[4].SetActive(false);
         stageCanvas.SetActive(false);
+
+        block.SetActive(true);
+        mainCamera.transform.DOMove(new Vector3(-1f ,-800f, -37), 0.5f).SetEase(Ease.InCubic);
+        mainCamera.GetComponent<Camera>().DOOrthoSize(5, 0.5f).SetEase(Ease.InCubic).OnComplete(StopBolck);
     }
 
     public void TitleReset()
