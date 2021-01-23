@@ -49,10 +49,11 @@ public class UI : MonoBehaviour
         {
             startPanel.GetComponent<RectTransform>().DOLocalMoveY(1000, 2);
             scoreManager.isTitleBegin = false;
-            mainCamera.transform.DOMoveY(-cameraMoveSlowDistance, cameraMoveSlowSpeed);
             backgroundCamera.transform.DOMoveY(-33.9f, 2f);
             TitleObjects.transform.DOLocalMoveY(30f, 2);
             TitleObjects.transform.DOScale(new Vector3(0.3f, 0.3f, 0.3f), 1);
+
+            mainCamera.transform.DOMoveY(-cameraMoveSlowDistance, cameraMoveSlowSpeed);
         }
 
         if (mainCamera.transform.localPosition.y <= -cameraMoveSlowDistance)
