@@ -25,7 +25,8 @@ public class UI : MonoBehaviour
     private float cameraMoveSpeed=2f;
     [SerializeField]
     private float invokeTime = 0.5f;
-    public GameObject ppVolume;
+    [SerializeField]
+    private float cameraMoveDistance = 800f;
 
     private void Awake()
     {
@@ -46,7 +47,7 @@ public class UI : MonoBehaviour
         {
             startPanel.GetComponent<RectTransform>().DOLocalMoveY(1000, 2);
             scoreManager.isTitleBegin = false;
-            mainCamera.transform.DOMoveY(-320, cameraMoveSpeed);
+            mainCamera.transform.DOMoveY(-cameraMoveDistance, cameraMoveSpeed);
             Invoke("FastMoveY", invokeTime);
             backgroundCamera.transform.DOMoveY(-33.9f, 2f);
             TitleObjects.transform.DOLocalMoveY(30f, 2);
@@ -54,6 +55,6 @@ public class UI : MonoBehaviour
         }
     }
     private void FastMoveY(){
-    mainCamera.transform.DOMoveY(-320, cameraMoveSpeed/2);
+    mainCamera.transform.DOMoveY(-cameraMoveDistance, cameraMoveSpeed/2);
     }
 }
