@@ -66,6 +66,7 @@ public class UI : MonoBehaviour
 
     private void TitleToLabyrinth()
     {
+        
         startPanel.GetComponent<RectTransform>().DOLocalMoveY(1000, 2);
         backgroundCamera.transform.DOMoveY(-33.9f, 4.5f);
         TitleObjects.transform.DOLocalMoveY(30f, 2);

@@ -8,7 +8,8 @@ using UnityEngine.SceneManagement;
 public class SceneMoveManager : MonoBehaviour
 {
     private ScoreManager scoreManager = null;
-
+    
+    public GameObject blurQuad;
     [SerializeField]
     private GameObject startPanel = null;
     [SerializeField]
@@ -44,7 +45,7 @@ public class SceneMoveManager : MonoBehaviour
     private int worldType_ = 0;
     private int currentShowStage = 0;
 
-    [Header("��ũ�� ǥ�ñ�� ȭ��ǥ")]
+    [Header("��ũ�� ǥ�ñ�� ȭ��ǥ")]
     [SerializeField]
     private GameObject[] scrollShowArrows = null;
     [SerializeField]
@@ -81,6 +82,7 @@ public class SceneMoveManager : MonoBehaviour
 
         mainCamera.transform.DOMove(stagePosition, 0);
         mainCamera.GetComponent<Camera>().DOOrthoSize(1, 0);
+        
     }
 
     public void WorldButtonClick(int worldType)
@@ -95,10 +97,11 @@ public class SceneMoveManager : MonoBehaviour
 
         block.SetActive(true);
         Vector3 stagePosition = new Vector3(Stages[worldType].position.x, Stages[worldType].position.y, -37);
-
+        SetTrueQuad();
+        Invoke("SetFalseQuad",1f);  
         mainCamera.transform.DOMove(stagePosition,0.5f).SetEase(Ease.InCubic);
         mainCamera.GetComponent<Camera>().DOOrthoSize(1,0.5f).SetEase(Ease.InCubic).OnComplete(ShowStage);
-
+        //블러 해제
         //worldStages[worldType].SetActive(true);
     }
     private void ShowStage()
@@ -148,8 +151,9 @@ public class SceneMoveManager : MonoBehaviour
         stageInfoStar.GetComponent<ShowStar>().ShowStars();
         stageInfoStamp.GetComponent<ShowStamp>().StageNumberSet(stageNumber);
         stageInfoStamp.GetComponent<ShowStamp>().ShowStamps();
+        
 
-        // �� �ؽ�Ʈ
+        // �� �ؽ�Ʈ
         {
             stageInfoText.text = "";
             stageInfoText.fontSize = 47;
@@ -221,5 +225,17 @@ public class SceneMoveManager : MonoBehaviour
             scrollShowArrows[0].SetActive(true);
         else
             scrollShowArrows[0].SetActive(false);
+    }
+    private void SetTrueQuad()
+    {
+        
+        Debug.Log("스테이지 선택 블러 활성화");
+        blurQuad.gameObject.SetActive(true);
+        
+    }
+    private void SetFalseQuad(){
+       
+        Debug.Log("스테이지 선택 블러 비활성화");
+         blurQuad.gameObject.SetActive(false);
     }
 }
