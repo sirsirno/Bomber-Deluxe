@@ -53,12 +53,12 @@ public class UI : MonoBehaviour
             TitleObjects.transform.DOLocalMoveY(30f, 2);
             TitleObjects.transform.DOScale(new Vector3(0.3f, 0.3f, 0.3f), 1);
 
-            mainCamera.transform.DOMoveY(-cameraMoveSlowDistance, cameraMoveSlowSpeed);
+            mainCamera.transform.DOMoveY(-cameraMoveDistance, cameraMoveSpeed).SetEase(Ease.InOutCubic);
         }
 
-        if (mainCamera.transform.localPosition.y <= -cameraMoveSlowDistance)
-        {
-            mainCamera.transform.DOMoveY(-cameraMoveDistance, cameraMoveSpeed);
-        }
+        //if (mainCamera.transform.localPosition.y <= -cameraMoveSlowDistance)
+        //{
+        //    mainCamera.transform.DOMoveY(-cameraMoveDistance, cameraMoveSpeed);
+        //}
     }
 }
