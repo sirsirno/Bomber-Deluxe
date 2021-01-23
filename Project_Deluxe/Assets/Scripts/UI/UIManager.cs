@@ -176,13 +176,13 @@ public class UIManager : Singleton<UIManager>
     {
         menu.SetActive(false);
         clear.SetActive(false);
-        if (GameManager.Instance.GetCurrentStage() >= 5)
+        if (GameManager.Instance.GetCurrentStage() <= 5)
             scoreManager.WorldTypeSet(0);
-        else if(GameManager.Instance.GetCurrentStage() >= 10)
+        else if(GameManager.Instance.GetCurrentStage() <= 10)
             scoreManager.WorldTypeSet(1);
-        else if(GameManager.Instance.GetCurrentStage() >= 15)
+        else if(GameManager.Instance.GetCurrentStage() <= 15)
             scoreManager.WorldTypeSet(2);
-        else if(GameManager.Instance.GetCurrentStage() >= 20)
+        else if(GameManager.Instance.GetCurrentStage() <= 20)
             scoreManager.WorldTypeSet(3);
         else
             scoreManager.WorldTypeSet(4);
