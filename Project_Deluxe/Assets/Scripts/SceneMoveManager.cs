@@ -52,13 +52,10 @@ public class SceneMoveManager : MonoBehaviour
         scoreManager.WorldTypeSet(-1);
         startPanel.SetActive(false);
         mainCamera.transform.localPosition = new Vector3(-1.08f, -160, -37);
-        mainCamera.transform.localPosition = new Vector3(30.5f, -33.9f, -37);
+        backgroundCamera.transform.localPosition = new Vector3(30.5f, -33.9f, -37);
         stageCanvas.SetActive(true);
 
-        if (worldType == 0)
-        {
-
-        }
+        worldStages[worldType].SetActive(true);
     }
 
     public void WorldButtonClick(int worldType)
@@ -70,16 +67,17 @@ public class SceneMoveManager : MonoBehaviour
         worldStages[3].SetActive(false);
         worldStages[4].SetActive(false);
 
-        if (worldType == 0)
-            worldStages[0].SetActive(true);
-        else if(worldType == 1)
-            worldStages[1].SetActive(true);
-        else if(worldType == 2)
-            worldStages[2].SetActive(true);
-        else if(worldType == 3)
-            worldStages[3].SetActive(true);
-        else
-            worldStages[4].SetActive(true);
+        worldStages[worldType].SetActive(true);
+    }
+
+    public void WorldExit()
+    {
+        worldStages[0].SetActive(false);
+        worldStages[1].SetActive(false);
+        worldStages[2].SetActive(false);
+        worldStages[3].SetActive(false);
+        worldStages[4].SetActive(false);
+        stageCanvas.SetActive(false);
     }
 
     public void TitleReset()
@@ -95,6 +93,8 @@ public class SceneMoveManager : MonoBehaviour
 
     public void StageButtonClick(int stageNumber)
     {
+        if (!stageInfo.activeSelf)
+            stageInfo.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 517, 0);
         stageInfo.SetActive(true);
         currentShowStage = stageNumber;
         stageInfoStar.GetComponent<ShowStar>().StageNumberSet(stageNumber);
@@ -134,14 +134,11 @@ public class SceneMoveManager : MonoBehaviour
             else if (stageNumber % 5 == 0)
                 stageInfoText.text += "5";
         }
-
         stageInfo.GetComponent<RectTransform>().DOLocalMoveY(181, 1f);
     }
 
     public void StageInfoClose()
     {
-        stageInfo.GetComponent<RectTransform>().DOLocalMoveY(517, 0f);
-        stageInfo.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 517, 0);
         stageInfo.SetActive(false);
         currentShowStage = 0;
     }
