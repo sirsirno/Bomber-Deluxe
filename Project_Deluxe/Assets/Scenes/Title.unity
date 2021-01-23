@@ -13320,8 +13320,9 @@ MonoBehaviour:
   mainCamera: {fileID: 364302678}
   backgroundCamera: {fileID: 1816812345}
   TitleObjects: {fileID: 947413687}
-  cameraMoveSpeed: 2
-  invokeTime: 1
+  cameraMoveSpeed: 4.5
+  cameraMoveSlowSpeed: 0.25
+  cameraMoveSlowDistance: 10
   cameraMoveDistance: 800
 --- !u!4 &1312409876
 Transform:

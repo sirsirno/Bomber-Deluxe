@@ -22,9 +22,11 @@ public class UI : MonoBehaviour
     // 함수용 변수
 
     [SerializeField]
-    private float cameraMoveSpeed=2f;
+    private float cameraMoveSpeed=1f;
     [SerializeField]
-    private float invokeTime = 0.5f;
+    private float cameraMoveSlowSpeed = 1f;
+    [SerializeField]
+    private float cameraMoveSlowDistance = 50f;
     [SerializeField]
     private float cameraMoveDistance = 800f;
 
@@ -47,14 +49,15 @@ public class UI : MonoBehaviour
         {
             startPanel.GetComponent<RectTransform>().DOLocalMoveY(1000, 2);
             scoreManager.isTitleBegin = false;
-            mainCamera.transform.DOMoveY(-cameraMoveDistance, cameraMoveSpeed);
-            Invoke("FastMoveY", invokeTime);
+            mainCamera.transform.DOMoveY(-cameraMoveSlowDistance, cameraMoveSlowSpeed);
             backgroundCamera.transform.DOMoveY(-33.9f, 2f);
             TitleObjects.transform.DOLocalMoveY(30f, 2);
             TitleObjects.transform.DOScale(new Vector3(0.3f, 0.3f, 0.3f), 1);
         }
-    }
-    private void FastMoveY(){
-    mainCamera.transform.DOMoveY(-cameraMoveDistance, cameraMoveSpeed/2);
+
+        if (mainCamera.transform.localPosition.y <= -cameraMoveSlowDistance)
+        {
+            mainCamera.transform.DOMoveY(-cameraMoveDistance, cameraMoveSpeed);
+        }
     }
 }
