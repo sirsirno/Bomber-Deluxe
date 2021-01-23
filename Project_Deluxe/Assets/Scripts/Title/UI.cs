@@ -14,9 +14,10 @@ public class UI : MonoBehaviour
     private GameObject mainCamera = null;
     [SerializeField]
     private GameObject backgroundCamera = null;
+    [SerializeField]
+    private GameObject TitleObjects = null;
 
     private ScoreManager scoreManager = null;
-    private SceneMoveManager sceneMoveManager = null;
 
     // 함수용 변수
 
@@ -35,7 +36,6 @@ public class UI : MonoBehaviour
     void Start()
     {
         scoreManager = FindObjectOfType<ScoreManager>();
-        sceneMoveManager = FindObjectOfType<SceneMoveManager>();
         scoreManager.ScoreValueSet(ScoreManager.ScoreType.LIFE, ScoreManager.SetType.SET, 5);
         startTxt.DOColor(new Color(1f, 1f, 1f, 10f), 0.8f).SetLoops(-1, LoopType.Yoyo);
 
@@ -44,11 +44,12 @@ public class UI : MonoBehaviour
     {
         if (Input.anyKeyDown && scoreManager.isTitleBegin) 
         {
-            startPanel.SetActive(false);
+            startPanel.GetComponent<RectTransform>().DOLocalMoveY(1000, 2);
             scoreManager.isTitleBegin = false;
             mainCamera.transform.DOMoveY(-320, cameraMoveSpeed);
             Invoke("FastMoveY", invokeTime);
             backgroundCamera.transform.DOMoveY(-33.9f, 2f);
+            TitleObjects.transform.DOLocalMoveY(30f, 2);
         }
     }
     private void FastMoveY(){

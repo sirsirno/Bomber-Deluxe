@@ -51,7 +51,7 @@ public class SceneMoveManager : MonoBehaviour
 
         scoreManager.WorldTypeSet(-1);
         startPanel.SetActive(false);
-        mainCamera.transform.localPosition = new Vector3(-1.08f, -160, -37);
+        mainCamera.transform.localPosition = new Vector3(-1.08f, -320, -37);
         backgroundCamera.transform.localPosition = new Vector3(30.5f, -33.9f, -37);
         stageCanvas.SetActive(true);
 
