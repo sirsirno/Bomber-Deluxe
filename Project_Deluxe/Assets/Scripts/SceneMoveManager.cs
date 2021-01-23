@@ -35,7 +35,11 @@ public class SceneMoveManager : MonoBehaviour
     private Sprite[] EmptyStamps = null;
     [SerializeField]
     private Sprite[] Stamps = null;
-
+    [SerializeField]
+    private RectTransform[] Stages = null;
+    [SerializeField]
+    private GameObject block = null;
+    private int worldType_ = 0;
 
     private int currentShowStage = 0;
     private void Start()
@@ -60,6 +64,7 @@ public class SceneMoveManager : MonoBehaviour
 
     public void WorldButtonClick(int worldType)
     {
+        worldType_ = worldType;
         stageCanvas.SetActive(true);
         worldStages[0].SetActive(false);
         worldStages[1].SetActive(false);
@@ -67,9 +72,18 @@ public class SceneMoveManager : MonoBehaviour
         worldStages[3].SetActive(false);
         worldStages[4].SetActive(false);
 
-        worldStages[worldType].SetActive(true);
-    }
+        block.SetActive(true);
+        Vector3 stagePosition = new Vector3(Stages[worldType].position.x, Stages[worldType].position.y, -37);
 
+        mainCamera.transform.DOMove(stagePosition,0.5f).SetEase(Ease.InCubic);
+        mainCamera.GetComponent<Camera>().DOOrthoSize(1,0.5f).SetEase(Ease.InCubic).OnComplete(ShowStage);
+
+        //worldStages[worldType].SetActive(true);
+    }
+    private void ShowStage()
+    {
+        worldStages[worldType_].SetActive(true);
+    }
     public void WorldExit()
     {
         worldStages[0].SetActive(false);
