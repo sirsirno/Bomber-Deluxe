@@ -50,6 +50,7 @@ public class UI : MonoBehaviour
             Invoke("FastMoveY", invokeTime);
             backgroundCamera.transform.DOMoveY(-33.9f, 2f);
             TitleObjects.transform.DOLocalMoveY(30f, 2);
+            TitleObjects.transform.DOScale(new Vector3(0.3f, 0.3f, 0.3f), 1);
         }
     }
     private void FastMoveY(){
