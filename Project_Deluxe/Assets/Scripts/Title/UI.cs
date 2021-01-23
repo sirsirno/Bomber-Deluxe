@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-
 public class UI : MonoBehaviour
 {
     [SerializeField]
@@ -18,6 +17,14 @@ public class UI : MonoBehaviour
 
     private ScoreManager scoreManager = null;
     private SceneMoveManager sceneMoveManager = null;
+
+    // 함수용 변수
+
+    [SerializeField]
+    private float cameraMoveSpeed=2f;
+    [SerializeField]
+    private float invokeTime = 0.5f;
+    public GameObject ppVolume;
 
     private void Awake()
     {
@@ -39,8 +46,12 @@ public class UI : MonoBehaviour
         {
             startPanel.SetActive(false);
             scoreManager.isTitleBegin = false;
-            mainCamera.transform.DOMoveY(-160, 5f);
-            backgroundCamera.transform.DOMoveY(-33.9f, 5f);
+            mainCamera.transform.DOMoveY(-320, cameraMoveSpeed);
+            Invoke("FastMoveY", invokeTime);
+            backgroundCamera.transform.DOMoveY(-33.9f, 2f);
         }
+    }
+    private void FastMoveY(){
+    mainCamera.transform.DOMoveY(-320, cameraMoveSpeed/2);
     }
 }

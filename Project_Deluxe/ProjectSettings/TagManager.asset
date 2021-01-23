@@ -17,12 +17,12 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - ApperTraps
+  - Postprocessing
   - Water
   - UI
   - Background
-  - 
-  - 
+  - Postprocessing
+  - ApperTraps
   - 
   - 
   - 
@@ -49,4 +49,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: New Layer
+    uniqueID: 4269874267
     locked: 0
