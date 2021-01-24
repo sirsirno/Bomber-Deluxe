@@ -155,14 +155,14 @@ public class PlayerController : Singleton<PlayerController>
                     AudioManager.Instance.SFX_PresentEnter.Play();
                     AudioManager.Instance.BGM_World.volume = 1f;
 
-                    futureAbillityCoolDownRemaining = Time.time + futureAbillityCoolDown;
+                    futureAbillityCoolDownRemaining = Time.timeSinceLevelLoad + futureAbillityCoolDown;
                     Debug.Log("-------현재--------");
                 }
             }
         }
         else // (!sleeping)
         {
-            float timer = Time.time;
+            float timer = Time.timeSinceLevelLoad;
             if (timer >= futureAbillityCoolDownRemaining)
             {
                     futureAbillityAbled = true;

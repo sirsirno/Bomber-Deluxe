@@ -37,7 +37,7 @@ public class FuturePlay : MonoBehaviour
         else if (PlayerController.Instance.sleeping)
         {
             isFuturePlay = false;
-            transform.localPosition = new Vector3(-11.62f, 0, 0);
+            transform.localPosition = new Vector3(-20.09f, 0, 0);
             playTime = 0f;
             playDelay = 0.03f;
             playframe = 0;

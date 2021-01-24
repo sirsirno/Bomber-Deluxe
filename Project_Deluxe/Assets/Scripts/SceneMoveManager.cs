@@ -8,8 +8,7 @@ using UnityEngine.SceneManagement;
 public class SceneMoveManager : MonoBehaviour
 {
     private ScoreManager scoreManager = null;
-    
-    public GameObject blurQuad;
+
     [SerializeField]
     private GameObject startPanel = null;
     [SerializeField]
@@ -17,9 +16,13 @@ public class SceneMoveManager : MonoBehaviour
     [SerializeField]
     private GameObject backgroundCamera = null;
     [SerializeField]
+    private GameObject[] stageBackgrounds = null;
+    [SerializeField]
     private GameObject stageCanvas = null;
     [SerializeField]
     private GameObject[] worldStages = null;
+    [SerializeField]
+    private GameObject worldExit = null;
     [SerializeField]
     private Sprite[] starSprites = null;
     [SerializeField]
@@ -45,7 +48,7 @@ public class SceneMoveManager : MonoBehaviour
     private int worldType_ = 0;
     private int currentShowStage = 0;
 
-    [Header("��ũ�� ǥ�ñ�� ȭ��ǥ")]
+    [Header("스크롤 표시 화살표")]
     [SerializeField]
     private GameObject[] scrollShowArrows = null;
     [SerializeField]
@@ -76,6 +79,8 @@ public class SceneMoveManager : MonoBehaviour
         worldStages[4].SetActive(false);
 
         worldStages[worldType].SetActive(true);
+        stageBackgrounds[worldType].SetActive(true);
+        worldExit.SetActive(true);
         worldType_ = worldType;
         //Debug.Log(Stages[worldType].position.x + " " + Stages[worldType].position.y + " " + worldType) ;
         Vector3 stagePosition = new Vector3(Stages[worldType].position.x, Stages[worldType].position.y + 18.4213f, -37);
@@ -94,11 +99,8 @@ public class SceneMoveManager : MonoBehaviour
         worldStages[2].SetActive(false);
         worldStages[3].SetActive(false);
         worldStages[4].SetActive(false);
-
         block.SetActive(true);
         Vector3 stagePosition = new Vector3(Stages[worldType].position.x, Stages[worldType].position.y, -37);
-        SetTrueQuad();
-        Invoke("SetFalseQuad",1f);  
         mainCamera.transform.DOMove(stagePosition,0.5f).SetEase(Ease.InCubic);
         mainCamera.GetComponent<Camera>().DOOrthoSize(1,0.5f).SetEase(Ease.InCubic).OnComplete(ShowStage);
         //블러 해제
@@ -107,7 +109,9 @@ public class SceneMoveManager : MonoBehaviour
     private void ShowStage()
     {
         block.SetActive(false);
+        stageBackgrounds[worldType_].SetActive(true);
         worldStages[worldType_].SetActive(true);
+        worldExit.SetActive(true);
     }
     private void StopBolck()
     {
@@ -116,11 +120,8 @@ public class SceneMoveManager : MonoBehaviour
     public void WorldExit()
     {
         worldStages[worldType_].SetActive(false);
-        //worldStages[0].SetActive(false);
-        //worldStages[1].SetActive(false);
-        //worldStages[2].SetActive(false);
-        //worldStages[3].SetActive(false);
-        //worldStages[4].SetActive(false);
+        stageBackgrounds[worldType_].SetActive(false);
+        worldExit.SetActive(false);
         stageCanvas.SetActive(false);
 
         block.SetActive(true);
@@ -151,9 +152,8 @@ public class SceneMoveManager : MonoBehaviour
         stageInfoStar.GetComponent<ShowStar>().ShowStars();
         stageInfoStamp.GetComponent<ShowStamp>().StageNumberSet(stageNumber);
         stageInfoStamp.GetComponent<ShowStamp>().ShowStamps();
-        
 
-        // �� �ؽ�Ʈ
+        // 맵 이름
         {
             stageInfoText.text = "";
             stageInfoText.fontSize = 47;
@@ -225,17 +225,5 @@ public class SceneMoveManager : MonoBehaviour
             scrollShowArrows[0].SetActive(true);
         else
             scrollShowArrows[0].SetActive(false);
-    }
-    private void SetTrueQuad()
-    {
-        
-        Debug.Log("스테이지 선택 블러 활성화");
-        blurQuad.gameObject.SetActive(true);
-        
-    }
-    private void SetFalseQuad(){
-       
-        Debug.Log("스테이지 선택 블러 비활성화");
-         blurQuad.gameObject.SetActive(false);
     }
 }
