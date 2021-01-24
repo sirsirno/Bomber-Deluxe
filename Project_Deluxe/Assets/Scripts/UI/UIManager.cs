@@ -34,6 +34,8 @@ public class UIManager : Singleton<UIManager>
     private GameObject[] stars = null;
     [SerializeField]
     private GameObject goHomeScreen = null;
+    [SerializeField]
+    private GameObject[] loadingSprites = null;
 
     [Header("이거 시계 빨간 면적임.")]
     [SerializeField]
@@ -221,8 +223,12 @@ public class UIManager : Singleton<UIManager>
         AudioManager.Instance.BGM_Future.Stop();
         AudioManager.Instance.BGM_Future2.Stop();
         goHomeScreen.SetActive(true);
-        goHomeScreen.GetComponent<Image>().color = new Color(0, 0, 0, 0);
-        goHomeScreen.GetComponent<Image>().DOFade(1, 1).OnComplete(LoadMenu).SetUpdate(true).timeScale = 1;
+
+        int randomSprite = Random.Range(0, loadingSprites.Length);
+        loadingSprites[randomSprite].SetActive(true);
+        loadingSprites[randomSprite].GetComponent<Image>().DOFade(1, 1).SetUpdate(true).timeScale = 1;
+
+        goHomeScreen.GetComponent<Image>().DOFade(1, 1.5f).OnComplete(LoadMenu).SetUpdate(true).timeScale = 1;
     }
 
     private void LoadMenu()

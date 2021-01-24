@@ -68,6 +68,7 @@ public class UI : MonoBehaviour
         {
             TitleObjects.transform.DOLocalMoveY(30f, 0);
             TitleObjects.transform.DOScale(new Vector3(0.3f, 0.3f, 0.3f), 0);
+            SoundBtnOn();
             AudioManager.Instance.BGM_Labyrinth.volume = 1;
             AudioManager.Instance.BGM_Labyrinth.Play();
         }
