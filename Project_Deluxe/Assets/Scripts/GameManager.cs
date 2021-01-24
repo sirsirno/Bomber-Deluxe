@@ -64,12 +64,14 @@ public class GameManager : Singleton<GameManager>
     {
         player.transform.localPosition = startPoint.transform.localPosition;
 
+        if(invisibleBlockParent != null)
         for (int i = 0; i < invisibleBlockParent.transform.childCount; i++) // 투명블럭 투명화
         {
             invisibleBlockParent.transform.GetChild(i).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
         }
 
-        for (int i = 0; i < invisibleBlockDownParent.transform.childCount; i++) // 투명블럭 투명화
+        if (invisibleBlockDownParent != null)
+            for (int i = 0; i < invisibleBlockDownParent.transform.childCount; i++) // 투명블럭 투명화
         {
             invisibleBlockDownParent.transform.GetChild(i).GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
         }

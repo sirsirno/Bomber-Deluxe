@@ -31914,6 +31914,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 30
   moveType: 3
+  waitCount: 2
 --- !u!61 &915797725
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -44385,7 +44386,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 8851452112847293948, guid: 703b399148a8ed8409023cd42da93d1a,
+  m_Sprite: {fileID: -6110659537316350941, guid: 0f395b6a12f33084b87cc15b02ed0c6e,
     type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -50969,7 +50970,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 44293861e6af31443bc1f4bef24a7d57, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 86d1721b9b3851948b73ecb67c147ea8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -13636,6 +13636,12 @@ MonoBehaviour:
   - {fileID: 1370913743}
   - {fileID: 803984999}
   - {fileID: 1695725468}
+  worldStagePercentTexts:
+  - {fileID: 1045434052}
+  - {fileID: 1180851522}
+  - {fileID: 1105787887}
+  - {fileID: 1248367815}
+  - {fileID: 663723593}
   worldExit: {fileID: 388083509}
   starSprites:
   - {fileID: 21300000, guid: 8ae7163c3515ced419daabfc50a12387, type: 3}

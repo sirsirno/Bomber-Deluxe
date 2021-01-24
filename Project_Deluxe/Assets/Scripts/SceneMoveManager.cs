@@ -27,6 +27,8 @@ public class SceneMoveManager : MonoBehaviour
     [SerializeField]
     private GameObject[] worldStages = null;
     [SerializeField]
+    private Text[] worldStagePercentTexts = null;
+    [SerializeField]
     private GameObject worldExit = null;
     [SerializeField]
     private Sprite[] starSprites = null;
@@ -91,7 +93,29 @@ public class SceneMoveManager : MonoBehaviour
         Vector3 stagePosition = new Vector3(Stages[worldType].position.x, Stages[worldType].position.y + 18.4213f, -37);
         mainCamera.transform.DOMove(stagePosition, 0);
         mainCamera.GetComponent<Camera>().DOOrthoSize(1, 0);
-        
+
+        {
+            int[] stars = new int[5];
+            int[] stamps = new int[5];
+
+            for (int i = 0; i < 5; i++)
+            {
+                stars[i] = JsonSave.Instance.gameData.StageGetValueSave(GameData.StageValueType.STAR, worldType * 5 + i + 1);
+                stamps[i] = JsonSave.Instance.gameData.StageGetValueSave(GameData.StageValueType.STAMP, worldType * 5 + i + 1, true);
+            }
+
+            int percentCount = 0;
+            for (int i = 0; i < 5; i++)
+            {
+                percentCount += stars[i];
+                percentCount += stamps[i];
+            }
+
+            float percent = 3.3f * percentCount;
+            if (percent >= 99)
+                percent = 100;
+            worldStagePercentTexts[worldType].text = string.Format("{0}%", percent);
+        }
     }
 
     public void WorldButtonClick(int worldType)
@@ -107,11 +131,33 @@ public class SceneMoveManager : MonoBehaviour
         block.SetActive(true);
         Vector3 stagePosition = new Vector3(Stages[worldType].position.x, Stages[worldType].position.y, -37);
         SetOnStageBlur();
-        Invoke("SetDownStageBlur", invokeDelay);
-        mainCamera.transform.DOMove(stagePosition,0.5f).SetEase(Ease.InCubic);
-        mainCamera.GetComponent<Camera>().DOOrthoSize(1,0.5f).SetEase(Ease.InCubic).OnComplete(ShowStage);
         //블러 해제
-        //worldStages[worldType].SetActive(true);
+        Invoke("SetDownStageBlur", invokeDelay);
+        mainCamera.transform.DOMove(stagePosition, 0.5f).SetEase(Ease.InCubic);
+        mainCamera.GetComponent<Camera>().DOOrthoSize(1, 0.5f).SetEase(Ease.InCubic).OnComplete(ShowStage);
+
+        {
+            int[] stars = new int[5];
+            int[] stamps = new int[5];
+
+            for (int i = 0; i < 5; i++)
+            {
+                stars[i] = JsonSave.Instance.gameData.StageGetValueSave(GameData.StageValueType.STAR, worldType * 5 + i + 1);
+                stamps[i] = JsonSave.Instance.gameData.StageGetValueSave(GameData.StageValueType.STAMP, worldType * 5 + i + 1, true);
+            }
+
+            int percentCount = 0;
+            for (int i = 0; i < 5; i++)
+            {
+                percentCount += stars[i];
+                percentCount += stamps[i];
+            }
+
+            float percent = 3.3f * percentCount;
+            if (percent >= 99)
+                percent = 100;
+            worldStagePercentTexts[worldType].text = string.Format("{0}%", percent);
+        }
     }
     private void ShowStage()
     {
@@ -195,6 +241,13 @@ public class SceneMoveManager : MonoBehaviour
             else if (stageNumber % 5 == 0)
                 stageInfoText.text += "5";
         }
+
+        int starCount = JsonSave.Instance.gameData.StageGetValueSave(GameData.StageValueType.STAR, stageNumber);
+        int stampCount = JsonSave.Instance.gameData.StageGetValueSave(GameData.StageValueType.STAMP, stageNumber, true);
+        int percent = 17 * (starCount + stampCount);
+        if (percent >= 100)
+            percent = 100;
+        stageInfoPercentText.text = string.Format("{0}%", percent);
         stageInfo.GetComponent<RectTransform>().DOLocalMoveY(181, 1f);
     }
 

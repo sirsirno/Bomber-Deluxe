@@ -20,12 +20,18 @@ public class SpikeMoveTrap : MonoBehaviour
     [SerializeField]
     private float moveSpeed = 1f;
     public MoveType moveType = MoveType.LEFT;
+    [Header("예) 1로 설정 -> 한번 들어가면 안발동되고 두번 들어가야 발동")]
+    [Header("감지를 몇번 무시할건지 설정")]
+    public int waitCount = 0;
+
+    private int defaultWaitCount = 0;
     private bool isTrigger = false;
     private bool respawn = false;
 
 
     private void Awake()
     {
+        defaultWaitCount = waitCount;
         GetComponent<BoxCollider2D>().size = GetComponent<SpriteRenderer>().size;
         player = GameObject.FindGameObjectWithTag("PlayerController");
         moveTraps = transform.parent.gameObject;
@@ -36,10 +42,17 @@ public class SpikeMoveTrap : MonoBehaviour
     {
         if(collision.gameObject.tag == "PlayerController")
         {
-            isTrigger = true;
-            if (player.GetComponent<PlayerController>().sleeping != false)
+            if (waitCount <= 0)
             {
-                respawn = true;
+                isTrigger = true;
+                if (player.GetComponent<PlayerController>().sleeping != false)
+                {
+                    respawn = true;
+                }
+            }
+            else
+            {
+                waitCount--;
             }
         }
     }
@@ -60,6 +73,7 @@ public class SpikeMoveTrap : MonoBehaviour
 
         if (player.GetComponent<PlayerController>().awake && respawn) // 함정 리셋
         {
+            waitCount = defaultWaitCount;
             isTrigger = false;
             moveTraps.transform.position = defaultposition;
             respawn = false;

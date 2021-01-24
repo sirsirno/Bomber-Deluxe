@@ -34,7 +34,6 @@ public class UI : MonoBehaviour
 
     private void Awake()
     {
-        JsonSave.Instance.LoadGameData();
         Time.timeScale = 1;
 
         if (PlayerPrefs.GetInt("Mute") == 0)
@@ -71,6 +70,7 @@ public class UI : MonoBehaviour
             SoundBtnOn();
             AudioManager.Instance.BGM_Labyrinth.volume = 1;
             AudioManager.Instance.BGM_Labyrinth.Play();
+            JsonSave.Instance.SaveGameData();
         }
         else
             AudioManager.Instance.BGM_Title.Play();

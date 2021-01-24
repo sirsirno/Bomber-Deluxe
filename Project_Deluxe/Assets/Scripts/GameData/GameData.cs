@@ -37,7 +37,7 @@ public class GameData
         JsonSave.Instance.SaveGameData();
     }
 
-    public int StageGetValueSave(StageValueType type, int stage)
+    public int StageGetValueSave(StageValueType type, int stage, bool isRealCount = false)
     {
         if (type == StageValueType.STAR)
         {
@@ -45,14 +45,28 @@ public class GameData
         }
         else //if (type == StageValueType.SCORE)
         {
-            return stageStamp[stage];
+            if(isRealCount)
+            {
+                if (stageStamp[stage] == 1 || stageStamp[stage] == 2 || stageStamp[stage] == 4)
+                    return 1;
+                else if (stageStamp[stage] == 3 || stageStamp[stage] == 5 || stageStamp[stage] == 6)
+                    return 2;
+                else if (stageStamp[stage] == 7)
+                    return 3;
+                else
+                    return 0;
+            }
+            else
+                return stageStamp[stage];
         }
     }
 
     public void BestStageSet(int value)
     {
         if (bestStage < value)
+        {
             bestStage = value;
+        }
     }
 
     public int BestStageGet() => bestStage;
