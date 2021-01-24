@@ -7,7 +7,12 @@ using UnityEngine.SceneManagement;
 
 public class SceneMoveManager : MonoBehaviour
 {
+
+
+    public GameObject StageBlur;
     private ScoreManager scoreManager = null;
+    [SerializeField]
+    private float invokeDelay = 1f;
 
     [SerializeField]
     private GameObject startPanel = null;
@@ -84,7 +89,6 @@ public class SceneMoveManager : MonoBehaviour
         worldType_ = worldType;
         //Debug.Log(Stages[worldType].position.x + " " + Stages[worldType].position.y + " " + worldType) ;
         Vector3 stagePosition = new Vector3(Stages[worldType].position.x, Stages[worldType].position.y + 18.4213f, -37);
-
         mainCamera.transform.DOMove(stagePosition, 0);
         mainCamera.GetComponent<Camera>().DOOrthoSize(1, 0);
         
@@ -101,6 +105,8 @@ public class SceneMoveManager : MonoBehaviour
         worldStages[4].SetActive(false);
         block.SetActive(true);
         Vector3 stagePosition = new Vector3(Stages[worldType].position.x, Stages[worldType].position.y, -37);
+        SetOnStageBlur();
+        Invoke("SetDownStageBlur", invokeDelay);
         mainCamera.transform.DOMove(stagePosition,0.5f).SetEase(Ease.InCubic);
         mainCamera.GetComponent<Camera>().DOOrthoSize(1,0.5f).SetEase(Ease.InCubic).OnComplete(ShowStage);
         //블러 해제
@@ -225,5 +231,13 @@ public class SceneMoveManager : MonoBehaviour
             scrollShowArrows[0].SetActive(true);
         else
             scrollShowArrows[0].SetActive(false);
+    }
+    private void SetOnStageBlur(){
+        StageBlur.gameObject.SetActive(true);
+        Debug.Log("스테이지 블러 활성화");
+    }
+    private void SetDownStageBlur(){
+        StageBlur.gameObject.SetActive(false);
+        Debug.Log("스테이지 블러 비활성화");
     }
 }
