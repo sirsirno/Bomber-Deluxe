@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class TextManager : MonoBehaviour
+
+public class DialogSys : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public Text textCharName;
+    public Text textSentence;
+    public Image[] charImage;
     void Start()
     {
         
