@@ -202,7 +202,7 @@ public class PlayerController : Singleton<PlayerController>
         {
             if (controlEnabled)
             {
-                if ((int)rb.velocity.y == 0 && state == PlayerState.Grounded && (Input.GetButtonDown("Jump") || isPressedController[3]))
+                if (state == PlayerState.Grounded && (Input.GetButtonDown("Jump") || isPressedController[3]))
                 {
                     isPressedController[3] = false;
                     jump = true;

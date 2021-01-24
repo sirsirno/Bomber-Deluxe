@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class GroundCheck : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject player = null;
+
     public List<Collider2D> colliders = new List<Collider2D>();
     private Rigidbody2D rigid = null;
+    private bool isLandDestiny = false;
 
     private void Start()
     {
@@ -30,9 +34,35 @@ public class GroundCheck : MonoBehaviour
             colliders.Remove(collision);
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (player.GetComponent<Animator>().GetInteger("PlayerAnimation") == 2)
+        {
+            if (rigid.gameObject.GetComponent<PlayerController>().state == PlayerController.PlayerState.Grounded)
+            {
+                if (isLandDestiny)
+                {
+                    isLandDestiny = false;
+                    player.GetComponent<Animator>().Play("Player_AfterJumpWait");
+                    player.GetComponent<Animator>().SetInteger("PlayerAnimation", 3);
+                    PlayerController.Instance.landAudio.Play();
+                }
+                else
+                {
+                    player.GetComponent<Animator>().SetInteger("PlayerAnimation", 0);
+                }
+            }
+        }
+    }
+
     private void Update()
     {
-        if(colliders.Count==0)
+        if (rigid.velocity.y < -8)
+        {
+            isLandDestiny = true;
+        }
+
+        if (colliders.Count==0)
         {
             PlayerController.Instance.state = PlayerController.PlayerState.Jumping;
         }
@@ -41,6 +71,8 @@ public class GroundCheck : MonoBehaviour
             if(rigid.velocity.y <= 0f)
                 PlayerController.Instance.state = PlayerController.PlayerState.Grounded;
         }
+
+
     }
 
 }

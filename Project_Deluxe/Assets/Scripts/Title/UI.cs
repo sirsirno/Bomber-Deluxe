@@ -41,20 +41,20 @@ public class UI : MonoBehaviour
         {
             isMute = false;
             soundBtn.GetComponent<Image>().color = new Color(1, 1, 1, 1);
-            mainCamera.GetComponent<AudioListener>().enabled = true;
+            AudioListener.volume = 1;
         }
         else if(PlayerPrefs.GetInt("Mute") == 1)
         {
             isMute = true;
             soundBtn.GetComponent<Image>().color = new Color(0.7843137f , 0.7843137f , 0.7843137f, 0.5019608f);
-            mainCamera.GetComponent<AudioListener>().enabled = false;
+            AudioListener.volume = 0;
         }
         else
         {
             isMute = false;
             PlayerPrefs.SetInt("Mute", 0);
             soundBtn.GetComponent<Image>().color = new Color(1, 1, 1, 1);
-            mainCamera.GetComponent<AudioListener>().enabled = true;
+            AudioListener.volume = 1;
         }
     }
 
@@ -116,7 +116,7 @@ public class UI : MonoBehaviour
             isMute = false;
             PlayerPrefs.SetInt("Mute", 0);
             soundBtn.GetComponent<Image>().color = new Color(1, 1, 1, 1);
-            mainCamera.GetComponent<AudioListener>().enabled = true;
+            AudioListener.volume = 1;
             AllAudioManager.Instance.uiClick.Play();
         }
         else
@@ -124,7 +124,7 @@ public class UI : MonoBehaviour
             isMute = true;
             PlayerPrefs.SetInt("Mute", 1);
             soundBtn.GetComponent<Image>().color = new Color(0.7843137f, 0.7843137f, 0.7843137f, 0.5019608f);
-            mainCamera.GetComponent<AudioListener>().enabled = false;
+            AudioListener.volume = 0;
         }
     }
 }
