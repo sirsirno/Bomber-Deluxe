@@ -11,9 +11,11 @@ public class PlayerController : Singleton<PlayerController>
     public AudioSource jumpWingAudio;
     public AudioSource coinGetAudio;
     public AudioSource badCoinGetAudio;
+    public AudioSource stampGetAudio;
     public AudioSource ouchAudio;
     public AudioSource headBlockAudio;
     public AudioSource landAudio;
+    public AudioSource cantUseAbilityAudio;
 
     [Header("컨트롤 관련")]
     /// <summary>
@@ -88,32 +90,45 @@ public class PlayerController : Singleton<PlayerController>
     private void Update()
     {
         // ----------------------확인차 만들어 놓음---------------
-        if ((Input.GetKeyDown(KeyCode.Q) || isPressedController[4]) && state == PlayerState.Grounded && !ExitPoint.Instance.isPlayerOn && GameManager.Instance.GetRealTimer() > 10)
+        if ((Input.GetKeyDown(KeyCode.Q) || isPressedController[4]))
         {
             isPressedController[4] = false;
-            if (!sleeping && controlEnabled && futureAbillityAbled)
+            if (state == PlayerState.Grounded && !ExitPoint.Instance.isPlayerOn && GameManager.Instance.GetRealTimer() > 10)
             {
-                Debug.Log("---------미래-------");
+                if (!sleeping && controlEnabled && futureAbillityAbled)
+                {
+                    Debug.Log("---------미래-------");
 
-                futureEffect.GetComponent<Animator>().Play("FutureEffect_Blue");
-                GlitchEffect.Instance.colorIntensity = 0.306f;
-                GlitchEffect.Instance.intensity = 0.194f;
-                realPlayer.GetComponent<SpriteRenderer>().color = new Color(0, 1, 1, 1);
-                sleepingPlayer.SetActive(true);
-                sleepingPlayer.transform.localPosition = transform.localPosition;
-                sleepingPlayer.GetComponent<SpriteRenderer>().flipX = spriteRenderer.flipX;
-                sleepingPlayer.transform.GetChild(0).gameObject.GetComponent<Animator>().Play("SleepSpeechBubble_Sleeping");
-                AudioManager.Instance.BGM_FutureRandomPlay();
-                AudioManager.Instance.SFX_FutureEnter.Play();
-                AudioManager.Instance.BGM_World.volume = 0f;
+                    futureEffect.GetComponent<Animator>().Play("FutureEffect_Blue");
+                    GlitchEffect.Instance.colorIntensity = 0.306f;
+                    GlitchEffect.Instance.intensity = 0.194f;
+                    realPlayer.GetComponent<SpriteRenderer>().color = new Color(0, 1, 1, 1);
+                    sleepingPlayer.SetActive(true);
+                    sleepingPlayer.transform.localPosition = transform.localPosition;
+                    sleepingPlayer.GetComponent<SpriteRenderer>().flipX = spriteRenderer.flipX;
+                    sleepingPlayer.transform.GetChild(0).gameObject.GetComponent<Animator>().Play("SleepSpeechBubble_Sleeping");
+                    AudioManager.Instance.BGM_FutureRandomPlay();
+                    AudioManager.Instance.SFX_FutureEnter.Play();
+                    AudioManager.Instance.BGM_World.volume = 0f;
 
-                sleeping = true;
-                sleepingDuration = sleepingDurationDefault;
-                sleepingDuration += Time.time;
+                    sleeping = true;
+                    sleepingDuration = sleepingDurationDefault;
+                    sleepingDuration += Time.time;
 
-                futureAbillityAbled = false;
-                scoreManager.ScoreValueSet(ScoreManager.ScoreType.ABILITYUSECOUNT, ScoreManager.SetType.ADD, 1);
-                UIManager.Instance.FutureCountOutput();
+                    futureAbillityAbled = false;
+                    scoreManager.ScoreValueSet(ScoreManager.ScoreType.ABILITYUSECOUNT, ScoreManager.SetType.ADD, 1);
+                    UIManager.Instance.FutureCountOutput();
+                }
+                else
+                {
+                    if (!cantUseAbilityAudio.isPlaying)
+                        cantUseAbilityAudio.Play();
+                }
+            }
+            else
+            {
+                if(!cantUseAbilityAudio.isPlaying)
+                    cantUseAbilityAudio.Play();
             }
         }
 

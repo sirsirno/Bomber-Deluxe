@@ -7,6 +7,7 @@ public class AudioManager : Singleton<AudioManager>
     [Header("타이틀")]
     public AudioSource BGM_Title = null;
     public AudioSource BGM_Labyrinth = null;
+    public AudioSource SFX_Fall = null;
 
     [Header("인게임")]
     [Header("BGM")]

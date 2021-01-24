@@ -21,7 +21,7 @@ public class GetStamp : MonoBehaviour
         {
             if (!PlayerController.Instance.sleeping)
             {
-                // ½ºÅÆÇÁ ¸Ô´Â ¼Ò¸® Ãâ·Â
+                PlayerController.Instance.stampGetAudio.Play();
 
                 UIManager.Instance.parEatEffect.gameObject.SetActive(true);
                 Invoke("OffEffect", offEffectTime);

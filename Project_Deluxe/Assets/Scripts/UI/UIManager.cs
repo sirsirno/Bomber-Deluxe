@@ -58,6 +58,12 @@ public class UIManager : Singleton<UIManager>
     [Header("파티클 이펙트")]
     public ParticleSystem parEatEffect;
     public ParticleSystem badEatEffect;
+    [Header("소리 관련")]
+    [SerializeField]
+    private GameObject mainCamera = null;
+    [SerializeField]
+    private GameObject soundBtn = null;
+    private bool isMute = false;
 
     private Animator animator;
     private GameObject realPlayer = null;
@@ -80,6 +86,19 @@ public class UIManager : Singleton<UIManager>
         for (int i = 0; i < stampUI.Length; i++)
         {
             stampUI[i].sprite = GameManager.Instance.GetStampSprite(true, i);
+        }
+
+        if (PlayerPrefs.GetInt("Mute") == 0)
+        {
+            isMute = false;
+            soundBtn.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+            mainCamera.GetComponent<AudioListener>().enabled = true;
+        }
+        else if (PlayerPrefs.GetInt("Mute") == 1)
+        {
+            isMute = true;
+            soundBtn.GetComponent<Image>().color = new Color(0.7843137f, 0.7843137f, 0.7843137f, 0.5019608f);
+            mainCamera.GetComponent<AudioListener>().enabled = false;
         }
     }
 
@@ -170,13 +189,32 @@ public class UIManager : Singleton<UIManager>
             }
         }
     }
+
+    public void OnClickMenuBtn()
+    {
+        AllAudioManager.Instance.uiClick.Play();
+        if (!menu.activeSelf && !isPlayingStartScreen)
+        {
+            menu.SetActive(true);
+            Time.timeScale = 0;
+        }
+        else if (menu.activeSelf && !isPlayingStartScreen)
+        {
+            menu.SetActive(false);
+            Time.timeScale = 1;
+        }
+    }
+
     public void OnClickContinueBtn() 
     {
+        AllAudioManager.Instance.uiClick.Play();
         menu.SetActive(false);
         Time.timeScale = 1;
     }
+
     public void OnClickHomeBtn() 
     {
+        AllAudioManager.Instance.uiClick.Play();
         menu.SetActive(false);
         clear.SetActive(false);
         AudioManager.Instance.BGM_World.Stop();
@@ -263,19 +301,50 @@ public class UIManager : Singleton<UIManager>
 
     public void OnClickNextBtn() 
     {
+        AllAudioManager.Instance.uiClick.Play();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
         clear.SetActive(false);
         
     }
+
+    public void SoundOnOffBtn()
+    {
+        if (isMute)
+        {
+            isMute = false;
+            PlayerPrefs.SetInt("Mute", 0);
+            soundBtn.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+            mainCamera.GetComponent<AudioListener>().enabled = true;
+            AllAudioManager.Instance.uiClick.Play();
+        }
+        else
+        {
+            isMute = true;
+            PlayerPrefs.SetInt("Mute", 1);
+            soundBtn.GetComponent<Image>().color = new Color(0.7843137f, 0.7843137f, 0.7843137f, 0.5019608f);
+            mainCamera.GetComponent<AudioListener>().enabled = false;
+        }
+    }
+
     public void OncClickRetryBtn() 
     {
+        AllAudioManager.Instance.uiClick.Play();
         Time.timeScale = 1;
         clear.SetActive(false);
         scoreManager.ScoreValueSet(ScoreManager.ScoreType.LIFE, ScoreManager.SetType.SET, 5);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+    public void OncClickStageRetryBtn()
+    {
+        AllAudioManager.Instance.uiClick.Play();
+        Time.timeScale = 1;
+        clear.SetActive(false);
+        scoreManager.ScoreValueSet(ScoreManager.ScoreType.LIFE, ScoreManager.SetType.REMOVE, 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
     public void OnClickExitBtn() 
     {
+        AllAudioManager.Instance.uiClick.Play();
         Application.Quit();
     }
 
