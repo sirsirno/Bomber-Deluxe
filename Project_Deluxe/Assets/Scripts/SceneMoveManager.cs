@@ -96,6 +96,7 @@ public class SceneMoveManager : MonoBehaviour
 
     public void WorldButtonClick(int worldType)
     {
+        AllAudioManager.Instance.uiClick.Play();
         worldType_ = worldType;
         stageCanvas.SetActive(true);
         worldStages[0].SetActive(false);
@@ -125,6 +126,7 @@ public class SceneMoveManager : MonoBehaviour
     }
     public void WorldExit()
     {
+        AllAudioManager.Instance.uiClick.Play();
         worldStages[worldType_].SetActive(false);
         stageBackgrounds[worldType_].SetActive(false);
         worldExit.SetActive(false);
@@ -145,11 +147,13 @@ public class SceneMoveManager : MonoBehaviour
 
     public void StartStage()
     {
+        AllAudioManager.Instance.gameStart.Play();
         SceneManager.LoadScene(currentShowStage + 1);
     }
 
     public void StageButtonClick(int stageNumber)
     {
+        AllAudioManager.Instance.uiClick.Play();
         if (!stageInfo.activeSelf)
             stageInfo.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, 517, 0);
         stageInfo.SetActive(true);
@@ -196,6 +200,7 @@ public class SceneMoveManager : MonoBehaviour
 
     public void StageInfoClose()
     {
+        AllAudioManager.Instance.uiClick.Play();
         stageInfo.SetActive(false);
         currentShowStage = 0;
     }
