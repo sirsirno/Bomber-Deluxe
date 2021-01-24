@@ -32,6 +32,8 @@ public class HitDeath : MonoBehaviour
 
         if (!PlayerController.Instance.sleeping)
         {
+            Par0.gameObject.GetComponent<ParticleSystemRenderer>().sortingOrder = 22;
+            player.GetComponent<SpriteRenderer>().sortingOrder = 22;
             playerController.GetComponent<PlayerController>().state = PlayerController.PlayerState.Dead;
             canvas.SetActive(true);
             Invoke("CheckEffect", 0.65f);

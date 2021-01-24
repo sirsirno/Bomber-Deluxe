@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -31,6 +32,8 @@ public class UIManager : Singleton<UIManager>
     private Sprite[] resultStampSprite;
     [SerializeField]
     private GameObject[] stars = null;
+    [SerializeField]
+    private GameObject goHomeScreen = null;
 
     [Header("이거 시계 빨간 면적임.")]
     [SerializeField]
@@ -176,13 +179,23 @@ public class UIManager : Singleton<UIManager>
     {
         menu.SetActive(false);
         clear.SetActive(false);
+        AudioManager.Instance.BGM_World.Stop();
+        AudioManager.Instance.BGM_Future.Stop();
+        AudioManager.Instance.BGM_Future2.Stop();
+        goHomeScreen.SetActive(true);
+        goHomeScreen.GetComponent<Image>().color = new Color(0, 0, 0, 0);
+        goHomeScreen.GetComponent<Image>().DOFade(1, 1).OnComplete(LoadMenu).SetUpdate(true).timeScale = 1;
+    }
+
+    private void LoadMenu()
+    {
         if (GameManager.Instance.GetCurrentStage() <= 5)
             scoreManager.WorldTypeSet(0);
-        else if(GameManager.Instance.GetCurrentStage() <= 10)
+        else if (GameManager.Instance.GetCurrentStage() <= 10)
             scoreManager.WorldTypeSet(1);
-        else if(GameManager.Instance.GetCurrentStage() <= 15)
+        else if (GameManager.Instance.GetCurrentStage() <= 15)
             scoreManager.WorldTypeSet(2);
-        else if(GameManager.Instance.GetCurrentStage() <= 20)
+        else if (GameManager.Instance.GetCurrentStage() <= 20)
             scoreManager.WorldTypeSet(3);
         else
             scoreManager.WorldTypeSet(4);

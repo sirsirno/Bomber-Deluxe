@@ -88,8 +88,9 @@ public class PlayerController : Singleton<PlayerController>
     private void Update()
     {
         // ----------------------확인차 만들어 놓음---------------
-        if (Input.GetKeyDown(KeyCode.Q) && state == PlayerState.Grounded && !ExitPoint.Instance.isPlayerOn && GameManager.Instance.GetRealTimer() > 10)
+        if ((Input.GetKeyDown(KeyCode.Q) || isPressedController[4]) && state == PlayerState.Grounded && !ExitPoint.Instance.isPlayerOn && GameManager.Instance.GetRealTimer() > 10)
         {
+            isPressedController[4] = false;
             if (!sleeping && controlEnabled && futureAbillityAbled)
             {
                 Debug.Log("---------미래-------");
@@ -186,13 +187,14 @@ public class PlayerController : Singleton<PlayerController>
         {
             if (controlEnabled)
             {
-                if (state == PlayerState.Grounded && Input.GetButtonDown("Jump"))
+                if (state == PlayerState.Grounded && (Input.GetButtonDown("Jump") || isPressedController[3]))
                 {
+                    isPressedController[3] = false;
                     jump = true;
                     jumpAudio.Play();
                 }
 
-                if (!Input.GetButton("Jump") || jumpTimer >= jumpTimeLimit)
+                if (!(Input.GetButton("Jump") || isPressedController[2]) || jumpTimer >= jumpTimeLimit)
                 {
                     jump = false;
                     jumpTimer = 0f;
