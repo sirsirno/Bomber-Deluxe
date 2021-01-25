@@ -3,7 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
+/*enum Expression {
+    Normal = 0,
+    Smile,
+    OpenMouse,
+    SharkTeeth,
+    LiddedEyeNormal,
+    LiddedEyeSmile,
+    LiddedEyeOpenMouse,
+    LiddedEyeSharkTeeth
+};*/
 public class DialogSys : MonoBehaviour
 {
     [SerializeField]
@@ -15,6 +24,8 @@ public class DialogSys : MonoBehaviour
     [SerializeField]
     private Animator anim;
     [SerializeField]
+    private Animator charAnim;
+    [SerializeField]
     private float iETextSpeed = 0.05f;
 
     Queue<string> sentences = new Queue<string>();
@@ -22,6 +33,7 @@ public class DialogSys : MonoBehaviour
     public void Begin(DialogClass info)
     {
         anim.SetBool("isOpen", true);
+        
         sentences.Clear(); // 큐 초기화
 
         textCharName.text = info.name;
@@ -36,7 +48,25 @@ public class DialogSys : MonoBehaviour
 
     public void Next()
     {
-        if(sentences.Count == 0)
+        for(int i =0; i <8; i++)
+        {
+            charImage[i].gameObject.SetActive(false);
+        }
+
+        if (sentences.Count == 6 || sentences.Count == 8)
+            LiddedEyeSharkTeeth();
+        else if (sentences.Count == 5)
+            Smile();
+        else if (sentences.Count == 10)
+            ;
+        else if(sentences.Count == 9)
+        {
+            charAnim.SetBool("isOpen_Char", true);
+            EyeNormal();
+        }
+        else EyeNormal();
+
+        if (sentences.Count == 0)
         {
             EndQueue();
             return;
@@ -52,12 +82,55 @@ public class DialogSys : MonoBehaviour
         {
             textSentence.text += letter;
             yield return new WaitForSeconds(iETextSpeed);
+            
         }
+       
     }
     public void EndQueue()
     {
         anim.SetBool("isOpen", false);
+        charAnim.SetBool("isOpen_Char", false);
         textSentence.text = string.Empty;
     }
-   
+    public void LiddedEyeNormal()
+    {
+        charImage[5].gameObject.SetActive(true);
+        return;
+    }
+    public void LiddedEyeSmile()
+    {
+        charImage[4].gameObject.SetActive(true);
+        return;
+    }
+    public void LiddedEyeSharkTeeth()
+    {
+        charImage[7].gameObject.SetActive(true);
+        return;
+    }
+    public void LiddedEyeOpenMouse()
+    {
+        charImage[6].gameObject.SetActive(true);
+        return;
+    }
+    public void Smile()
+    {
+        charImage[1].gameObject.SetActive(true);
+        return;
+    }
+    public void SharkTeeth()
+    {
+        charImage[3].gameObject.SetActive(true);
+        return;
+    }
+    public void EyeNormal()
+    {
+        charImage[0].gameObject.SetActive(true);
+        return;
+    }
+    public void OpenMouse()
+    {
+        charImage[2].gameObject.SetActive(true);
+        return;
+    }
+
 }

@@ -10,5 +10,8 @@ public class DialogClass
     // Start is called before the first frame update
     public string name;
     public List<string> sentences;
-    public Image[] charImage;
+    public Text noticeTuto;
+    public Image background;
+    public Button yesButton;
+    public Button noButton;
 }

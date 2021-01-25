@@ -8,9 +8,24 @@ public class DialogTrigger : MonoBehaviour
     [SerializeField]
     private DialogClass info;
 
+    
+
     public void Trigger()
     {
+        if(gameObject.tag == "NoBtn")
+        {
+            info.noticeTuto.gameObject.SetActive(false);
+            gameObject.SetActive(false);
+            info.background.gameObject.SetActive(false);
+            info.yesButton.gameObject.SetActive(false);
+            return;
+        }
        var system = FindObjectOfType<DialogSys>();
         system.Begin(info);
+        
+        info.noticeTuto.gameObject.SetActive(false);
+        info.noButton.gameObject.SetActive(false);
+        gameObject.SetActive(false);
+        
     }
 }
