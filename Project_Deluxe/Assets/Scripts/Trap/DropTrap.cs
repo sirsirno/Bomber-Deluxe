@@ -5,7 +5,6 @@ using UnityEngine.Tilemaps;
 
 public class DropTrap : MonoBehaviour
 {
-    [SerializeField]
     private GameObject player = null;
 
     private bool respawn = false;
@@ -23,7 +22,9 @@ public class DropTrap : MonoBehaviour
 
     private void Awake()
     {
-        if(trapType == TrapType.PARENT)
+        player = GameObject.FindGameObjectWithTag("PlayerController");
+
+        if (trapType == TrapType.PARENT)
             Trap = transform.parent.gameObject;
         if (GetComponent<SpriteRenderer>() != null)
             GetComponent<BoxCollider2D>().size = GetComponent<SpriteRenderer>().size; 

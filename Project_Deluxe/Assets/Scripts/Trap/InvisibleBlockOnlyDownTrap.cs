@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class InvisibleBlockOnlyDownTrap : MonoBehaviour
 {
-    [SerializeField]
     private GameObject player = null;
 
     private bool respawn = false;
@@ -14,6 +13,7 @@ public class InvisibleBlockOnlyDownTrap : MonoBehaviour
     private Vector2 defaultsize = Vector2.zero;
     private void Awake()
     {
+        player = GameObject.FindGameObjectWithTag("PlayerController");
         defaultOffset = GetComponent<BoxCollider2D>().offset;
         defaultsize = GetComponent<BoxCollider2D>().size;
     }

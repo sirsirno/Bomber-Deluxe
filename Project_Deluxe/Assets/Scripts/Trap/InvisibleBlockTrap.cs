@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class InvisibleBlockTrap : MonoBehaviour
 {
-    [SerializeField]
     private GameObject player = null;
 
     private bool respawn = false;
     private bool isShow = false;
+
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("PlayerController");
+    }
+
     private void Update()
     {
         if (player.GetComponent<PlayerController>().awake != false && respawn != false) // 함정 리셋

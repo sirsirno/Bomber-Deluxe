@@ -7,7 +7,6 @@ using UnityEngine;
 /// </summary>
 public class AppearTrap : MonoBehaviour
 {
-    [SerializeField]
     private GameObject player = null;
 
     private bool respawn = false;
@@ -29,6 +28,7 @@ public class AppearTrap : MonoBehaviour
             Debug.Log("박스 컬라이더가 없음요");
         if (GetComponent<SpriteRenderer>() != null)
             GetComponent<BoxCollider2D>().size = GetComponent<SpriteRenderer>().size;
+        player = GameObject.FindGameObjectWithTag("PlayerController");
     }
     private void Update()
     {
