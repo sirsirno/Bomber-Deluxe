@@ -23,11 +23,11 @@ public class CameraMove : Singleton<CameraMove>
     {
         float playerDistanceX = player.transform.localPosition.x - spawnX;
 
-        float followRangeX = 0 - spawnX;
-        float followRangeY = 1.1f - spawnY;
+        float followRangeX = minX - spawnX;
+
         float cameraToPlayerDistanceX = Mathf.Abs(transform.localPosition.x - player.transform.localPosition.x);
 
-        //Debug.Log("playerDistance X :" + playerDistanceX + "\nplayerDistance Y :" + playerDistanceY + "\nfollowRange X :" + followRangeX + "\nfollowRange Y :" + followRangeY + "\ncameraToPlayerDistance X :" + cameraToPlayerDistanceX + "\ncameraToPlayerDistance Y :" + cameraToPlayerDistanceY);
+        Debug.Log("playerDistance X :" + playerDistanceX + "\nfollowRange X :" + followRangeX +  "\ncameraToPlayerDistance X :" + cameraToPlayerDistanceX);
 
 
         if (cameraToPlayerDistanceX > 1)
