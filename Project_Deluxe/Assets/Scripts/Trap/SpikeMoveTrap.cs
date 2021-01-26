@@ -23,6 +23,9 @@ public class SpikeMoveTrap : MonoBehaviour
     [Header("예) 1로 설정 -> 한번 들어가면 안발동되고 두번 들어가야 발동")]
     [Header("감지를 몇번 무시할건지 설정")]
     public int waitCount = 0;
+    [Header("발동할때 딜레이를 줌")]
+    [SerializeField]
+    private float delay = 0f;
 
     private int defaultWaitCount = 0;
     private bool isTrigger = false;
@@ -44,11 +47,7 @@ public class SpikeMoveTrap : MonoBehaviour
         {
             if (waitCount <= 0)
             {
-                isTrigger = true;
-                if (player.GetComponent<PlayerController>().sleeping != false)
-                {
-                    respawn = true;
-                }
+                Invoke("TrapTrigger", delay);
             }
             else
             {
@@ -77,6 +76,15 @@ public class SpikeMoveTrap : MonoBehaviour
             isTrigger = false;
             moveTraps.transform.position = defaultposition;
             respawn = false;
+        }
+    }
+
+    private void TrapTrigger()
+    {
+        isTrigger = true;
+        if (player.GetComponent<PlayerController>().sleeping != false)
+        {
+            respawn = true;
         }
     }
 }

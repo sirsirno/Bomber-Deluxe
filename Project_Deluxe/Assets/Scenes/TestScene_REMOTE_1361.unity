@@ -31996,6 +31996,7 @@ MonoBehaviour:
   moveSpeed: 30
   moveType: 3
   waitCount: 2
+  delay: 0
 --- !u!212 &833265553
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -32483,6 +32484,7 @@ MonoBehaviour:
   moveSpeed: 30
   moveType: 3
   waitCount: 2
+  delay: 1
 --- !u!61 &915797725
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -58,11 +58,13 @@ public class BlockMoveTrap : MonoBehaviour
         if (isTrigger)
         {
             isTrigger = false;
+            GetComponent<BoxCollider2D>().enabled = false;
             moveTraps.transform.DOMove(new Vector2(moveTraps.transform.position.x + ToXY.x, moveTraps.transform.position.y + ToXY.y) , duration).SetEase(Ease.Linear);
         }
 
         if (player.GetComponent<PlayerController>().awake && respawn) // 함정 리셋
         {
+            GetComponent<BoxCollider2D>().enabled = true;
             waitCount = defaultWaitCount;
             moveTraps.transform.position = defaultposition;
             respawn = false;
