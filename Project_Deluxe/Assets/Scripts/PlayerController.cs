@@ -33,6 +33,7 @@ public class PlayerController : Singleton<PlayerController>
 
     public PlayerState state = PlayerState.Grounded;
     public bool controlEnabled = true;
+    public bool isHeadBlocked = false;
 
     public bool sleeping { get; private set; }  = false; // 미래예지중
     [Header("능력 관련")]
@@ -209,8 +210,11 @@ public class PlayerController : Singleton<PlayerController>
                     jumpAudio.Play();
                 }
 
-                if (!(Input.GetButton("Jump") || isPressedController[2]) || jumpTimer >= jumpTimeLimit)
+                if (!(Input.GetButton("Jump") || isPressedController[2]) || jumpTimer >= jumpTimeLimit || isHeadBlocked)
                 {
+                    if (isHeadBlocked)
+                        rb.velocity = new Vector2(0, -4);
+                    isHeadBlocked = false;
                     jump = false;
                     jumpTimer = 0f;
                     return;
@@ -235,7 +239,7 @@ public class PlayerController : Singleton<PlayerController>
                 if (state == PlayerState.Grounded && animator.GetInteger("PlayerAnimation") == 1)
                     transform.Translate(Vector3.left * moveSpeed * Time.fixedDeltaTime);
                 else if (state == PlayerState.Jumping)
-                    transform.Translate(Vector3.left * moveSpeed / 1.5f * Time.fixedDeltaTime);
+                    transform.Translate(Vector3.left * moveSpeed / 2f * Time.fixedDeltaTime);
                 spriteRenderer.flipX = true;
             }
 
@@ -244,7 +248,7 @@ public class PlayerController : Singleton<PlayerController>
                 if (state == PlayerState.Grounded && animator.GetInteger("PlayerAnimation") == 1)
                     transform.Translate(Vector3.right * moveSpeed * Time.fixedDeltaTime);
                 else if (state == PlayerState.Jumping)
-                    transform.Translate(Vector3.right * moveSpeed / 1.5f * Time.fixedDeltaTime);
+                    transform.Translate(Vector3.right * moveSpeed /2f * Time.fixedDeltaTime);
                 spriteRenderer.flipX = false;
             }
 

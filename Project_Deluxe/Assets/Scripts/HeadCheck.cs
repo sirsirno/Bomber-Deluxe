@@ -9,6 +9,7 @@ public class HeadCheck : MonoBehaviour
         if (collision.gameObject.tag == "JumpTrigger" && transform.parent.transform.parent.GetComponent<Rigidbody2D>().velocity.y > -0.1f && PlayerController.Instance.state == PlayerController.PlayerState.Jumping)
         {
             PlayerController.Instance.headBlockAudio.Play();
+            PlayerController.Instance.isHeadBlocked = true;
         }
     }
 }
