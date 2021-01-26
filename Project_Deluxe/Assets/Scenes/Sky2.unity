@@ -25843,7 +25843,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clearNeedDurationDefault: 3
-  exitSFX: {fileID: 0}
+  exitSFX: {fileID: 740048086}
 --- !u!61 &541285142
 BoxCollider2D:
   m_ObjectHideFlags: 0
