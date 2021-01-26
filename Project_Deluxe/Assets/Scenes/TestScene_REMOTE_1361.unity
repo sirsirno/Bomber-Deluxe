@@ -14139,7 +14139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e761e6e9a04dc21478294b606dbb416c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpSpeed: 5
+  jumpSpeed: 10
   isTrapSpring: 0
 --- !u!95 &580502388
 Animator:
@@ -50520,6 +50520,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1984311048}
+  minX: 0
+  followY: 2.52
 --- !u!81 &1926728164
 AudioListener:
   m_ObjectHideFlags: 0
