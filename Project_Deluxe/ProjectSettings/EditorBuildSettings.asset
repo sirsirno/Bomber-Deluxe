@@ -5,9 +5,6 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Title.unity
     guid: 14cb3357d2061424eb7d4dc6e490f49f
@@ -17,4 +14,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Sky1.unity
     guid: 42b0741b4abd68944b026df3c5463eb4
+  - enabled: 1
+    path: Assets/Scenes/Sky2.unity
+    guid: 2332a6f1885ceff48900388d29a4d8d5
+  - enabled: 1
+    path: Assets/Scenes/Sky3.unity
+    guid: e80aa100eb8477742901b4bd051d65aa
+  - enabled: 1
+    path: Assets/Scenes/Sky4.unity
+    guid: 8554367679428544799824963b6e5e84
+  - enabled: 1
+    path: Assets/Scenes/Sky5.unity
+    guid: 63555336fc0b6e14b8b83efa9be06061
   m_configObjects: {}
