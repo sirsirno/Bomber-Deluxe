@@ -27,7 +27,7 @@ public class CameraMove : Singleton<CameraMove>
 
         float cameraToPlayerDistanceX = Mathf.Abs(transform.localPosition.x - player.transform.localPosition.x);
 
-        Debug.Log("playerDistance X :" + playerDistanceX + "\nfollowRange X :" + followRangeX +  "\ncameraToPlayerDistance X :" + cameraToPlayerDistanceX);
+        //Debug.Log("playerDistance X :" + playerDistanceX + "\nfollowRange X :" + followRangeX +  "\ncameraToPlayerDistance X :" + cameraToPlayerDistanceX);
 
 
         if (cameraToPlayerDistanceX > 1)

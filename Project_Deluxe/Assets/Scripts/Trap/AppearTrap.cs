@@ -8,7 +8,8 @@ using UnityEngine;
 public class AppearTrap : MonoBehaviour
 {
     private GameObject player = null;
-
+    [SerializeField]
+    private float delay = 0f;
     private bool respawn = false;
     private void Start()
     {
@@ -23,7 +24,7 @@ public class AppearTrap : MonoBehaviour
         {
             GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0);
         }
-        
+
         if (GetComponent<BoxCollider2D>() == null)
             Debug.Log("박스 컬라이더가 없음요");
         if (GetComponent<SpriteRenderer>() != null)
@@ -32,7 +33,7 @@ public class AppearTrap : MonoBehaviour
     }
     private void Update()
     {
-        if(player.GetComponent<PlayerController>().awake != false && respawn != false) // 함정 리셋
+        if (player.GetComponent<PlayerController>().awake != false && respawn != false) // 함정 리셋
         {
             if (transform.childCount != 0)
             {
@@ -62,17 +63,22 @@ public class AppearTrap : MonoBehaviour
             {
                 gameObject.GetComponent<BoxCollider2D>().enabled = false;
             }
-            if (transform.childCount != 0)
+            Invoke("TrapTrigger", delay);
+        }
+    }
+
+    private void TrapTrigger()
+    {
+        if (transform.childCount != 0)
+        {
+            for (int i = 0; i < transform.childCount; i++)
             {
-                for (int i = 0; i < transform.childCount; i++)
-                {
-                    transform.GetChild(i).gameObject.SetActive(true);
-                }
+                transform.GetChild(i).gameObject.SetActive(true);
             }
-            else
-            {
-                GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
-            }
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
         }
     }
 }
