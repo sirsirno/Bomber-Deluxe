@@ -48,6 +48,10 @@ public class SpikeMoveTrap : MonoBehaviour
             if (waitCount <= 0)
             {
                 Invoke("TrapTrigger", delay);
+                if (player.GetComponent<PlayerController>().sleeping != false)
+                {
+                    respawn = true;
+                }
             }
             else
             {
@@ -82,9 +86,5 @@ public class SpikeMoveTrap : MonoBehaviour
     private void TrapTrigger()
     {
         isTrigger = true;
-        if (player.GetComponent<PlayerController>().sleeping != false)
-        {
-            respawn = true;
-        }
     }
 }

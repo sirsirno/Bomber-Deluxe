@@ -140,7 +140,7 @@ public class PlayerController : Singleton<PlayerController>
             if (animator.GetInteger("PlayerAnimation") != 4 && animator.GetInteger("PlayerAnimation") != 5)
                 clockDuration = sleepingDuration - sleepTime;
 
-            if (sleepTime >= sleepingDuration || PlayerStopEvent.Instance.isFutureDead || GameManager.Instance.GetRealTimer() <= 10)
+            if (sleepTime >= sleepingDuration || PlayerStopEvent.Instance.isFutureDead || GameManager.Instance.GetRealTimer() <= 10 || state == PlayerState.Dead)
             {
                 if (animator.GetInteger("PlayerAnimation") != 4 && animator.GetInteger("PlayerAnimation") != 5)
                 {

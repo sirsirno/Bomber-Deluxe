@@ -28,7 +28,7 @@ public class PlayerStopEvent : Singleton<PlayerStopEvent>
 
     private void BackToNow()
     {
-        if (PlayerController.Instance.sleeping)
+        if (PlayerController.Instance.sleeping && PlayerController.Instance.state != PlayerController.PlayerState.Dead)
         {
             GetComponent<Animator>().SetInteger("PlayerAnimation", 0);
             GetComponent<Animator>().Play("Player_Idle");
