@@ -3335,13 +3335,35 @@ GameObject:
   m_Component:
   - component: {fileID: 112911615}
   - component: {fileID: 112911614}
+  - component: {fileID: 112911616}
+  - component: {fileID: 112911613}
+  - component: {fileID: 112911617}
   m_Layer: 0
   m_Name: Sleeping_Player
-  m_TagString: Untagged
+  m_TagString: SleepingPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &112911613
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112911612}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1ff9be269986ee74cb7f89d0e9fb7010, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!212 &112911614
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3409,6 +3431,43 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &112911616
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112911612}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!50 &112911617
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112911612}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &116993724
 GameObject:
   m_ObjectHideFlags: 0
@@ -12330,6 +12389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57c3e3a5a86cf59478072e4ec661d0a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  delay: 0
 --- !u!61 &414785787
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -43443,6 +43503,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57c3e3a5a86cf59478072e4ec661d0a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  delay: 0
 --- !u!61 &1430163099
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -51584,6 +51645,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 1051801983}
   Par0: {fileID: 608461183}
+  sleepingPlayer: {fileID: 112911612}
   effectDelay: 3
   DeathPanelDelayTime: 5
 --- !u!1 &1988909151
