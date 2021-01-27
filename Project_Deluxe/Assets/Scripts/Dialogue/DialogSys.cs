@@ -27,6 +27,8 @@ public class DialogSys : MonoBehaviour
     private Animator charAnim;
     [SerializeField]
     private float iETextSpeed = 0.05f;
+    [SerializeField]
+    DialogClass infor;
 
     Queue<string> sentences = new Queue<string>();
 
@@ -53,13 +55,13 @@ public class DialogSys : MonoBehaviour
             charImage[i].gameObject.SetActive(false);
         }
 
-        if (sentences.Count == 6 || sentences.Count == 8)
+        if (sentences.Count == 2 || sentences.Count == 4)
             LiddedEyeSharkTeeth();
-        else if (sentences.Count == 5)
+        else if (sentences.Count == 1)
             Smile();
-        else if (sentences.Count == 10)
+        else if (sentences.Count == 6)
             ;
-        else if(sentences.Count == 9)
+        else if(sentences.Count == 5)
         {
             charAnim.SetBool("isOpen_Char", true);
             EyeNormal();
@@ -91,6 +93,8 @@ public class DialogSys : MonoBehaviour
         anim.SetBool("isOpen", false);
         charAnim.SetBool("isOpen_Char", false);
         textSentence.text = string.Empty;
+        infor.background.gameObject.SetActive(false);
+        infor.noticeBox.gameObject.SetActive(true);
     }
     public void LiddedEyeNormal()
     {
