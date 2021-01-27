@@ -20,7 +20,14 @@ public class UI : MonoBehaviour
     private ScoreManager scoreManager = null;
     [SerializeField]
     private float titleClickWaitTime = 1f;
-
+    [SerializeField]
+    private GameObject toWorldSelectBtn = null;
+    [SerializeField]
+    private GameObject creditBtn = null;
+    [SerializeField]
+    private GameObject creditContent = null;
+    [SerializeField]
+    private GameObject creditScroll = null;
     // 함수용 변수
 
     [SerializeField]
@@ -68,6 +75,7 @@ public class UI : MonoBehaviour
             TitleObjects.transform.DOLocalMoveY(30f, 0);
             TitleObjects.transform.DOScale(new Vector3(0.3f, 0.3f, 0.3f), 0);
             SoundBtnOn();
+            soundBtn.GetComponent<Image>().color = new Color(1, 1, 1, 1);
             AudioManager.Instance.BGM_Labyrinth.volume = 1;
             AudioManager.Instance.BGM_Labyrinth.Play();
             JsonSave.Instance.SaveGameData();
@@ -78,19 +86,42 @@ public class UI : MonoBehaviour
 
     private void Update()
     {
-        if (Input.anyKeyDown && scoreManager.isTitleBegin) 
+        if (Input.anyKeyDown && scoreManager.isTitleBegin)
         {
             scoreManager.isTitleBegin = false;
-            Invoke("TitleToLabyrinth", titleClickWaitTime);
+            startTxt.gameObject.SetActive(false);
+            SoundBtnOn();
+            soundBtn.GetComponent<Image>().color = new Color(1, 1, 1, 0);
+            if (isMute)
+                soundBtn.GetComponent<Image>().DOColor(new Color(0.7843137f, 0.7843137f, 0.7843137f, 0.5019608f), 0.8f);
+            else
+                soundBtn.GetComponent<Image>().DOColor(new Color(1, 1, 1, 1), 0.8f);
+            toWorldSelectBtn.SetActive(true);
+            toWorldSelectBtn.GetComponent<RectTransform>().anchoredPosition = new Vector2(100, 70);
+            toWorldSelectBtn.GetComponent<RectTransform>().DOAnchorPos(new Vector2(-70, 70), 1);
+            creditBtn.SetActive(true);
+            creditBtn.GetComponent<RectTransform>().anchoredPosition = new Vector2(-100, 70);
+            creditBtn.GetComponent<RectTransform>().DOAnchorPos(new Vector2(70, 70), 1);
         }
 
         if (AudioManager.Instance.BGM_Title.volume == 0)
             AudioManager.Instance.BGM_Title.Stop();
     }
 
+    public void TitleToLabyrinthBtnClick()
+    {
+        AllAudioManager.Instance.uiClick.Play();
+        toWorldSelectBtn.GetComponent<RectTransform>().DOAnchorPos(new Vector2(100, 70), 1);
+        toWorldSelectBtn.GetComponent<Button>().interactable = false;
+        creditBtn.GetComponent<RectTransform>().DOAnchorPos(new Vector2(-100, 70), 1);
+        creditBtn.GetComponent<Button>().interactable = false;
+        soundBtn.GetComponent<Image>().DOColor(new Color(1, 1, 1, 0), 0.8f);
+        Invoke("TitleToLabyrinth", titleClickWaitTime);
+    }
+
     private void TitleToLabyrinth()
     {
-        
+        soundBtn.SetActive(false);
         startPanel.GetComponent<RectTransform>().DOLocalMoveY(1000, 2);
         backgroundCamera.transform.DOMoveY(-33.9f, 4.5f);
         TitleObjects.transform.DOLocalMoveY(30f, 2);
@@ -106,6 +137,14 @@ public class UI : MonoBehaviour
     private void SoundBtnOn()
     {
         soundBtn.SetActive(true);
+        if (isMute)
+        {
+            soundBtn.GetComponent<Image>().color = new Color(0.7843137f, 0.7843137f, 0.7843137f, 0.5019608f);
+        }
+        else
+        {
+            soundBtn.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+        }
     }
 
 
@@ -126,5 +165,16 @@ public class UI : MonoBehaviour
             soundBtn.GetComponent<Image>().color = new Color(0.7843137f, 0.7843137f, 0.7843137f, 0.5019608f);
             AudioListener.volume = 0;
         }
+    }
+
+    public void CreditClick()
+    {
+        creditContent.SetActive(true);
+    }
+
+    public void CreditExit()
+    {
+        creditContent.SetActive(false);
+        creditScroll.GetComponent<RectTransform>().anchoredPosition = new Vector2(-147.26f, 110.5f);
     }
 }
