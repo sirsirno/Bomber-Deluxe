@@ -39127,7 +39127,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 12
-      m_TileSpriteIndex: 53
+      m_TileSpriteIndex: 57
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -41457,7 +41457,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 16
-      m_TileSpriteIndex: 52
+      m_TileSpriteIndex: 56
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -50944,20 +50944,20 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: -8901654756704438209, guid: ef705494d4f2a164fb66c9fab5adf196,
       type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -3781356590855103081, guid: ef705494d4f2a164fb66c9fab5adf196,
       type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: -3176937907779624982, guid: ef705494d4f2a164fb66c9fab5adf196,
       type: 3}
@@ -56865,8 +56865,8 @@ MonoBehaviour:
   headBlockAudio: {fileID: 911347343}
   landAudio: {fileID: 482210813}
   cantUseAbilityAudio: {fileID: 20466359}
-  moveSpeed: 6.1
-  jumpSpeed: 4.1
+  moveSpeed: 6.256
+  jumpSpeed: 4.2
   jumpTimeLimit: 0.5
   state: 0
   controlEnabled: 1
