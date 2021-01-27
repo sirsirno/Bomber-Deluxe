@@ -169,11 +169,13 @@ public class UI : MonoBehaviour
 
     public void CreditClick()
     {
+        AllAudioManager.Instance.uiClick.Play();
         creditContent.SetActive(true);
     }
 
     public void CreditExit()
     {
+        AllAudioManager.Instance.uiClick.Play();
         creditContent.SetActive(false);
         creditScroll.GetComponent<RectTransform>().anchoredPosition = new Vector2(-147.26f, 110.5f);
     }
