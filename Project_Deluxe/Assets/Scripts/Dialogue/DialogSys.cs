@@ -32,6 +32,11 @@ public class DialogSys : MonoBehaviour
 
     Queue<string> sentences = new Queue<string>();
 
+    private void Awake()
+    {
+        Time.timeScale = 0f;
+    }
+
     public void Begin(DialogClass info)
     {
         anim.SetBool("isOpen", true);
@@ -83,7 +88,7 @@ public class DialogSys : MonoBehaviour
         foreach (var letter in sentence)
         {
             textSentence.text += letter;
-            yield return new WaitForSeconds(iETextSpeed);
+            yield return new WaitForSecondsRealtime(iETextSpeed);
             
         }
        

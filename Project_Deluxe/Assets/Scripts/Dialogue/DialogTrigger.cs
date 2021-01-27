@@ -18,6 +18,7 @@ public class DialogTrigger : MonoBehaviour
             gameObject.SetActive(false);
             info.background.gameObject.SetActive(false);
             info.yesButton.gameObject.SetActive(false);
+            Time.timeScale = 1f;
             return;
         }
        var system = FindObjectOfType<DialogSys>();

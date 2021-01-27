@@ -12997,13 +12997,13 @@ MonoBehaviour:
   isDebugMode: 0
   player: {fileID: 279765756}
   stampSprites:
-  - {fileID: -2691526193057411252, guid: bd8e1cfec0a5af04485c6bec85d489bc, type: 3}
-  - {fileID: -2658500766554755595, guid: bd8e1cfec0a5af04485c6bec85d489bc, type: 3}
-  - {fileID: 3825655930465830487, guid: bd8e1cfec0a5af04485c6bec85d489bc, type: 3}
+  - {fileID: -6131721971889202329, guid: bd8e1cfec0a5af04485c6bec85d489bc, type: 3}
+  - {fileID: -6059841001887055105, guid: bd8e1cfec0a5af04485c6bec85d489bc, type: 3}
+  - {fileID: 1866350215667649569, guid: bd8e1cfec0a5af04485c6bec85d489bc, type: 3}
   emptyStampSprites:
-  - {fileID: -6960880885195301962, guid: 5816c1ad32f51504bad0a5a11edc2388, type: 3}
-  - {fileID: -6376610583622659817, guid: 5816c1ad32f51504bad0a5a11edc2388, type: 3}
-  - {fileID: 4531579967841745595, guid: 5816c1ad32f51504bad0a5a11edc2388, type: 3}
+  - {fileID: 6790852919441416960, guid: 5816c1ad32f51504bad0a5a11edc2388, type: 3}
+  - {fileID: 4169186572327930995, guid: 5816c1ad32f51504bad0a5a11edc2388, type: 3}
+  - {fileID: -8981408185803780723, guid: 5816c1ad32f51504bad0a5a11edc2388, type: 3}
   gameTimerDefault: 300
   worldType: 0
   CurrentStage: 3

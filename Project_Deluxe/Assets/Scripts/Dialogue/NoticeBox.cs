@@ -50,6 +50,7 @@ public class NoticeBox : MonoBehaviour
         diaClass.noticeBox.gameObject.SetActive(false);
         diaClass.nextBtn.gameObject.SetActive(false);
         diaClass.nextXbutton.gameObject.SetActive(false);
+        Time.timeScale = 1f;
         return;
     }
     public void SetNextButtonX()
