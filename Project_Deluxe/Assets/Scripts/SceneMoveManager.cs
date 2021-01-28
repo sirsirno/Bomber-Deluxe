@@ -43,6 +43,10 @@ public class SceneMoveManager : MonoBehaviour
     [SerializeField]
     private GameObject stageInfoStamp = null;
     [SerializeField]
+    private Sprite[] stageInfoMapPictures = null;
+    [SerializeField]
+    private Image stageInfoMapSprite = null;
+    [SerializeField]
     private Sprite[] stageButton = null;
     [SerializeField]
     private Sprite[] EmptyStamps = null;
@@ -208,7 +212,7 @@ public class SceneMoveManager : MonoBehaviour
         stageInfoStar.GetComponent<ShowStar>().ShowStars();
         stageInfoStamp.GetComponent<ShowStamp>().StageNumberSet(stageNumber);
         stageInfoStamp.GetComponent<ShowStamp>().ShowStamps();
-
+        stageInfoMapSprite.sprite = stageInfoMapPictures[stageNumber - 1];
         // 맵 이름
         {
             stageInfoText.text = "";
