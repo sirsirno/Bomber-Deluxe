@@ -15731,9 +15731,9 @@ MonoBehaviour:
   img: {fileID: 697333447}
   startScreenOutWaitTime: 1
   startScreenOutFadeTime: 2
-  startScreenPanel: {fileID: 733603516}
-  startScreenLifeTxt: {fileID: 35261681}
-  startScreenWorldTxt: {fileID: 732569976}
+  startScreenPanel: {fileID: 0}
+  startScreenLifeTxt: {fileID: 0}
+  startScreenWorldTxt: {fileID: 0}
   timerText: {fileID: 1987706063}
   parEatEffect: {fileID: 600308858}
   badEatEffect: {fileID: 976807526}

@@ -308,7 +308,7 @@ public class UIManager : Singleton<UIManager>
         AllAudioManager.Instance.uiClick.Play();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
         clear.SetActive(false);
-        
+        Time.timeScale = 1;
     }
 
     public void SoundOnOffBtn()

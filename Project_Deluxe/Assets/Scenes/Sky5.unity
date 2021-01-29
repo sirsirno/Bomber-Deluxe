@@ -73806,7 +73806,7 @@ MonoBehaviour:
   - {fileID: -8981408185803780723, guid: 5816c1ad32f51504bad0a5a11edc2388, type: 3}
   gameTimerDefault: 300
   worldType: 0
-  CurrentStage: 3
+  CurrentStage: 5
 --- !u!4 &1762964538
 Transform:
   m_ObjectHideFlags: 0

@@ -13853,6 +13853,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SkyExit
       objectReference: {fileID: 0}
+    - target: {fileID: 7007189049226615222, guid: 3953a9716c58e94418e33a2117845db1,
+        type: 3}
+      propertyPath: exitSFX
+      value: 
+      objectReference: {fileID: 1445537742}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3953a9716c58e94418e33a2117845db1, type: 3}
 --- !u!4 &711554809 stripped
