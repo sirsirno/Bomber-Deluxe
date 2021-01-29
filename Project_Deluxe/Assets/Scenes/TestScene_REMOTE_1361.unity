@@ -3091,8 +3091,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 541, y: 453.03467}
+  m_AnchoredPosition: {x: 0, y: -29}
+  m_SizeDelta: {x: 541, y: 404.28}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &86108538
 MonoBehaviour:
@@ -32597,11 +32597,13 @@ MonoBehaviour:
     background: {fileID: 0}
     yesButton: {fileID: 0}
     noButton: {fileID: 0}
+    dialogue: {fileID: 0}
     noticeBox: {fileID: 0}
     nextXbutton: {fileID: 0}
     prevXbutton: {fileID: 0}
     prevBtn: {fileID: 0}
     nextBtn: {fileID: 0}
+    isTutoOnes: 1
   noticeImages: []
   i: 0
 --- !u!114 &851160557
@@ -33104,11 +33106,13 @@ MonoBehaviour:
     background: {fileID: 2101978924}
     yesButton: {fileID: 1960237427}
     noButton: {fileID: 979710935}
+    dialogue: {fileID: 1488574126}
     noticeBox: {fileID: 818252234}
     nextXbutton: {fileID: 851160557}
     prevXbutton: {fileID: 1117277835}
     prevBtn: {fileID: 0}
     nextBtn: {fileID: 0}
+    isTutoOnes: 1
 --- !u!4 &924671367
 Transform:
   m_ObjectHideFlags: 0
@@ -33142,11 +33146,13 @@ MonoBehaviour:
     background: {fileID: 0}
     yesButton: {fileID: 0}
     noButton: {fileID: 0}
+    dialogue: {fileID: 1488574126}
     noticeBox: {fileID: 818252234}
     nextXbutton: {fileID: 851160557}
     prevXbutton: {fileID: 1117277835}
     prevBtn: {fileID: 1884277587}
     nextBtn: {fileID: 1923989976}
+    isTutoOnes: 1
   noticeImages:
   - {fileID: 1005260546}
   - {fileID: 1236593096}
@@ -33870,11 +33876,13 @@ MonoBehaviour:
     background: {fileID: 2101978924}
     yesButton: {fileID: 1960237427}
     noButton: {fileID: 0}
+    dialogue: {fileID: 1488574126}
     noticeBox: {fileID: 0}
     nextXbutton: {fileID: 0}
     prevXbutton: {fileID: 0}
     prevBtn: {fileID: 0}
     nextBtn: {fileID: 0}
+    isTutoOnes: 1
 --- !u!114 &979710935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34147,7 +34155,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1005260545
 RectTransform:
   m_ObjectHideFlags: 0
@@ -34164,8 +34172,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 541, y: 453.03467}
+  m_AnchoredPosition: {x: 0, y: -29}
+  m_SizeDelta: {x: 541, y: 404.28}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1005260546
 MonoBehaviour:
@@ -41599,8 +41607,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 541, y: 453.03467}
+  m_AnchoredPosition: {x: 0, y: -29}
+  m_SizeDelta: {x: 541, y: 404.28}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1221166201
 MonoBehaviour:
@@ -41785,8 +41793,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 541, y: 453.03467}
+  m_AnchoredPosition: {x: 0, y: -29}
+  m_SizeDelta: {x: 541, y: 404.28}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1236593096
 MonoBehaviour:
@@ -44780,7 +44788,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1488574127
 RectTransform:
   m_ObjectHideFlags: 0
@@ -51532,8 +51540,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 541, y: 453.03467}
+  m_AnchoredPosition: {x: 0, y: -29}
+  m_SizeDelta: {x: 541, y: 404.28}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1922339322
 MonoBehaviour:
@@ -51728,11 +51736,13 @@ MonoBehaviour:
     background: {fileID: 0}
     yesButton: {fileID: 0}
     noButton: {fileID: 0}
+    dialogue: {fileID: 0}
     noticeBox: {fileID: 0}
     nextXbutton: {fileID: 851160557}
     prevXbutton: {fileID: 0}
     prevBtn: {fileID: 0}
     nextBtn: {fileID: 0}
+    isTutoOnes: 1
   noticeImages: []
   i: 0
 --- !u!1 &1926728162
@@ -52563,11 +52573,13 @@ MonoBehaviour:
     background: {fileID: 2101978924}
     yesButton: {fileID: 0}
     noButton: {fileID: 979710935}
+    dialogue: {fileID: 1488574126}
     noticeBox: {fileID: 818252234}
     nextXbutton: {fileID: 0}
     prevXbutton: {fileID: 0}
     prevBtn: {fileID: 0}
     nextBtn: {fileID: 0}
+    isTutoOnes: 1
 --- !u!1 &1970423442
 GameObject:
   m_ObjectHideFlags: 0
@@ -52684,8 +52696,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 541, y: 453.03467}
+  m_AnchoredPosition: {x: 0, y: -29}
+  m_SizeDelta: {x: 541, y: 404.28}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1975197354
 MonoBehaviour:
@@ -54922,8 +54934,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 541, y: 453.03467}
+  m_AnchoredPosition: {x: 0, y: -29}
+  m_SizeDelta: {x: 541, y: 404.28}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2106281182
 MonoBehaviour:

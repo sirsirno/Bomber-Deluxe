@@ -14,6 +14,7 @@ public class DialogClass
     public Image background;
     public Button yesButton;
     public Button noButton;
+    public GameObject dialogue;
 
     // 밑은 노티스 박스 전용 
     public Image noticeBox;
@@ -21,4 +22,5 @@ public class DialogClass
     public Button prevXbutton;
     public Button prevBtn;
     public Button nextBtn;
+    public  bool isTutoOnes = true;
 }

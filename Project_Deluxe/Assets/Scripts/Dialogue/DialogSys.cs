@@ -34,7 +34,17 @@ public class DialogSys : MonoBehaviour
 
     private void Awake()
     {
+        string bString = PlayerPrefs.GetString("TutoOnes", "true");
+        infor.isTutoOnes = System.Convert.ToBoolean(bString);
         Time.timeScale = 0f;
+        
+        if(infor.isTutoOnes == true)
+        {
+            infor.dialogue.gameObject.SetActive(true);
+        }
+        Time.timeScale = 1f;
+
+
     }
 
     public void Begin(DialogClass info)
