@@ -36,14 +36,13 @@ public class DialogSys : MonoBehaviour
     {
         string bString = PlayerPrefs.GetString("TutoOnes", "true");
         infor.isTutoOnes = System.Convert.ToBoolean(bString);
-        Time.timeScale = 0f;
         
-        if(infor.isTutoOnes == true)
+        Time.timeScale = 1f;
+        if (infor.isTutoOnes == true)
         {
+            Time.timeScale = 0f;
             infor.dialogue.gameObject.SetActive(true);
         }
-        Time.timeScale = 1f;
-
 
     }
 
@@ -152,4 +151,9 @@ public class DialogSys : MonoBehaviour
         return;
     }
 
+    [ContextMenu("Å×½ºÆ®")]
+    private void Test()
+    {
+        PlayerPrefs.SetString("TutoOnes", "true");
+    }
 }

@@ -14493,7 +14493,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 780c7f4290ab7e643b957b68f35a362f, type: 3}
   - {fileID: 21300000, guid: 5fb123c547174ce439269a7326f65410, type: 3}
   - {fileID: 21300000, guid: e53ce5e471785d44f8deba7011bdf02e, type: 3}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: df9c84ce0addd9c409556242f5fd8bed, type: 3}
   stageInfoMapSprite: {fileID: 1983167863}
   stageButton:
   - {fileID: 5783416599399022740, guid: 703b399148a8ed8409023cd42da93d1a, type: 3}
