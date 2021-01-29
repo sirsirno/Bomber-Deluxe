@@ -8715,8 +8715,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522ded694a1857e47af1564d5c6eee18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
-  Par0: {fileID: 0}
+  canvas: {fileID: 714894714}
+  Par0: {fileID: 1896494933}
   effectDelay: 1.5
   DeathPanelDelayTime: 5
 --- !u!61 &415493117
@@ -22831,8 +22831,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522ded694a1857e47af1564d5c6eee18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
-  Par0: {fileID: 0}
+  canvas: {fileID: 714894714}
+  Par0: {fileID: 1896494933}
   effectDelay: 1.5
   DeathPanelDelayTime: 5
 --- !u!61 &783832487
@@ -27830,8 +27830,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 522ded694a1857e47af1564d5c6eee18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
-  Par0: {fileID: 0}
+  canvas: {fileID: 714894714}
+  Par0: {fileID: 1896494933}
   effectDelay: 1.5
   DeathPanelDelayTime: 5
 --- !u!61 &909614409
@@ -29774,6 +29774,11 @@ PrefabInstance:
     - target: {fileID: 6029100136661032014, guid: fc629941f907cf748b8a4b119a3bae67,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8185238978569864327, guid: fc629941f907cf748b8a4b119a3bae67,
+        type: 3}
+      propertyPath: stampNumber
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
