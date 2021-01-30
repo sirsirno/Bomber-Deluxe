@@ -16,6 +16,8 @@ public class UI : MonoBehaviour
     private GameObject backgroundCamera = null;
     [SerializeField]
     private GameObject TitleObjects = null;
+    [SerializeField]
+    private GameObject exit = null;
 
     private ScoreManager scoreManager = null;
     [SerializeField]
@@ -103,6 +105,10 @@ public class UI : MonoBehaviour
             creditBtn.GetComponent<RectTransform>().anchoredPosition = new Vector2(-100, 70);
             creditBtn.GetComponent<RectTransform>().DOAnchorPos(new Vector2(70, 70), 1);
         }
+        if (Input.GetKeyDown(KeyCode.Escape)) 
+        {
+            exit.SetActive(true);
+        }
 
         if (AudioManager.Instance.BGM_Title.volume == 0)
             AudioManager.Instance.BGM_Title.Stop();
@@ -178,5 +184,13 @@ public class UI : MonoBehaviour
         AllAudioManager.Instance.uiClick.Play();
         creditContent.SetActive(false);
         creditScroll.GetComponent<RectTransform>().anchoredPosition = new Vector2(-147.26f, 110.5f);
+    }
+    public void ExitCancleBtn() 
+    {
+        exit.SetActive(false);
+    }
+    public void ExitBtn() 
+    {
+        Application.Quit();
     }
 }
