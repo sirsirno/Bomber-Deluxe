@@ -4142,7 +4142,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 176964039}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.1, z: -10}
+  m_LocalPosition: {x: -10, y: 1.1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -15731,9 +15731,9 @@ MonoBehaviour:
   img: {fileID: 697333447}
   startScreenOutWaitTime: 1
   startScreenOutFadeTime: 2
-  startScreenPanel: {fileID: 0}
-  startScreenLifeTxt: {fileID: 0}
-  startScreenWorldTxt: {fileID: 0}
+  startScreenPanel: {fileID: 733603516}
+  startScreenLifeTxt: {fileID: 35261681}
+  startScreenWorldTxt: {fileID: 732569976}
   timerText: {fileID: 1987706063}
   parEatEffect: {fileID: 600308858}
   badEatEffect: {fileID: 976807526}
