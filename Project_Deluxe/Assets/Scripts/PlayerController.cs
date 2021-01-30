@@ -16,6 +16,7 @@ public class PlayerController : Singleton<PlayerController>
     public AudioSource headBlockAudio;
     public AudioSource landAudio;
     public AudioSource cantUseAbilityAudio;
+    public AudioSource springAudio;
 
     [Header("컨트롤 관련")]
     /// <summary>

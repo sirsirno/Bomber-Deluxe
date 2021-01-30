@@ -16,6 +16,7 @@ public class Spring : MonoBehaviour
         if (collision.gameObject.tag == "PlayerController" && !isTrapSpring)
         {
             GetComponent<Animator>().Play("Trap_Spring");
+            PlayerController.Instance.springAudio.Play();
             GameObject.FindGameObjectWithTag("PlayerController").GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             GameObject.FindGameObjectWithTag("PlayerController").GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
         }
