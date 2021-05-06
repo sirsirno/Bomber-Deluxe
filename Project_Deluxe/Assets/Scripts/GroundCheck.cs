@@ -57,7 +57,7 @@ public class GroundCheck : MonoBehaviour
 
     private void Update()
     {
-        if (rigid.velocity.y < -8)
+        if (rigid.velocity.y < -15)
         {
             isLandDestiny = true;
         }
